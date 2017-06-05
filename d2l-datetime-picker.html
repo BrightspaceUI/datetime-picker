@@ -41,7 +41,8 @@ Accessible, Localized Time Picker Input Element
 			is: 'd2l-datetime-picker',
 
 			listeners: {
-				'd2l-date-picker-value-changed': '_dateChanged'
+				'd2l-date-picker-value-changed': '_dateChanged',
+				'd2l-time-picker-time-changed': '_timeChanged'
 			},
 
 			properties: {
@@ -50,39 +51,39 @@ Accessible, Localized Time Picker Input Element
 					readOnly: true,
 					value: new d2lIntl.DateTimeParse(null, {locale:{date:{formats:{dateFormats:{short:'yyyy-M-d'}}}}})
 				},
-				hours: {
-					type: Number,
-					observer: '_dateTimeChanged'
-				},
-				minutes: {
-					type: Number,
-					observer: '_dateTimeChanged'
-				},
+				hours: Number,
+				minutes: Number,
 				locale: String,
 				timezone: String,
-				date: {
-					type: String,
-					observer: '_dateTimeChanged'
-				},
+				date: String,
+				time: Object,
 				datetime: {
 					type: Object,
 					notify: true
 				}
 			},
 
+			observers: [
+				'_dateTimeChanged(date, time)'
+			],
+
 			_dateChanged: function(e) {
 				this.date = e.detail.detail.value;
 			},
 
-			_dateTimeChanged: function() {
-				if (!this.parser || !this.date) {
+			_timeChanged: function(e) {
+				this.time = e.detail;
+			},
+
+			_dateTimeChanged: function(date, time) {
+				if (!this.parser || !date || !time) {
 					return;
 				}
-				var datetime = this.parser.parseDate(this.date);
-				datetime.setHours(this.hours);
-				datetime.setMinutes(this.minutes);
+				var datetime = this.parser.parseDate(date);
+				datetime.setHours(time.hours);
+				datetime.setMinutes(time.minutes);
 				this.datetime = datetime;
-				this.emit('d2l-datetime-picker-datetime-changed', datetime);
+				this.fire('d2l-datetime-picker-datetime-changed', datetime);
 			}
 		});
 	</script>

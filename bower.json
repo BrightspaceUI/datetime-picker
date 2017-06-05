@@ -4,7 +4,7 @@
   "main": "d2l-datetime-picker.html",
   "dependencies": {
     "polymer": "Polymer/polymer#1.9 - 2",
-    "d2l-time-picker": "BrightspaceUI/time-picker#^0.0.1",
+    "d2l-time-picker": "BrightspaceUI/time-picker#^0.0.2",
     "d2l-date-picker": "BrightspaceUI/date-picker#^0.0.1"
   },
   "devDependencies": {
