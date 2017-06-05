@@ -1,0 +1,38 @@
+{
+  "name": "d2l-datetime-picker",
+  "description": "Accessible, Localized Date-Time Picker Element",
+  "main": "d2l-datetime-picker.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#1.9 - 2",
+    "d2l-time-picker": "BrightspaceUI/time-picker",
+    "d2l-date-picker": "BrightspaceUI/date-picker#^0.0.1"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#1 - 2",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#1 - 2",
+    "iron-test-helpers": "PolymerElements/iron-test-helpers#1 - 2",
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#0.7 - 1",
+    "d2l-demo-template": "^0.0.12"
+  },
+  "variants": {
+    "1.x": {
+      "dependencies": {
+        "polymer": "Polymer/polymer#^1.9.1"
+      },
+      "devDependencies": {
+        "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+        "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+        "iron-test-helpers": "PolymerElements/iron-test-helpers#^1.0.0",
+        "web-component-tester": "Polymer/web-component-tester#^4.0.0",
+        "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+      },
+      "resolutions": {
+        "webcomponentsjs": "^0.7"
+      }
+    }
+  },
+  "resolutions": {
+    "webcomponentsjs": "0.7 - 1"
+  }
+}

@@ -1,0 +1,88 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../d2l-date-picker/d2l-date-picker.html">
+<link rel="import" href="../d2l-time-picker/d2l-time-picker.html">
+<script type="text/javascript" src="https://s.brightspace.com/lib/d2l-intl/0.2.1/Intl.js"></script>
+
+<!--
+`d2l-time-picker`
+Accessible, Localized Time Picker Input Element
+
+@demo demo/index.html
+-->
+
+<dom-module id="d2l-datetime-picker">
+	<template strip-whitespace>
+		<style>
+			:host {
+				display: inline-flex;
+				align-items: flex-start;
+			}
+
+			d2l-date-picker {
+				padding-right: 1rem;
+				--paper-input-container: {
+					padding: 0;
+				};
+			}
+		</style>
+		<d2l-date-picker></d2l-date-picker>
+		<d2l-time-picker
+			locale="[[locale]]"
+			timezone="[[timezone]]"
+			hours="{{hours}}"
+			minutes="{{minutes}}"
+		></d2l-time-picker>
+	</template>
+
+	<script>
+		/* global d2lIntl */
+
+		Polymer({
+			is: 'd2l-datetime-picker',
+
+			listeners: {
+				'd2l-date-picker-value-changed': '_dateChanged'
+			},
+
+			properties: {
+				parser: {
+					type: Object,
+					readOnly: true,
+					value: new d2lIntl.DateTimeParse(null, {locale:{date:{formats:{dateFormats:{short:'yyyy-M-d'}}}}})
+				},
+				hours: {
+					type: Number,
+					observer: '_dateTimeChanged'
+				},
+				minutes: {
+					type: Number,
+					observer: '_dateTimeChanged'
+				},
+				locale: String,
+				timezone: String,
+				date: {
+					type: String,
+					observer: '_dateTimeChanged'
+				},
+				datetime: {
+					type: Object,
+					notify: true
+				}
+			},
+
+			_dateChanged: function(e) {
+				this.date = e.detail.detail.value;
+			},
+
+			_dateTimeChanged: function() {
+				if (!this.parser || !this.date) {
+					return;
+				}
+				var datetime = this.parser.parseDate(this.date);
+				datetime.setHours(this.hours);
+				datetime.setMinutes(this.minutes);
+				this.datetime = datetime;
+			}
+		});
+	</script>
+</dom-module>

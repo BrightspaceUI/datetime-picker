@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+		<title>d2l-datetime-picker demo</title>
+
+		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+		<link rel="import" href="../../d2l-demo-template/d2l-demo-template.html">
+		<link rel="import" href="../d2l-datetime-picker.html">
+	</head>
+	<body unresolved>
+		<d2l-demo-template title="d2l-datetime-picker">
+			<div class="d2l-demo-fixture">
+				<dom-bind>
+					<template is="dom-bind">
+						<label>Locale: <input value="{{locale::input}}"/></label>
+						<br/>
+						<label>Timezone: <input value="{{timezone::input}}"/></label>
+						<br/>
+						<d2l-datetime-picker locale="{{locale}}" timezone="{{timezone}}" datetime="{{datetime}}">
+						</d2l-datetime-picker>
+						<br/>
+						<span>{{datetime}}</span>
+					</template>
+				</dom-bind>
+			</div>
+		</d2l-demo-template>
+	</body>
+</html>

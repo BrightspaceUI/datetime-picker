@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+		<title>d2l-datetime-picker test</title>
+
+		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+		<script src="../../web-component-tester/browser.js"></script>
+		<script src="../../web-component-tester/data/a11ySuite.js"></script>
+
+		<link rel="import" href="../../iron-test-helpers/mock-interactions.html">
+		<link rel="import" href="../d2l-datetime-picker.html">
+	</head>
+	<body>
+		<test-fixture id="a11y">
+			<template>
+				<div>
+					<d2l-datetime-picker></d2l-datetime-picker>
+				</div>
+			</template>
+		</test-fixture>
+
+		<script>
+			/* global MockInteractions */
+			suite('a11y', function() {
+				a11ySuite('a11y');
+				a11ySuite('a11y', [], function() {
+					var a11y = fixture('a11y');
+					var picker = a11y.querySelector('body /deep/ d2l-time-picker');
+					picker.focus();
+				});
+				a11ySuite('a11y', [], function() {
+					var a11y = fixture('a11y');
+					var picker = a11y.querySelector('body /deep/ d2l-time-picker');
+					picker.focus();
+					Polymer.dom.flush();
+					MockInteractions.pressAndReleaseKeyOn(document.activeElement, 27);
+				});
+				a11ySuite('a11y', [], function() {
+					var a11y = fixture('a11y');
+					var picker = a11y.querySelector('body /deep/ vaadin-date-picker');
+					MockInteractions.tap(picker);
+					Polymer.dom.flush();
+				});
+				a11ySuite('a11y', [], function() {
+					var a11y = fixture('a11y');
+					var picker = a11y.querySelector('body /deep/ vaadin-date-picker');
+					MockInteractions.tap(picker);
+					Polymer.dom.flush();
+					MockInteractions.pressAndReleaseKeyOn(picker, 27);
+				});
+			});
+		</script>
+	</body>
+</html>

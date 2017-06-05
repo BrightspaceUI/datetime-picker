@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+		<title>d2l-datetime-picker test</title>
+
+		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+		<script src="../../web-component-tester/browser.js"></script>
+		<script type="text/javascript" src="https://s.brightspace.com/lib/d2l-intl/0.2.1/Intl.js"></script>
+
+		<link rel="import" href="../../iron-test-helpers/mock-interactions.html">
+		<link rel="import" href="../d2l-datetime-picker.html">
+	</head>
+	<body>
+		<test-fixture id="basic">
+			<template>
+				<d2l-datetime-picker></d2l-datetime-picker>
+			</template>
+		</test-fixture>
+
+		<script>
+			suite('d2l-datetime-picker', function() {
+				setup(function() {
+					this.element = fixture('basic');
+				});
+
+				test('instantiating the element works', function() {
+					expect(this.element.is).to.equal('d2l-datetime-picker');
+				});
+			});
+		</script>
+	</body>
+</html>
