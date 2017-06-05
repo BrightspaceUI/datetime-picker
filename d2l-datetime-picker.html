@@ -28,6 +28,7 @@ Accessible, Localized Time Picker Input Element
 		<d2l-date-picker value="[[dateValue]]"></d2l-date-picker>
 		<d2l-time-picker
 			locale="[[locale]]"
+			overrides="[[overrides]]"
 			timezone="[[timezone]]"
 			hours="{{hours}}"
 			minutes="{{minutes}}"
@@ -59,6 +60,7 @@ Accessible, Localized Time Picker Input Element
 				hours: Number,
 				minutes: Number,
 				locale: String,
+				overrides: Object,
 				timezone: String,
 				date: String,
 				time: Object,
@@ -82,13 +84,19 @@ Accessible, Localized Time Picker Input Element
 			},
 
 			_dateTimeChanged: function(datetime) {
+				if (typeof datetime === 'string') {
+					this.datetime = new Date(datetime)
+					return;
+				}
+				this._dontUpdateDateTime = true;
 				this.dateValue = this.formatter.formatDate(datetime);
 				this.hours = this.datetime.getHours();
 				this.minutes = this.datetime.getMinutes();
+				this._dontUpdateDateTime = false;
 			},
 
 			_dateAndTimeChanged: function(date, time) {
-				if (!this.parser || !date || !time) {
+				if (!this.parser || !date || !time || this._dontUpdateDateTime) {
 					return;
 				}
 				var datetime = this.parser.parseDate(date);

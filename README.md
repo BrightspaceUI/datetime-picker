@@ -14,6 +14,17 @@ First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polyme
 $ polymer serve
 ```
 
+## Usage
+
+```html
+<d2l-datetime-picker
+	locale="en"
+	overrides="[[overrides]]"
+	timezone="Canada-Toronto"
+	datetime="Wed Dec 31 1969 19:00:00 GMT-0500 (EST)"
+></d2l-datetime-picker>
+```
+
 ## Running Tests
 
 ```
