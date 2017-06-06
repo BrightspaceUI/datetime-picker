@@ -32,6 +32,7 @@ Accessible, Localized Time Picker Input Element
 			timezone="[[timezone]]"
 			hours="{{hours}}"
 			minutes="{{minutes}}"
+			boundary="[[boundary]]"
 		></d2l-time-picker>
 	</template>
 
@@ -47,12 +48,12 @@ Accessible, Localized Time Picker Input Element
 			},
 
 			properties: {
-				parser: {
+				_parser: {
 					type: Object,
 					readOnly: true,
 					value: new d2lIntl.DateTimeParse(null, {locale:{date:{formats:{dateFormats:{short:'yyyy-MM-dd'}}}}})
 				},
-				formatter: {
+				_formatter: {
 					type: Object,
 					readOnly: true,
 					value: new d2lIntl.DateTimeFormat(null, {locale:{date:{formats:{dateFormats:{short:'yyyy-MM-dd'}}}}})
@@ -62,13 +63,20 @@ Accessible, Localized Time Picker Input Element
 				locale: String,
 				overrides: Object,
 				timezone: String,
-				date: String,
-				time: Object,
+				date: {
+					type: String,
+					notify: true
+				},
+				time: {
+					type: Object,
+					notify: true
+				},
 				datetime: {
 					type: Object,
 					notify: true,
 					observer: '_dateTimeChanged'
-				}
+				},
+				boundary: Object
 			},
 
 			observers: [
@@ -85,21 +93,24 @@ Accessible, Localized Time Picker Input Element
 
 			_dateTimeChanged: function(datetime) {
 				if (typeof datetime === 'string') {
-					this.datetime = new Date(datetime)
-					return;
+					try {
+						datetime = new Date(datetime);
+					} catch (e) {
+						return;
+					}
 				}
 				this._dontUpdateDateTime = true;
-				this.dateValue = this.formatter.formatDate(datetime);
-				this.hours = this.datetime.getHours();
-				this.minutes = this.datetime.getMinutes();
+				this.dateValue = this._formatter.formatDate(datetime);
+				this.hours = datetime.getHours();
+				this.minutes = datetime.getMinutes();
 				this._dontUpdateDateTime = false;
 			},
 
 			_dateAndTimeChanged: function(date, time) {
-				if (!this.parser || !date || !time || this._dontUpdateDateTime) {
+				if (!this._parser || !date || !time || this._dontUpdateDateTime) {
 					return;
 				}
-				var datetime = this.parser.parseDate(date);
+				var datetime = this._parser.parseDate(date);
 				datetime.setHours(time.hours);
 				datetime.setMinutes(time.minutes);
 				this.datetime = datetime;
