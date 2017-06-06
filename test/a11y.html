@@ -28,11 +28,15 @@
 				a11ySuite('a11y', ['duplicateId']);
 				a11ySuite('a11y', ['duplicateId'], function() {
 					var a11y = fixture('a11y');
+					a11y.querySelector('d2l-datetime-picker').datetime = new Date();
+					Polymer.dom.flush();
 					var picker = a11y.querySelector('d2l-datetime-picker').$$('d2l-time-picker');
 					picker.focus();
 				});
 				a11ySuite('a11y', ['duplicateId'], function() {
 					var a11y = fixture('a11y');
+					a11y.querySelector('d2l-datetime-picker').datetime = new Date();
+					Polymer.dom.flush();
 					var picker = a11y.querySelector('d2l-datetime-picker').$$('d2l-time-picker');
 					picker.focus();
 					Polymer.dom.flush();
