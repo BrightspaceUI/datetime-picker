@@ -30,6 +30,11 @@ Accessible, Localized Time Picker Input Element
 					padding: 0;
 				};
 			}
+
+			:host-context([dir="rtl"]) d2l-date-picker {
+				padding-right: 0;
+				padding-left: 1rem;
+			}
 		</style>
 		<label for="input">{{_dateLabel}}</label>
 		<d2l-date-picker value="[[_dateValue]]"></d2l-date-picker>
