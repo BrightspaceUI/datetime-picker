@@ -137,11 +137,16 @@ Accessible, Localized Time Picker Input Element
 				this.fire('d2l-datetime-picker-datetime-changed', datetime);
 			},
 
-			_dateAndTimeChanged: function(date) {
-				if (!this._parser || !date || this._dontUpdateDateTime) {
+			_dateAndTimeChanged: function() {
+				if (!this._parser || this._dontUpdateDateTime) {
 					return;
 				}
-				var datetime = this._parser.parseDate(date);
+				var datetime;
+				try {
+					datetime = this._parser.parseDate(this.date);
+				} catch (e) {
+					return;
+				}
 				datetime.setHours(this.hours);
 				datetime.setMinutes(this.minutes);
 				this.datetime = datetime;
