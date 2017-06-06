@@ -1,6 +1,8 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../d2l-date-picker/d2l-date-picker.html">
 <link rel="import" href="../d2l-time-picker/d2l-time-picker.html">
+<link rel="import" href="../d2l-offscreen/d2l-offscreen.html">
+<link rel="import" href="localize-behavior.html">
 <script type="text/javascript" src="https://s.brightspace.com/lib/d2l-intl/0.2.1/Intl.js"></script>
 
 <!--
@@ -12,10 +14,14 @@ Accessible, Localized Time Picker Input Element
 
 <dom-module id="d2l-datetime-picker">
 	<template strip-whitespace>
-		<style>
+		<style include="d2l-offscreen-shared-styles">
 			:host {
 				display: inline-flex;
 				align-items: flex-start;
+			}
+
+			label {
+				@apply --d2l-offscreen;
 			}
 
 			d2l-date-picker {
@@ -25,8 +31,10 @@ Accessible, Localized Time Picker Input Element
 				};
 			}
 		</style>
+		<label for="input">{{localize('datepicker')}}</label>
 		<d2l-date-picker value="[[_dateValue]]"></d2l-date-picker>
 		<d2l-time-picker
+			label="[[localize('timepicker')]]"
 			locale="[[locale]]"
 			overrides="[[overrides]]"
 			timezone="[[timezone]]"
@@ -37,8 +45,6 @@ Accessible, Localized Time Picker Input Element
 	</template>
 
 	<script>
-		/* global d2lIntl */
-
 		Polymer({
 			is: 'd2l-datetime-picker',
 
@@ -46,6 +52,10 @@ Accessible, Localized Time Picker Input Element
 				'd2l-date-picker-value-changed': '_dateChanged',
 				'd2l-time-picker-time-changed': '_timeChanged'
 			},
+
+			behaviors: [
+				window.D2L.PolymerBehaviors.DateTimePicker.LocalizeBehavior
+			],
 
 			properties: {
 				_parser: {

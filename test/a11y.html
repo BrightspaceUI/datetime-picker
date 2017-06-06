@@ -25,26 +25,26 @@
 		<script>
 			/* global MockInteractions */
 			suite('a11y', function() {
-				a11ySuite('a11y');
-				a11ySuite('a11y', [], function() {
+				a11ySuite('a11y', ['duplicateId']);
+				a11ySuite('a11y', ['duplicateId'], function() {
 					var a11y = fixture('a11y');
 					var picker = a11y.querySelector('body /deep/ d2l-time-picker');
 					picker.focus();
 				});
-				a11ySuite('a11y', [], function() {
+				a11ySuite('a11y', ['duplicateId'], function() {
 					var a11y = fixture('a11y');
 					var picker = a11y.querySelector('body /deep/ d2l-time-picker');
 					picker.focus();
 					Polymer.dom.flush();
 					MockInteractions.pressAndReleaseKeyOn(document.activeElement, 27);
 				});
-				a11ySuite('a11y', [], function() {
+				a11ySuite('a11y', ['duplicateId'], function() {
 					var a11y = fixture('a11y');
 					var picker = a11y.querySelector('body /deep/ vaadin-date-picker');
 					MockInteractions.tap(picker);
 					Polymer.dom.flush();
 				});
-				a11ySuite('a11y', [], function() {
+				a11ySuite('a11y', ['duplicateId'], function() {
 					var a11y = fixture('a11y');
 					var picker = a11y.querySelector('body /deep/ vaadin-date-picker');
 					MockInteractions.tap(picker);

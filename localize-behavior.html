@@ -1,0 +1,48 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../app-localize-behavior/app-localize-behavior.html">
+<script>
+(function() {
+	'use strict';
+	window.D2L = window.D2L || {};
+	window.D2L.PolymerBehaviors = window.D2L.PolymerBehaviors || {};
+	window.D2L.PolymerBehaviors.DateTimePicker = window.D2L.PolymerBehaviors.DateTimePicker || {};
+	/** @polymerBehavior D2L.PolymerBehaviors.DateTimePicker.LocalizeBehavior */
+	window.D2L.PolymerBehaviors.DateTimePicker.LocalizeBehaviorImpl = {
+		properties: {
+			language: {
+				type: String,
+				computed: '_computeLanguage(resources)'
+			},
+			resources: {
+				value: function() {
+					return {
+						'en': {
+							datepicker: 'Date Picker',
+							timepicker: 'Time Picker'
+						}
+					};
+				}
+			}
+		},
+		_computeLanguage: function(resources) {
+			var locale = document.documentElement.lang
+				|| document.documentElement.getAttribute('data-lang-default')
+				|| 'en-us';
+			locale = locale.toLowerCase();
+			if (resources[locale]) {
+				return locale;
+			}
+			var langAndRegion = locale.split('-');
+			if (resources[langAndRegion[0]]) {
+				return langAndRegion[0];
+			}
+			return 'en';
+		}
+	};
+	/** @polymerBehavior */
+	window.D2L.PolymerBehaviors.DateTimePicker.LocalizeBehavior = [
+		Polymer.AppLocalizeBehavior,
+		window.D2L.PolymerBehaviors.DateTimePicker.LocalizeBehaviorImpl
+	];
+})();
+</script>
