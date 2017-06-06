@@ -29,6 +29,81 @@
 				test('instantiating the element works', function() {
 					expect(this.element.is).to.equal('d2l-datetime-picker');
 				});
+
+				test('should have d2l-time-picker when date is set', function() {
+					expect(this.element.$$('d2l-time-picker')).to.not.be.ok;
+					this.element.date = '1990-01-30';
+					Polymer.dom.flush();
+					expect(this.element.$$('d2l-time-picker')).to.be.ok;
+				});
+
+				test('should have d2l-date-picker', function() {
+					expect(this.element.$$('d2l-date-picker')).to.be.ok;
+				});
+
+				suite('hours/minutes', function() {
+					test('should update time-picker hours/minutes', function() {
+						this.element.date = 'here';
+						Polymer.dom.flush();
+						this.element.hours = 1;
+						this.element.minutes = 30;
+
+						expect(this.element.$$('d2l-time-picker').hours).to.equal(1);
+						expect(this.element.$$('d2l-time-picker').minutes).to.equal(30);
+					});
+				});
+
+				suite('datetime', function() {
+					test('should not be updated when date is undefined', function() {
+						this.element.date = undefined;
+						this.element.hours = 1;
+						this.element.minutes = 30;
+						expect(this.element.datetime).to.not.be.ok;
+					});
+
+					test('should be updated when date is defined', function() {
+						this.element.date = '1990-01-30';
+						Polymer.dom.flush();
+						expect(this.element.datetime).to.be.ok;
+						expect(this.element.datetime.getYear()).to.equal(90);
+						expect(this.element.datetime.getMonth()).to.equal(0);
+						expect(this.element.datetime.getDate()).to.equal(30);
+					});
+
+					test('should have correct time', function() {
+						this.element.date = '1990-01-30';
+						Polymer.dom.flush();
+						this.element.hours = 1;
+						this.element.minutes = 30;
+						expect(this.element.datetime).to.be.ok;
+						expect(this.element.datetime.getYear()).to.equal(90);
+						expect(this.element.datetime.getMonth()).to.equal(0);
+						expect(this.element.datetime.getDate()).to.equal(30);
+						expect(this.element.datetime.getHours()).to.equal(1);
+						expect(this.element.datetime.getMinutes()).to.equal(30);
+					});
+
+					test('date,hours,minutes should be updated when set', function() {
+						this.element.datetime = new Date(0, 0, 0, 0, 0, 0, 0);
+						expect(this.element.date).to.equal('1899-12-31');
+						expect(this.element.hours).to.equal(0);
+						expect(this.element.minutes).to.equal(0);
+					});
+				});
+
+				suite('date-label', function() {
+					test('defaults to "Date Picker" under the "en" locale', function() {
+						this.element.locale = 'en';
+						expect(this.element._dateLabel).to.equal('Date Picker');
+					});
+				});
+
+				suite('time-label', function() {
+					test('defaults to "Time Picker" under the "en" locale', function() {
+						this.element.locale = 'en';
+						expect(this.element._timeLabel).to.equal('Time Picker');
+					});
+				});
 			});
 		</script>
 	</body>
