@@ -20,10 +20,11 @@
 						<br/>
 						<label>Timezone: <input value="{{timezone::input}}"/></label>
 						<br/>
-						<d2l-datetime-picker locale="{{locale}}" timezone="{{timezone}}" datetime="{{datetime}}">
+						<label>Date-Time: <input value="{{datetime::input}}" type="text"/></label>
+						<br/>
+						<d2l-datetime-picker locale="{{locale}}" timezone="{{timezone}}" datetime="{{datetime}}" boundary='{"below":240}'>
 						</d2l-datetime-picker>
 						<br/>
-						<span>{{datetime}}</span>
 					</template>
 				</dom-bind>
 			</div>

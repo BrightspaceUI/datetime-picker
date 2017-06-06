@@ -21,7 +21,8 @@ $ polymer serve
 	locale="en"
 	overrides="[[overrides]]"
 	timezone="Canada-Toronto"
-	datetime="Wed Dec 31 1969 19:00:00 GMT-0500 (EST)"
+	datetime="Wed Dec 31 1969 19:00:00 GMT-0500 (EST)",
+	boundary='{"below":240}'
 ></d2l-datetime-picker>
 ```
 
