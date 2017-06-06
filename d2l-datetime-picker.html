@@ -33,15 +33,19 @@ Accessible, Localized Time Picker Input Element
 		</style>
 		<label for="input">{{_dateLabel}}</label>
 		<d2l-date-picker value="[[_dateValue]]"></d2l-date-picker>
-		<d2l-time-picker
-			label="[[_timeLabel]]"
-			locale="[[locale]]"
-			overrides="[[overrides]]"
-			timezone="[[timezone]]"
-			hours="{{hours}}"
-			minutes="{{minutes}}"
-			boundary="[[boundary]]"
-		></d2l-time-picker>
+
+		<template is="dom-if" if="{{date}}">
+			<d2l-time-picker
+				label="[[_timeLabel]]"
+				locale="[[locale]]"
+				overrides="[[overrides]]"
+				timezone="[[timezone]]"
+				hours="{{hours}}"
+				minutes="{{minutes}}"
+				value="{{_timeValue}}"
+				boundary="[[boundary]]"
+			></d2l-time-picker>
+		</template>
 	</template>
 
 	<script>
@@ -49,8 +53,7 @@ Accessible, Localized Time Picker Input Element
 			is: 'd2l-datetime-picker',
 
 			listeners: {
-				'd2l-date-picker-value-changed': '_dateChanged',
-				'd2l-time-picker-time-changed': '_timeChanged'
+				'd2l-date-picker-value-changed': '_dateChanged'
 			},
 
 			behaviors: [
@@ -68,6 +71,7 @@ Accessible, Localized Time Picker Input Element
 					readOnly: true,
 					value: new d2lIntl.DateTimeFormat(null, {locale:{date:{formats:{dateFormats:{short:'yyyy-MM-dd'}}}}})
 				},
+				_timeValue: String,
 				hours: {
 					type: Number,
 					notify: true
@@ -84,14 +88,6 @@ Accessible, Localized Time Picker Input Element
 					type: String,
 					notify: true,
 					value: ''
-				},
-				time: {
-					type: Object,
-					notify: true,
-					value: {
-						hours: 0,
-						minutes: 0
-					}
 				},
 				datetime: {
 					type: Object,
@@ -118,15 +114,11 @@ Accessible, Localized Time Picker Input Element
 			},
 
 			observers: [
-				'_dateAndTimeChanged(date, time)'
+				'_dateAndTimeChanged(date, _timeValue)'
 			],
 
 			_dateChanged: function(e) {
 				this.date = e.detail.detail.value;
-			},
-
-			_timeChanged: function(e) {
-				this.time = e.detail;
 			},
 
 			_dateTimeChanged: function(datetime) {
@@ -145,13 +137,18 @@ Accessible, Localized Time Picker Input Element
 				this.fire('d2l-datetime-picker-datetime-changed', datetime);
 			},
 
-			_dateAndTimeChanged: function(date, time) {
-				if (!this._parser || !date || !time || this._dontUpdateDateTime) {
+			_dateAndTimeChanged: function() {
+				if (!this._parser || this._dontUpdateDateTime) {
 					return;
 				}
-				var datetime = this._parser.parseDate(date);
-				datetime.setHours(time.hours);
-				datetime.setMinutes(time.minutes);
+				var datetime;
+				try {
+					datetime = this._parser.parseDate(this.date);
+				} catch (e) {
+					return;
+				}
+				datetime.setHours(this.hours);
+				datetime.setMinutes(this.minutes);
 				this.datetime = datetime;
 			},
 
