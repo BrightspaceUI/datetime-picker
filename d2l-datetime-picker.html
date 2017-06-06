@@ -25,7 +25,7 @@ Accessible, Localized Time Picker Input Element
 				};
 			}
 		</style>
-		<d2l-date-picker value="[[dateValue]]"></d2l-date-picker>
+		<d2l-date-picker value="[[_dateValue]]"></d2l-date-picker>
 		<d2l-time-picker
 			locale="[[locale]]"
 			overrides="[[overrides]]"
@@ -63,6 +63,7 @@ Accessible, Localized Time Picker Input Element
 				locale: String,
 				overrides: Object,
 				timezone: String,
+				_dateValue: String,
 				date: {
 					type: String,
 					notify: true
@@ -100,7 +101,7 @@ Accessible, Localized Time Picker Input Element
 					}
 				}
 				this._dontUpdateDateTime = true;
-				this.dateValue = this._formatter.formatDate(datetime);
+				this._dateValue = this._formatter.formatDate(datetime);
 				this.hours = datetime.getHours();
 				this.minutes = datetime.getMinutes();
 				this._dontUpdateDateTime = false;
