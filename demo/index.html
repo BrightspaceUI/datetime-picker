@@ -22,8 +22,21 @@
 						<br/>
 						<label>Date-Time: <input value="{{datetime::input}}" type="text"/></label>
 						<br/>
-						<d2l-datetime-picker locale="{{locale}}" timezone="{{timezone}}" datetime="{{datetime}}" boundary='{"below":240}'>
-						</d2l-datetime-picker>
+						<label>Date: <input value="{{date::input}}" type="text"/></label>
+						<br/>
+						<label>Hours: <input value="{{hours::input}}" type="text"/></label>
+						<br/>
+						<label>Minutes: <input value="{{minutes::input}}" type="text"/></label>
+						<br/>
+						<d2l-datetime-picker
+							locale="{{locale}}"
+							timezone="{{timezone}}"
+							datetime="{{datetime}}"
+							date="{{date}}"
+							hours="{{hours}}"
+							minutes="{{minutes}}"
+							boundary='{"below":240}'
+						></d2l-datetime-picker>
 						<br/>
 					</template>
 				</dom-bind>
