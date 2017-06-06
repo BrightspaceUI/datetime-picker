@@ -68,19 +68,30 @@ Accessible, Localized Time Picker Input Element
 					readOnly: true,
 					value: new d2lIntl.DateTimeFormat(null, {locale:{date:{formats:{dateFormats:{short:'yyyy-MM-dd'}}}}})
 				},
-				hours: Number,
-				minutes: Number,
+				hours: {
+					type: Number,
+					notify: true
+				},
+				minutes: {
+					type: Number,
+					notify: true
+				},
 				locale: String,
 				overrides: Object,
 				timezone: String,
 				_dateValue: String,
 				date: {
 					type: String,
-					notify: true
+					notify: true,
+					value: ''
 				},
 				time: {
 					type: Object,
-					notify: true
+					notify: true,
+					value: {
+						hours: 0,
+						minutes: 0
+					}
 				},
 				datetime: {
 					type: Object,
@@ -131,6 +142,7 @@ Accessible, Localized Time Picker Input Element
 				this.hours = datetime.getHours();
 				this.minutes = datetime.getMinutes();
 				this._dontUpdateDateTime = false;
+				this.fire('d2l-datetime-picker-datetime-changed', datetime);
 			},
 
 			_dateAndTimeChanged: function(date, time) {
@@ -141,7 +153,6 @@ Accessible, Localized Time Picker Input Element
 				datetime.setHours(time.hours);
 				datetime.setMinutes(time.minutes);
 				this.datetime = datetime;
-				this.fire('d2l-datetime-picker-datetime-changed', datetime);
 			},
 
 			_computeDateLabel: function(dateLabel, localize) {

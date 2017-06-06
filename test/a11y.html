@@ -28,25 +28,25 @@
 				a11ySuite('a11y', ['duplicateId']);
 				a11ySuite('a11y', ['duplicateId'], function() {
 					var a11y = fixture('a11y');
-					var picker = a11y.querySelector('body /deep/ d2l-time-picker');
+					var picker = a11y.querySelector('d2l-datetime-picker').$$('d2l-time-picker');
 					picker.focus();
 				});
 				a11ySuite('a11y', ['duplicateId'], function() {
 					var a11y = fixture('a11y');
-					var picker = a11y.querySelector('body /deep/ d2l-time-picker');
+					var picker = a11y.querySelector('d2l-datetime-picker').$$('d2l-time-picker');
 					picker.focus();
 					Polymer.dom.flush();
 					MockInteractions.pressAndReleaseKeyOn(document.activeElement, 27);
 				});
 				a11ySuite('a11y', ['duplicateId'], function() {
 					var a11y = fixture('a11y');
-					var picker = a11y.querySelector('body /deep/ vaadin-date-picker');
+					var picker = a11y.querySelector('d2l-datetime-picker').$$('d2l-date-picker').$$('vaadin-date-picker');
 					MockInteractions.tap(picker);
 					Polymer.dom.flush();
 				});
 				a11ySuite('a11y', ['duplicateId'], function() {
 					var a11y = fixture('a11y');
-					var picker = a11y.querySelector('body /deep/ vaadin-date-picker');
+					var picker = a11y.querySelector('d2l-datetime-picker').$$('d2l-date-picker').$$('vaadin-date-picker');
 					MockInteractions.tap(picker);
 					Polymer.dom.flush();
 					MockInteractions.pressAndReleaseKeyOn(picker, 27);
