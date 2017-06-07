@@ -126,6 +126,14 @@
 						expect(this.element._timeLabel).to.equal('Time Picker');
 					});
 				});
+
+				suite('d2l-icon-button', function() {
+					test('clears datetime', function() {
+						this.element.datetime = new Date();
+						this.element.$$('d2l-icon-button button').click();
+						expect(this.element.datetime).to.be.empty;
+					});
+				});
 			});
 		</script>
 	</body>
