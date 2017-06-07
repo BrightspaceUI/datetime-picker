@@ -2,6 +2,8 @@
 <link rel="import" href="../d2l-date-picker/d2l-date-picker.html">
 <link rel="import" href="../d2l-time-picker/d2l-time-picker.html">
 <link rel="import" href="../d2l-offscreen/d2l-offscreen.html">
+<link rel="import" href="../d2l-icons/d2l-icon-button.html">
+<link rel="import" href="../d2l-icons/tier1-icons.html">
 <link rel="import" href="localize-behavior.html">
 <script type="text/javascript" src="https://s.brightspace.com/lib/d2l-intl/0.2.1/Intl.js"></script>
 
@@ -25,16 +27,32 @@ Accessible, Localized Time Picker Input Element
 			}
 
 			d2l-date-picker {
-				padding-right: 1rem;
 				--paper-input-container: {
 					padding: 0;
 				};
 			}
 
-			:host-context([dir="rtl"]) d2l-date-picker {
-				padding-right: 0;
-				padding-left: 1rem;
+			.clear-button,
+			.clear-button button {
+				--d2l-icon-button-icon: {
+					color: var(--d2l-color-tungsten);
+				};
 			}
+
+			.clear-button button {
+				height: 2.4rem;
+			}
+
+			d2l-time-picker {
+				padding-left: 1rem;
+				padding-right: 0.5rem;
+			}
+
+			:host-context([dir="rtl"]) d2l-time-picker {
+				padding-left: 0.5rem;
+				padding-right: 1rem;
+			}
+
 		</style>
 		<label for="input">{{_dateLabel}}</label>
 		<d2l-date-picker value="[[_dateValue]]"></d2l-date-picker>
@@ -49,6 +67,14 @@ Accessible, Localized Time Picker Input Element
 				minutes="{{minutes}}"
 				boundary="[[boundary]]"
 			></d2l-time-picker>
+			<d2l-icon-button class="clear-button" icon="d2l-tier1:close-small">
+				<button is="d2l-icon-button"
+					icon="d2l-tier1:close-small"
+					on-click="clear"
+					title="[[localize('clear')]]"
+					aria-label$="[[localize('clear')]]"
+				></button>
+			</d2l-icon-button>
 		</template>
 	</template>
 
@@ -119,6 +145,10 @@ Accessible, Localized Time Picker Input Element
 			observers: [
 				'_dateAndTimeChanged(date, hours, minutes)'
 			],
+
+			clear: function() {
+				this.datetime = '';
+			},
 
 			_dateChanged: function(e) {
 				this.date = e.detail.detail.value;
