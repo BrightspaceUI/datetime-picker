@@ -2,7 +2,7 @@
 <link rel="import" href="../d2l-date-picker/d2l-date-picker.html">
 <link rel="import" href="../d2l-time-picker/d2l-time-picker.html">
 <link rel="import" href="../d2l-offscreen/d2l-offscreen.html">
-<link rel="import" href="../d2l-icons/d2l-icon-button.html">
+<link rel="import" href="../d2l-icons/d2l-icon.html">
 <link rel="import" href="../d2l-icons/tier1-icons.html">
 <link rel="import" href="localize-behavior.html">
 <script type="text/javascript" src="https://s.brightspace.com/lib/d2l-intl/0.2.1/Intl.js"></script>
@@ -32,7 +32,21 @@ Accessible, Localized Time Picker Input Element
 				};
 			}
 
-			d2l-icon-button button {
+			.clear-button > d2l-icon {
+				color: var(--d2l-color-tungsten);
+			}
+
+			.clear-button {
+				background-color: transparent;
+				border: none;
+				cursor: pointer;
+				display: inline-block;
+				font-family: inherit;
+				font-size: inherit;
+				line-height: 0;
+				margin: 0;
+				padding: 0;
+				text-decoration: none;
 				height: 2.4rem;
 			}
 
@@ -60,9 +74,9 @@ Accessible, Localized Time Picker Input Element
 				minutes="{{minutes}}"
 				boundary="[[boundary]]"
 			></d2l-time-picker>
-			<d2l-icon-button icon="d2l-tier1:close-small">
-				<button on-click="clear" is="d2l-icon-button" icon="d2l-tier1:close-small"></button>
-			</d2l-icon-button>
+			<button class="clear-button" on-click="clear">
+				<d2l-icon icon="d2l-tier1:close-small"></d2l-icon>
+			</button>
 		</template>
 	</template>
 
