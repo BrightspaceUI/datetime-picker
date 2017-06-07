@@ -89,6 +89,11 @@
 						expect(this.element.hours).to.equal(0);
 						expect(this.element.minutes).to.equal(0);
 					});
+
+					test('clears date,hours,minutes when set to empty', function() {
+						this.element.datetime = '';
+						expect(this.element.date).to.be.empty;
+					});
 				});
 
 				suite('date-label', function() {
