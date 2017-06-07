@@ -127,9 +127,16 @@ Accessible, Localized Time Picker Input Element
 			},
 
 			_dateTimeChanged: function(datetime) {
+				if (!datetime) {
+					this._dateValue = '';
+					return;
+				}
 				if (typeof datetime === 'string') {
 					try {
 						datetime = new Date(datetime);
+						if (isNaN(datetime.getTime())) {
+							return;
+						}
 					} catch (e) {
 						return;
 					}
