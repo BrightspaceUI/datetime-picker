@@ -94,6 +94,17 @@
 						this.element.datetime = '';
 						expect(this.element.date).to.be.empty;
 					});
+
+					test('noop when date is invalid', function() {
+						this.element.datetime = new Date();
+						var date = this.element.date;
+						var hours = this.element.hours;
+						var minutes = this.element.minutes;
+						this.element.datetime = 'foozleberries';
+						expect(this.element.date).to.equal(date);
+						expect(this.element.hours).to.equal(hours);
+						expect(this.element.minutes).to.equal(minutes);
+					});
 				});
 
 				suite('date-label', function() {

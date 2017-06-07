@@ -134,6 +134,9 @@ Accessible, Localized Time Picker Input Element
 				if (typeof datetime === 'string') {
 					try {
 						datetime = new Date(datetime);
+						if (isNaN(datetime.getTime())) {
+							return;
+						}
 					} catch (e) {
 						return;
 					}
