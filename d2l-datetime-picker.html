@@ -151,9 +151,16 @@ Accessible, Localized Time Picker Input Element
 				if (!this._parser || this._dontUpdateDateTime) {
 					return;
 				}
+				if (!this.date) {
+					this.datetime = '';
+					return;
+				}
 				var datetime;
 				try {
 					datetime = this._parser.parseDate(this.date);
+					if (isNaN(datetime.getTime())) {
+						return;
+					}
 				} catch (e) {
 					return;
 				}
