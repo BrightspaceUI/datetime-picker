@@ -61,6 +61,12 @@
 						expect(this.element.datetime).to.not.be.ok;
 					});
 
+					test('empty when date is empty', function() {
+						this.element.date = new Date();
+						this.element.date = '';
+						expect(this.element.datetime).to.not.be.ok;
+					});
+
 					test('should be updated when date is defined', function() {
 						this.element.date = '1990-01-30';
 						Polymer.dom.flush();
