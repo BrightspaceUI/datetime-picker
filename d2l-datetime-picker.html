@@ -47,7 +47,6 @@ Accessible, Localized Time Picker Input Element
 				timezone="[[timezone]]"
 				hours="{{hours}}"
 				minutes="{{minutes}}"
-				value="{{_timeValue}}"
 				boundary="[[boundary]]"
 			></d2l-time-picker>
 		</template>
@@ -76,7 +75,6 @@ Accessible, Localized Time Picker Input Element
 					readOnly: true,
 					value: new d2lIntl.DateTimeFormat(null, {locale:{date:{formats:{dateFormats:{short:'yyyy-MM-dd'}}}}})
 				},
-				_timeValue: String,
 				hours: {
 					type: Number,
 					notify: true
@@ -119,7 +117,7 @@ Accessible, Localized Time Picker Input Element
 			},
 
 			observers: [
-				'_dateAndTimeChanged(date, _timeValue)'
+				'_dateAndTimeChanged(date, hours, minutes)'
 			],
 
 			_dateChanged: function(e) {
