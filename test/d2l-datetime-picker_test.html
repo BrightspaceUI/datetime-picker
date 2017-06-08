@@ -90,7 +90,7 @@
 					});
 
 					test('date,hours,minutes should be updated when set', function() {
-						this.element.datetime = moment(new Date(0, 0, 0, 0, 0, 0, 0));
+						this.element.datetime = moment.tz('1899-12-31T00:00:00', this.element.timezone);
 						expect(this.element.date).to.equal('1899-12-31');
 						expect(this.element.hours).to.equal(0);
 						expect(this.element.minutes).to.equal(0);
