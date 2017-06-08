@@ -6,6 +6,8 @@
 <link rel="import" href="../d2l-icons/tier1-icons.html">
 <link rel="import" href="localize-behavior.html">
 <script type="text/javascript" src="https://s.brightspace.com/lib/d2l-intl/0.2.1/Intl.js"></script>
+<script type="text/javascript" src="https://s.brightspace.com/lib/moment.js/2.15.2/moment.min.js"></script>
+<script type="text/javascript" src="https://s.brightspace.com/lib/moment-timezone/0.5.10/moment-timezone-with-data.min.js"></script>
 
 <!--
 `d2l-time-picker`
@@ -96,11 +98,6 @@ Accessible, Localized Time Picker Input Element
 					readOnly: true,
 					value: new d2lIntl.DateTimeParse(null, {locale:{date:{formats:{dateFormats:{short:'yyyy-MM-dd'}}}}})
 				},
-				_formatter: {
-					type: Object,
-					readOnly: true,
-					value: new d2lIntl.DateTimeFormat(null, {locale:{date:{formats:{dateFormats:{short:'yyyy-MM-dd'}}}}})
-				},
 				hours: {
 					type: Number,
 					notify: true
@@ -111,7 +108,11 @@ Accessible, Localized Time Picker Input Element
 				},
 				locale: String,
 				overrides: Object,
-				timezone: String,
+				timezone: {
+					type: String,
+					value: moment.tz.guess(),
+					notify: true
+				},
 				_dateValue: String,
 				date: {
 					type: String,
@@ -143,7 +144,7 @@ Accessible, Localized Time Picker Input Element
 			},
 
 			observers: [
-				'_dateAndTimeChanged(date, hours, minutes)'
+				'_dateAndTimeChanged(date, timezone, hours, minutes)'
 			],
 
 			clear: function() {
@@ -159,20 +160,14 @@ Accessible, Localized Time Picker Input Element
 					this._dateValue = '';
 					return;
 				}
-				if (typeof datetime === 'string') {
-					try {
-						datetime = new Date(datetime);
-						if (isNaN(datetime.getTime())) {
-							return;
-						}
-					} catch (e) {
-						return;
-					}
+				datetime = moment.tz(datetime, this.timezone);
+				if (!datetime.isValid()) {
+					return;
 				}
 				this._dontUpdateDateTime = true;
-				this._dateValue = this._formatter.formatDate(datetime);
-				this.hours = datetime.getHours();
-				this.minutes = datetime.getMinutes();
+				this._dateValue = datetime.format('YYYY-MM-DD');
+				this.hours = datetime.hours();
+				this.minutes = datetime.minutes();
 				this._dontUpdateDateTime = false;
 				this.fire('d2l-datetime-picker-datetime-changed', datetime);
 			},
@@ -187,15 +182,15 @@ Accessible, Localized Time Picker Input Element
 				}
 				var datetime;
 				try {
-					datetime = this._parser.parseDate(this.date);
-					if (isNaN(datetime.getTime())) {
+					datetime = moment.tz(this.date, this.timezone);
+					if (!datetime.isValid()) {
 						return;
 					}
 				} catch (e) {
 					return;
 				}
-				datetime.setHours(this.hours);
-				datetime.setMinutes(this.minutes);
+				datetime.hours(this.hours);
+				datetime.minutes(this.minutes);
 				this.datetime = datetime;
 			},
 

@@ -62,7 +62,7 @@
 					});
 
 					test('empty when date is empty', function() {
-						this.element.date = new Date();
+						this.element.date = moment();
 						this.element.date = '';
 						expect(this.element.datetime).to.not.be.ok;
 					});
@@ -71,9 +71,9 @@
 						this.element.date = '1990-01-30';
 						Polymer.dom.flush();
 						expect(this.element.datetime).to.be.ok;
-						expect(this.element.datetime.getYear()).to.equal(90);
-						expect(this.element.datetime.getMonth()).to.equal(0);
-						expect(this.element.datetime.getDate()).to.equal(30);
+						expect(this.element.datetime.year()).to.equal(1990);
+						expect(this.element.datetime.month()).to.equal(0);
+						expect(this.element.datetime.date()).to.equal(30);
 					});
 
 					test('should have correct time', function() {
@@ -82,15 +82,15 @@
 						this.element.hours = 1;
 						this.element.minutes = 30;
 						expect(this.element.datetime).to.be.ok;
-						expect(this.element.datetime.getYear()).to.equal(90);
-						expect(this.element.datetime.getMonth()).to.equal(0);
-						expect(this.element.datetime.getDate()).to.equal(30);
-						expect(this.element.datetime.getHours()).to.equal(1);
-						expect(this.element.datetime.getMinutes()).to.equal(30);
+						expect(this.element.datetime.year()).to.equal(1990);
+						expect(this.element.datetime.month()).to.equal(0);
+						expect(this.element.datetime.date()).to.equal(30);
+						expect(this.element.datetime.hours()).to.equal(1);
+						expect(this.element.datetime.minutes()).to.equal(30);
 					});
 
 					test('date,hours,minutes should be updated when set', function() {
-						this.element.datetime = new Date(0, 0, 0, 0, 0, 0, 0);
+						this.element.datetime = moment.tz('1899-12-31T00:00:00', this.element.timezone);
 						expect(this.element.date).to.equal('1899-12-31');
 						expect(this.element.hours).to.equal(0);
 						expect(this.element.minutes).to.equal(0);
@@ -102,7 +102,7 @@
 					});
 
 					test('noop when date is invalid', function() {
-						this.element.datetime = new Date();
+						this.element.datetime = moment();
 						var date = this.element.date;
 						var hours = this.element.hours;
 						var minutes = this.element.minutes;
@@ -129,10 +129,88 @@
 
 				suite('d2l-icon-button', function() {
 					test('clears datetime', function() {
-						this.element.datetime = new Date();
+						this.element.datetime = moment();
 						Polymer.dom.flush();
 						this.element.$$('d2l-icon-button button').click();
 						expect(this.element.datetime).to.be.empty;
+					});
+				});
+
+				suite('timezone', function() {
+					test('utcdatetime is converted to UTC from the given timezone (UTC)', function() {
+						this.element.timezone = 'UTC';
+						this.element.date = '1990-01-30';
+						this.element.hours = 1;
+						this.element.minutes = 30;
+
+						expect(this.element.datetime.utc().hours()).to.equal(1);
+						expect(this.element.datetime.utc().minutes()).to.equal(30);
+						expect(this.element.datetime.utc().date()).to.equal(30);
+					});
+
+					test('utcdatetime is converted to UTC from the given timezone (America/Toronto)', function() {
+						this.element.timezone = 'America/Toronto';
+						this.element.date = '1990-01-30';
+						this.element.hours = 1;
+						this.element.minutes = 30;
+
+						expect(this.element.datetime.utc().hours()).to.equal(6);
+						expect(this.element.datetime.utc().minutes()).to.equal(30);
+						expect(this.element.datetime.utc().date()).to.equal(30);
+					});
+
+					test('utcdatetime is converted to UTC from the given timezone (America/Los_Angeles)', function() {
+						this.element.timezone = 'America/Los_Angeles';
+						this.element.date = '1990-01-30';
+						this.element.hours = 1;
+						this.element.minutes = 30;
+
+						expect(this.element.datetime.utc().hours()).to.equal(9);
+						expect(this.element.datetime.utc().minutes()).to.equal(30);
+						expect(this.element.datetime.utc().date()).to.equal(30);
+					});
+
+					test('changing timezone will not update date/hours/minutes', function() {
+						this.element.timezone = 'America/Toronto';
+						this.element.date = '1990-01-30';
+						this.element.hours = 1;
+						this.element.minutes = 30;
+
+						this.element.timezone = 'UTC';
+
+						expect(this.element.date).to.equal('1990-01-30');
+						expect(this.element.hours).to.equal(1);
+						expect(this.element.minutes).to.equal(30);
+					});
+
+					test('changing timezone will not update date/hours/minutes', function() {
+						this.element.timezone = 'UTC';
+						this.element.date = '1990-01-30';
+						this.element.hours = 23;
+						this.element.minutes = 30;
+
+						this.element.timezone = 'America/Toronto';
+
+						expect(this.element.date).to.equal('1990-01-30');
+						expect(this.element.hours).to.equal(23);
+						expect(this.element.minutes).to.equal(30);
+					});
+
+					test('changing timezone will update datetime', function() {
+						this.element.timezone = 'America/Toronto';
+						this.element.date = '1990-01-30';
+						this.element.hours = 1;
+						this.element.minutes = 30;
+
+						expect(this.element.datetime.utc().hours()).to.equal(6);
+						expect(this.element.datetime.utc().minutes()).to.equal(30);
+						expect(this.element.datetime.utc().date()).to.equal(30);
+
+						this.element.timezone = 'UTC';
+
+						expect(this.element.datetime.utc().hours()).to.equal(1);
+						expect(this.element.datetime.utc().minutes()).to.equal(30);
+						expect(this.element.datetime.utc().date()).to.equal(30);
 					});
 				});
 			});
