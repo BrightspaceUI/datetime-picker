@@ -36,6 +36,7 @@
     }
   },
   "resolutions": {
-    "webcomponentsjs": "0.7 - 1"
+    "webcomponentsjs": "0.7 - 1",
+    "d2l-colors": "^2.4.0"
   }
 }
