@@ -19,6 +19,8 @@ Accessible, Localized Time Picker Input Element
 
 <dom-module id="d2l-datetime-picker">
 	<template strip-whitespace>
+		<!-- HACK d2l-input-styles is imported from time-picker.
+		This is here until the input styles get split out into their own repo -->
 		<style include="d2l-offscreen-shared-styles d2l-input-styles">
 			:host {
 				display: inline-flex;
