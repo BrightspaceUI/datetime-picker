@@ -8,7 +8,7 @@
     "vaadin-date-picker": "^1.2.3",
     "d2l-offscreen": "^2.2.5",
     "app-localize-behavior": "0.10 - 2",
-    "iron-input": "^2.0.0"
+    "iron-input": "^1.0.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#1 - 2",
