@@ -4,7 +4,7 @@
   "main": "d2l-datetime-picker.html",
   "dependencies": {
     "polymer": "Polymer/polymer#1.9 - 2",
-    "d2l-time-picker": "BrightspaceUI/time-picker#^0.0.6",
+    "d2l-time-picker": "BrightspaceUI/time-picker#^0.1.0",
     "vaadin-date-picker": "^1.2.3",
     "d2l-offscreen": "^2.2.5",
     "app-localize-behavior": "0.10 - 2",
