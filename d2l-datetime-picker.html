@@ -26,7 +26,11 @@ Accessible, Localized Time Picker Input Element
 				display: inline-flex;
 				align-items: flex-start;
 				flex-wrap: wrap;
+
+				/* For flex/position to work correctly in IE11, the max-width needs to be set */
 				position: relative;
+				max-width: 14.5rem;
+				width: 100%;
 			}
 
 			label {
@@ -95,7 +99,9 @@ Accessible, Localized Time Picker Input Element
 			}
 
 			d2l-time-picker {
-				flex: 1;
+				/* IE11 likes a basis */
+				flex: 1 0 6rem;
+				max-width: 7rem;
 				padding-right: 0.5rem;
 			}
 
