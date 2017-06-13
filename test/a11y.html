@@ -44,13 +44,13 @@
 				});
 				a11ySuite('a11y', ['duplicateId'], function() {
 					var a11y = fixture('a11y');
-					var picker = a11y.querySelector('d2l-datetime-picker').$$('d2l-date-picker').$$('vaadin-date-picker');
+					var picker = a11y.querySelector('d2l-datetime-picker').$$('input.d2l-input');
 					MockInteractions.tap(picker);
 					Polymer.dom.flush();
 				});
 				a11ySuite('a11y', ['duplicateId'], function() {
 					var a11y = fixture('a11y');
-					var picker = a11y.querySelector('d2l-datetime-picker').$$('d2l-date-picker').$$('vaadin-date-picker');
+					var picker = a11y.querySelector('d2l-datetime-picker').$$('input.d2l-input');
 					MockInteractions.tap(picker);
 					Polymer.dom.flush();
 					MockInteractions.pressAndReleaseKeyOn(picker, 27);

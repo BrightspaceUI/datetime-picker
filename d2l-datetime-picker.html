@@ -1,5 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../d2l-date-picker/d2l-date-picker.html">
+<link rel="import" href="../vaadin-date-picker/vaadin-date-picker-light.html">
+<link rel="import" href="../iron-input/iron-input.html">
 <link rel="import" href="../d2l-time-picker/d2l-time-picker.html">
 <link rel="import" href="../d2l-offscreen/d2l-offscreen.html">
 <link rel="import" href="../d2l-icons/d2l-icon-button.html">
@@ -18,7 +19,9 @@ Accessible, Localized Time Picker Input Element
 
 <dom-module id="d2l-datetime-picker">
 	<template strip-whitespace>
-		<style include="d2l-offscreen-shared-styles">
+		<!-- HACK d2l-input-styles is imported from time-picker.
+		This is here until the input styles get split out into their own repo -->
+		<style include="d2l-offscreen-shared-styles d2l-input-styles">
 			:host {
 				display: inline-flex;
 				align-items: flex-start;
@@ -28,10 +31,39 @@ Accessible, Localized Time Picker Input Element
 				@apply --d2l-offscreen;
 			}
 
-			d2l-date-picker {
-				--paper-input-container: {
-					padding: 0;
+			vaadin-date-picker-light {
+				--primary-color: var(--d2l-color-celestine);
+				--light-primary-color: var(--d2l-color-celestine-plus-1);
+				--dark-theme-background-color: var(--d2l-color-ferrite);
+				--dark-theme-secondary-color: var(--d2l-color-white);
+				--primary-text-color: var(--d2l-color-ferrite);
+				--secondary-text-color: var(--d2l-color-tungsten);
+				--vaadin-date-picker-overlay: {
+					font-family: inherit;
+					max-height: 300px;
 				};
+				--vaadin-date-picker-yearscroller: {
+					font-family: inherit;
+				};
+				--vaadin-date-picker-header: {
+					font-family: inherit;
+				};
+				--vaadin-date-picker-calendar-title: {
+					font-family: inherit;
+				};
+				--vaadin-date-picker-calendar-cell: {
+					font-family: inherit;
+				};
+				--vaadin-date-picker-footer: {
+					font-family: inherit;
+				};
+				--vaadin-date-picker-calendar: {
+					font-family: inherit;
+				};
+			}
+
+			vaadin-date-picker-light .d2l-input {
+				width: 7rem;
 			}
 
 			.clear-button,
@@ -57,7 +89,11 @@ Accessible, Localized Time Picker Input Element
 
 		</style>
 		<label for="input">{{_dateLabel}}</label>
-		<d2l-date-picker value="[[_dateValue]]"></d2l-date-picker>
+		<vaadin-date-picker-light value="{{date}}">
+			<iron-input>
+				<input aria-label$="{{_dateLabel}}" class="d2l-input" is="iron-input" type="text"/>
+			</iron-input>
+		</vaadin-date-picker-light>
 
 		<template is="dom-if" if="{{date}}">
 			<d2l-time-picker
@@ -84,10 +120,6 @@ Accessible, Localized Time Picker Input Element
 		Polymer({
 			is: 'd2l-datetime-picker',
 
-			listeners: {
-				'd2l-date-picker-value-changed': '_dateChanged'
-			},
-
 			behaviors: [
 				window.D2L.PolymerBehaviors.DateTimePicker.LocalizeBehavior
 			],
@@ -113,7 +145,6 @@ Accessible, Localized Time Picker Input Element
 					value: moment.tz.guess(),
 					notify: true
 				},
-				_dateValue: String,
 				date: {
 					type: String,
 					notify: true,
@@ -151,13 +182,9 @@ Accessible, Localized Time Picker Input Element
 				this.datetime = '';
 			},
 
-			_dateChanged: function(e) {
-				this.date = e.detail.detail.value;
-			},
-
 			_dateTimeChanged: function(datetime) {
 				if (!datetime) {
-					this._dateValue = '';
+					this.date = '';
 					return;
 				}
 				datetime = moment.tz(datetime, this.timezone);
@@ -165,7 +192,7 @@ Accessible, Localized Time Picker Input Element
 					return;
 				}
 				this._dontUpdateDateTime = true;
-				this._dateValue = datetime.format('YYYY-MM-DD');
+				this.date = datetime.format('YYYY-MM-DD');
 				this.hours = datetime.hours();
 				this.minutes = datetime.minutes();
 				this._dontUpdateDateTime = false;

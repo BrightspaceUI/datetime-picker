@@ -37,13 +37,13 @@
 					expect(this.element.$$('d2l-time-picker')).to.be.ok;
 				});
 
-				test('should have d2l-date-picker', function() {
-					expect(this.element.$$('d2l-date-picker')).to.be.ok;
+				test('should have vaadin-date-picker-light', function() {
+					expect(this.element.$$('vaadin-date-picker-light')).to.be.ok;
 				});
 
 				suite('hours/minutes', function() {
 					test('should update time-picker hours/minutes', function() {
-						this.element.date = 'here';
+						this.element.date = '1990-01-30';
 						Polymer.dom.flush();
 						this.element.hours = 1;
 						this.element.minutes = 30;
