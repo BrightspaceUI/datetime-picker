@@ -91,7 +91,7 @@ Accessible, Localized Time Picker Input Element
 		<label for="input">{{_dateLabel}}</label>
 		<vaadin-date-picker-light value="{{date}}">
 			<iron-input>
-				<input aria-label$="{{_dateLabel}}" class="d2l-input" is="iron-input" type="text"/>
+				<input aria-label$="{{_dateLabel}}" placeholder="{{placeholder}}" class="d2l-input" is="iron-input" type="text"/>
 			</iron-input>
 		</vaadin-date-picker-light>
 
@@ -156,6 +156,7 @@ Accessible, Localized Time Picker Input Element
 					observer: '_dateTimeChanged'
 				},
 				boundary: Object,
+				placeholder: String,
 				dateLabel: {
 					type: String,
 					value: ''
