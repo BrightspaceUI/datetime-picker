@@ -25,6 +25,8 @@ Accessible, Localized Time Picker Input Element
 			:host {
 				display: inline-flex;
 				align-items: flex-start;
+				flex-wrap: wrap;
+				position: relative;
 			}
 
 			label {
@@ -66,6 +68,11 @@ Accessible, Localized Time Picker Input Element
 				width: 7rem;
 			}
 
+			.clear-button {
+				position: absolute;
+				top: 0;
+			}
+
 			.clear-button,
 			.clear-button button {
 				--d2l-icon-button-icon: {
@@ -77,14 +84,24 @@ Accessible, Localized Time Picker Input Element
 				height: 2.4rem;
 			}
 
-			d2l-time-picker {
+			vaadin-date-picker-light {
+				padding-right: 1rem;
+				padding-bottom: 20px;
+			}
+
+			:host-context([dir="rtl"]) vaadin-date-picker-light {
+				padding-right: 0;
 				padding-left: 1rem;
+			}
+
+			d2l-time-picker {
+				flex: 1;
 				padding-right: 0.5rem;
 			}
 
 			:host-context([dir="rtl"]) d2l-time-picker {
 				padding-left: 0.5rem;
-				padding-right: 1rem;
+				padding-right: 0;
 			}
 
 		</style>
@@ -105,14 +122,16 @@ Accessible, Localized Time Picker Input Element
 				minutes="{{minutes}}"
 				boundary="[[boundary]]"
 			></d2l-time-picker>
-			<d2l-icon-button class="clear-button" icon="d2l-tier1:close-small">
-				<button is="d2l-icon-button"
-					icon="d2l-tier1:close-small"
-					on-click="clear"
-					title="[[localize('clear')]]"
-					aria-label$="[[localize('clear')]]"
-				></button>
-			</d2l-icon-button>
+			<div class="clear-button-container">
+				<d2l-icon-button class="clear-button" icon="d2l-tier1:close-small">
+					<button is="d2l-icon-button"
+						icon="d2l-tier1:close-small"
+						on-click="clear"
+						title="[[localize('clear')]]"
+						aria-label$="[[localize('clear')]]"
+					></button>
+				</d2l-icon-button>
+			</div>
 		</template>
 	</template>
 
