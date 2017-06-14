@@ -34,6 +34,7 @@ Accessible, Localized Time Picker Input Element
 
 				--d2l-datetime-picker-label-width: 5rem;
 				--d2l-datetime-picker-label-min-width: 2rem;
+				--d2l-datetime-picker-label-padding: 20px;
 			}
 
 			vaadin-date-picker-light {
@@ -137,6 +138,7 @@ Accessible, Localized Time Picker Input Element
 				flex: 0 1 var(--d2l-datetime-picker-label-width);
 				max-width: var(--d2l-datetime-picker-label-width);
 				min-width: var(--d2l-datetime-picker-label-min-width);
+				box-sizing: border-box;
 				max-height: 0.7rem;
 			}
 
@@ -145,8 +147,15 @@ Accessible, Localized Time Picker Input Element
 			}
 
 			@media (max-width: 615px), (max-device-width: 960px) {
-				:host(:not([hide-label])) label {
+				label {
 					font-size: 0.6rem;
+					padding-right: var(--d2l-datetime-picker-label-padding);
+					text-align: right;
+				}
+
+				:host-context([dir="rtl"]) label {
+					padding-right: 0;
+					padding-left: var(--d2l-datetime-picker-label-padding);
 				}
 
 				:host(:not([hide-label])) .d2l-date-picker-container,
