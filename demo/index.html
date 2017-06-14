@@ -22,6 +22,10 @@
 						<br/>
 						<label>Placeholder: <input value="{{placeholder::input}}" type="text"/></label>
 						<br/>
+						<label>Date Label: <input value="{{dateLabel::input}}" type="text"/></label>
+						<br/>
+						<label>Time Label: <input value="{{timeLabel::input}}" type="text"/></label>
+						<br/>
 						<label>Date-Time: <input value="{{datetime::input}}" type="text"/></label>
 						<br/>
 						<label>Date: <input value="{{date::input}}" type="text"/></label>
@@ -39,8 +43,25 @@
 							hours="{{hours}}"
 							minutes="{{minutes}}"
 							boundary='{"below":240}'
+							date-label="{{dateLabel}}"
+							time-label="{{timeLabel}}"
 						></d2l-datetime-picker>
 						<br/>
+
+						<p>Hidden label (visual)</p>
+						<d2l-datetime-picker
+							locale="{{locale}}"
+							timezone="{{timezone}}"
+							placeholder="{{placeholder}}"
+							datetime="{{datetime}}"
+							date="{{date}}"
+							hours="{{hours}}"
+							minutes="{{minutes}}"
+							boundary='{"below":240}'
+							date-label="{{dateLabel}}"
+							time-label="{{timeLabel}}"
+							hide-label
+						></d2l-datetime-picker>
 					</template>
 				</dom-bind>
 			</div>
