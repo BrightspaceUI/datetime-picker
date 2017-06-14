@@ -1,4 +1,4 @@
-/* global polymerTests, LocalBrowserFactory, SauceBrowserFactory, importClass, Keys */
+/* global polymerTests, LocalBrowserFactory, SauceBrowserFactory, importClass, org, Keys */
 /* eslint no-invalid-this: 0 */
 'use strict';
 
