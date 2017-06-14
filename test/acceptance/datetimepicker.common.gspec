@@ -1,0 +1,95 @@
+@groups
+	datetime datetimepicker,datetimepicker-labelless
+
+== D2L Date-Time Picker ==
+
+	@on closed
+		@forEach [&datetime] as item
+			${item}.time-picker, ${item}.clear:
+				absent
+
+	@on open
+		@forEach [&datetime] as item
+			${item}.time-picker, ${item}.clear:
+				visible
+
+		datetimepicker.time-picker-label:
+			visible
+
+	datetimepicker.date-picker-label:
+		visible
+
+	datetimepicker-labelless.date-picker-label, datetimepicker-labelless.time-picker-label:
+		absent
+
+	@on mobile
+		@on ltr
+			datetimepicker.date-picker-label:
+				left-of datetimepicker.date-picker
+
+		@on rtl
+			datetimepicker.date-picker-label:
+				right-of datetimepicker.date-picker
+
+		@on open
+			@on ltr
+				datetimepicker.time-picker-label:
+					left-of datetimepicker.time-picker
+
+			@on rtl
+				datetimepicker.time-picker-label:
+					right-of datetimepicker.time-picker
+
+			@forEach [&datetime] as item
+				${item}.time-picker:
+					below ${item}.date-picker 20px
+
+				@on ltr
+					${item}.time-picker:
+						aligned vertically left ${item}.date-picker
+
+					${item}.clear:
+						right-of ${item}.date-picker ~18px
+
+				@on rtl
+					${item}.time-picker:
+						aligned vertically right ${item}.date-picker
+
+					${item}.clear:
+						left-of ${item}.date-picker ~18px
+
+	@on desktop
+		@on ltr
+			datetimepicker.date-picker-label:
+				aligned vertically left datetimepicker.date-picker
+
+		@on rtl
+			datetimepicker.date-picker-label:
+				aligned vertically right datetimepicker.date-picker
+
+		@on open
+			@on ltr
+				datetimepicker.time-picker-label:
+					aligned vertically left datetimepicker.time-picker
+
+			@on rtl
+				datetimepicker.time-picker-label:
+					aligned vertically right datetimepicker.time-picker
+
+			@forEach [&datetime] as item
+				${item}.time-picker:
+					aligned horizontally top ${item}.date-picker
+
+				@on ltr
+					${item}.time-picker:
+						right-of ${item}.date-picker 20px
+
+					${item}.clear:
+						right-of ${item}.time-picker ~18px
+
+				@on rtl
+					${item}.time-picker:
+						left-of ${item}.date-picker 20px
+
+					${item}.clear:
+						left-of ${item}.time-picker ~18px

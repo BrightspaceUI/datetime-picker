@@ -29,15 +29,16 @@ Accessible, Localized Time Picker Input Element
 
 				/* For flex/position to work correctly in IE11, the max-width needs to be set */
 				position: relative;
-				max-width: 14.5rem;
+				max-width: 14.75rem;
 				width: 100%;
-			}
 
-			label {
-				@apply --d2l-offscreen;
+				--d2l-datetime-picker-label-width: 5rem;
+				--d2l-datetime-picker-label-min-width: 2rem;
 			}
 
 			vaadin-date-picker-light {
+				width: 7rem;
+
 				--primary-color: var(--d2l-color-celestine);
 				--light-primary-color: var(--d2l-color-celestine-plus-1);
 				--dark-theme-background-color: var(--d2l-color-ferrite);
@@ -68,12 +69,12 @@ Accessible, Localized Time Picker Input Element
 				};
 			}
 
-			vaadin-date-picker-light .d2l-input {
-				width: 7rem;
-			}
-
 			.clear-button {
 				position: absolute;
+				top: 1.7rem;
+			}
+
+			:host([hide-label]) .clear-button {
 				top: 0;
 			}
 
@@ -89,6 +90,7 @@ Accessible, Localized Time Picker Input Element
 			}
 
 			vaadin-date-picker-light {
+				display: inline-block;
 				padding-right: 1rem;
 				padding-bottom: 20px;
 			}
@@ -99,35 +101,92 @@ Accessible, Localized Time Picker Input Element
 			}
 
 			d2l-time-picker {
-				/* IE11 likes a basis */
-				flex: 1 0 6rem;
-				max-width: 7rem;
-				padding-right: 0.5rem;
+				display: inline-flex;
 			}
 
-			:host-context([dir="rtl"]) d2l-time-picker {
-				padding-left: 0.5rem;
+			.d2l-time-picker-container {
+				flex: 1 0 6rem;
+				max-width: 7rem;
+				padding-right: 0.75rem;
+			}
+
+			.d2l-date-picker-container {
+				flex: 1 1 auto;
+			}
+
+			:host-context([dir="rtl"]) .d2l-time-picker-container {
+				padding-left: 0.75rem;
 				padding-right: 0;
 			}
 
+			.d2l-date-picker-container,
+			.d2l-time-picker-container {
+				display: inline-flex;
+				flex-direction: column;
+			}
+
+			label {
+				color: var(--d2l-color-ferrite);
+				cursor: default;
+				display: block;
+				font-family: inherit;
+				font-size: 0.7rem;
+				font-weight: normal;
+				line-height: 0.7rem;
+				margin: 0 0 1rem 0;
+				flex: 0 1 var(--d2l-datetime-picker-label-width);
+				max-width: var(--d2l-datetime-picker-label-width);
+				min-width: var(--d2l-datetime-picker-label-min-width);
+				max-height: 0.7rem;
+			}
+
+			:host([hide-label]) label {
+				display: none;
+			}
+
+			@media (max-width: 615px), (max-device-width: 960px) {
+				:host(:not([hide-label])) label {
+					font-size: 0.6rem;
+				}
+
+				:host(:not([hide-label])) .d2l-date-picker-container,
+				:host(:not([hide-label])) .d2l-time-picker-container {
+					flex-direction: row;
+					align-items: baseline;
+				}
+
+				:host(:not([hide-label])) .d2l-time-picker-container {
+					max-width: calc(7rem + var(--d2l-datetime-picker-label-width));
+				}
+
+				:host(:not([hide-label])) .clear-button {
+					top: 0;
+				}
+			}
+
 		</style>
-		<label for="input">{{_dateLabel}}</label>
-		<vaadin-date-picker-light value="{{date}}">
-			<iron-input>
-				<input aria-label$="{{_dateLabel}}" placeholder="{{placeholder}}" class="d2l-input" is="iron-input" type="text"/>
-			</iron-input>
-		</vaadin-date-picker-light>
+		<div class="d2l-date-picker-container">
+			<label aria-hidden="true" role="presentation">{{_dateLabel}}</label>
+			<vaadin-date-picker-light value="{{date}}">
+				<iron-input>
+					<input aria-label$="{{_dateLabel}}" placeholder="{{placeholder}}" class="d2l-input" is="iron-input" type="text"/>
+				</iron-input>
+			</vaadin-date-picker-light>
+		</div>
 
 		<template is="dom-if" if="{{date}}">
-			<d2l-time-picker
-				label="[[_timeLabel]]"
-				locale="[[locale]]"
-				overrides="[[overrides]]"
-				timezone="[[timezone]]"
-				hours="{{hours}}"
-				minutes="{{minutes}}"
-				boundary="[[boundary]]"
-			></d2l-time-picker>
+			<div class="d2l-time-picker-container">
+				<label aria-hidden="true" role="presentation">{{_timeLabel}}</label>
+				<d2l-time-picker
+					label="[[_timeLabel]]"
+					locale="[[locale]]"
+					overrides="[[overrides]]"
+					timezone="[[timezone]]"
+					hours="{{hours}}"
+					minutes="{{minutes}}"
+					boundary="[[boundary]]"
+				></d2l-time-picker>
+			</div>
 			<div class="clear-button-container">
 				<d2l-icon-button class="clear-button" icon="d2l-tier1:close-small">
 					<button is="d2l-icon-button"
@@ -197,6 +256,10 @@ Accessible, Localized Time Picker Input Element
 				_timeLabel: {
 					type: String,
 					computed: '_computeTimeLabel(timeLabel, localize)'
+				},
+				hideLabel: {
+					type: Boolean,
+					reflectToAttribute: true
 				}
 			},
 
