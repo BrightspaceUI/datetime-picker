@@ -9,7 +9,7 @@ var browsers = {
 	chromeWindows: new SauceBrowserFactory({
 		browser: 'Chrome',
 		platform: 'WIN10',
-		size: '1024x768'
+		size: '1400x900'
 	}),
 	/*firefoxWindows: new SauceBrowserFactory({
 		browser: 'Firefox',
@@ -20,17 +20,17 @@ var browsers = {
 		browser: 'internet explorer',
 		version: '11',
 		platform: 'WIN10',
-		size: '1024x768'
+		size: '1400x900'
 	}),
 	edgeWindows: new SauceBrowserFactory({
 		browser: 'microsoftedge',
 		platform: 'WIN10',
-		size: '1024x768'
+		size: '1400x900'
 	}),
 	chromeMac: new SauceBrowserFactory({
 		browser: 'Chrome',
 		platform: 'SIERRA',
-		size: '1024x768',
+		size: '1400x900',
 		/* crashes during screenshot command on > 2.24
 		 *			https://bugs.chromium.org/p/chromedriver/issues/detail?id=1770# */
 		desiredCapabilities: {
@@ -40,12 +40,12 @@ var browsers = {
 	safariMac: new SauceBrowserFactory({
 		browser: 'Safari',
 		platform: 'EL_CAPITAN',
-		size: '1024x768'
+		size: '1400x900'
 	})/*,
 	firefoxMac: new SauceBrowserFactory({
 		browser: 'Firefox',
 		platform: 'EL_CAPITAN',
-		size: '1024x768'
+		size: '1400x900'
 	})*/
 };
 
