@@ -1,0 +1,23 @@
+@objects
+
+	datetimepicker            d2l-datetime-picker
+		date-picker-container .d2l-date-picker-container
+			label             label
+			date-picker       vaadin-date-picker-light
+				input         .d2l-input
+		time-picker-container .d2l-time-picker-container
+			label             label
+			time-picker       d2l-time-picker
+		clear                 .clear-button svg g
+
+	datetimepicker-labelless  d2l-datetime-picker[hide-label]
+		date-picker-container .d2l-date-picker-container
+			label             label
+			date-picker       vaadin-date-picker-light
+				input         .d2l-input
+		time-picker-container .d2l-time-picker-container
+			label             label
+			time-picker       d2l-time-picker
+		clear                 .clear-button svg g
+
+@import datetimepicker.common.gspec

@@ -29,11 +29,13 @@ Accessible, Localized Time Picker Input Element
 
 				/* For flex/position to work correctly in IE11, the max-width needs to be set */
 				position: relative;
-				max-width: 14.5rem;
+				max-width: 14.75rem;
 				width: 100%;
 			}
 
 			vaadin-date-picker-light {
+				width: 7rem;
+
 				--primary-color: var(--d2l-color-celestine);
 				--light-primary-color: var(--d2l-color-celestine-plus-1);
 				--dark-theme-background-color: var(--d2l-color-ferrite);
@@ -62,10 +64,6 @@ Accessible, Localized Time Picker Input Element
 				--vaadin-date-picker-calendar: {
 					font-family: inherit;
 				};
-			}
-
-			vaadin-date-picker-light .d2l-input {
-				width: 7rem;
 			}
 
 			.clear-button {
@@ -106,7 +104,7 @@ Accessible, Localized Time Picker Input Element
 			.d2l-time-picker-container {
 				flex: 1 0 6rem;
 				max-width: 7rem;
-				padding-right: 0.5rem;
+				padding-right: 0.75rem;
 			}
 
 			.d2l-date-picker-container {
@@ -114,7 +112,7 @@ Accessible, Localized Time Picker Input Element
 			}
 
 			:host-context([dir="rtl"]) .d2l-time-picker-container {
-				padding-left: 0.5rem;
+				padding-left: 0.75rem;
 				padding-right: 0;
 			}
 

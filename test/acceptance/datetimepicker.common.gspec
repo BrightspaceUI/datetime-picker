@@ -1,0 +1,95 @@
+@groups
+	datetime datetimepicker,datetimepicker-labelless
+
+== D2L Date-Time Picker ==
+
+	@on closed
+		@forEach [&datetime] as item
+			${item}.time-picker-container, ${item}.clear:
+				absent
+
+	@on open
+		@forEach [&datetime] as item
+			${item}.time-picker-container, ${item}.clear:
+				visible
+
+		datetimepicker.time-picker-container.label:
+			visible
+
+	datetimepicker.date-picker-container.label:
+		visible
+
+	datetimepicker-labelless.date-picker-container.label, datetimepicker-labelless.time-picker-container.label:
+		absent
+
+	@on mobile
+		@on ltr
+			datetimepicker.date-picker-container.label:
+				left-of datetimepicker.date-picker-container.date-picker.input
+
+		@on rtl
+			datetimepicker.date-picker-container.label:
+				right-of datetimepicker.date-picker-container.date-picker.input
+
+		@on open
+			@on ltr
+				datetimepicker.time-picker-container.label:
+					left-of datetimepicker.time-picker-container.time-picker
+
+			@on rtl
+				datetimepicker.time-picker-container.label:
+					right-of datetimepicker.time-picker-container.time-picker
+
+			@forEach [&datetime] as item
+				${item}.time-picker-container.time-picker:
+					below ${item}.date-picker-container.date-picker.input 20px
+
+				@on ltr
+					${item}.time-picker-container.time-picker:
+						aligned vertically left ${item}.date-picker-container.date-picker.input
+
+					${item}.clear:
+						right-of ${item}.date-picker-container.date-picker.input ~18px
+
+				@on rtl
+					${item}.time-picker-container.time-picker:
+						aligned vertically right ${item}.date-picker-container.date-picker.input
+
+					${item}.clear:
+						left-of ${item}.date-picker-container.date-picker.input ~18px
+
+	@on desktop
+		@on ltr
+			datetimepicker.date-picker-container.label:
+				aligned vertically left datetimepicker.date-picker-container.date-picker.input
+
+		@on rtl
+			datetimepicker.date-picker-container.label:
+				aligned vertically right datetimepicker.date-picker-container.date-picker.input
+
+		@on open
+			@on ltr
+				datetimepicker.time-picker-container.label:
+					aligned vertically left datetimepicker.time-picker-container.time-picker
+
+			@on rtl
+				datetimepicker.time-picker-container.label:
+					aligned vertically right datetimepicker.time-picker-container.time-picker
+
+			@forEach [&datetime] as item
+				${item}.time-picker-container.time-picker:
+					aligned horizontally top ${item}.date-picker-container.date-picker.input
+
+				@on ltr
+					${item}.time-picker-container.time-picker:
+						right-of ${item}.date-picker-container.date-picker.input 20px
+
+					${item}.clear:
+						right-of ${item}.time-picker-container.time-picker ~18px
+
+				@on rtl
+					${item}.time-picker-container.time-picker:
+						left-of ${item}.date-picker-container.date-picker.input 20px
+
+					${item}.clear:
+						left-of ${item}.time-picker-container.time-picker ~18px

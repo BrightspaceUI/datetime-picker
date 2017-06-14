@@ -7,7 +7,14 @@
     "test": "npm run test:lint && polymer test --skip-plugin sauce",
     "test:lint": "npm run test:lint:wc && npm run test:lint:html",
     "test:lint:html": "eslint *.html",
-    "test:lint:wc": "polymer lint -i d2l-datetime-picker.html"
+    "test:lint:wc": "polymer lint -i d2l-datetime-picker.html",
+    "galen": "d2l-galen -c \"java -Xmx2g -cp node_modules/galenframework/lib/galen/galen.jar com.galenframework.GalenMain\"",
+    "dump:galen:local:run": "npm run galen -- dump test/acceptance/galen.test.js -g factory:local -d test/acceptance/dumps",
+    "galen:local:run": "npm run galen -- test test/acceptance/galen.test.js -g factory:local -- -p4",
+    "galen:sauce:run": "sc-run -- npm run galen -- test test/acceptance/galen.test.js -g factory:sauce -i SAUCE_USERNAME SAUCE_ACCESS_KEY TRAVIS_REPO_SLUG TRAVIS_BUILD_NUMBER -- -p4",
+    "dump:galen:local": "concurrently -p name -n serve,galen -s first -k \"polymer serve -p 8080\" \"npm run dump:galen:local:run\"",
+    "test:galen:local": "concurrently -p name -n serve,galen -s first -k \"polymer serve -p 8080\" \"npm run galen:local:run\"",
+    "test:galen:sauce": "concurrently -p name -n serve,galen -s first -k \"polymer serve -p 8080\" \"npm run galen:sauce:run\""
   },
   "repository": {
     "type": "git",
@@ -16,9 +23,13 @@
   "author": "D2L Corporation",
   "license": "Apache-2.0",
   "devDependencies": {
+    "chromedriver": "^2.29.0",
+    "concurrently": "^3.4.0",
+    "d2l-galen-utils": "git+https://github.com/Brightspace/d2l-galen-utils.git#v0.2.4",
     "eslint": "^3.19.0",
     "eslint-config-brightspace": "^0.2.4",
     "eslint-plugin-html": "^2.0.3",
+    "galenframework": "^2.3.3",
     "polymer-cli": "^1.1.0"
   }
 }
