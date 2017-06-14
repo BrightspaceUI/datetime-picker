@@ -49,7 +49,7 @@ var browsers = {
 	})*/
 };
 
-var endpoint = 'http://localhost:8080/components/d2l-datetime-picker/demo/index.html';
+var endpoint = 'http://localhost:8080/components/d2l-datetime-picker/demo/galen.html';
 
 var DateTimePickerDemoPage = $page('Date Time Picker Demo Page', {
 	input: 'd2l-datetime-picker .d2l-input'
@@ -70,6 +70,7 @@ polymerTests(browsers, function(test) {
 
 		rtl && queryParams.push('dir=rtl');
 		shadow && queryParams.push('dom=shadow');
+		mobile && queryParams.push('width=290px');
 
 		var testEndpoint = endpoint;
 		if (queryParams.length) {
@@ -96,7 +97,7 @@ polymerTests(browsers, function(test) {
 		testFunc(name, {
 			endpoint: testEndpoint,
 			spec: shadow ? 'test/acceptance/datetimepicker.shadow.gspec' : 'test/acceptance/datetimepicker.gspec',
-			size: mobile ? '320x900' : '1024x768',
+			size: mobile ? '375x667' : '1024x768',
 			tags: tags
 		}, cb);
 	}
