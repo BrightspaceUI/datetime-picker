@@ -13,6 +13,9 @@
 			${item}.time-picker, ${item}.clear:
 				visible
 
+			${item}.clear:
+				inside ${item}
+
 		datetimepicker.time-picker-label:
 			visible
 

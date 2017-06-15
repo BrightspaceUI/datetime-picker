@@ -70,7 +70,7 @@ polymerTests(browsers, function(test) {
 
 		rtl && queryParams.push('dir=rtl');
 		shadow && queryParams.push('dom=shadow');
-		mobile && queryParams.push('width=290px');
+		mobile && queryParams.push('width=280px');
 
 		var testEndpoint = endpoint;
 		if (queryParams.length) {
