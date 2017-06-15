@@ -29,7 +29,7 @@ Accessible, Localized Time Picker Input Element
 
 				/* For flex/position to work correctly in IE11, the max-width needs to be set */
 				position: relative;
-				max-width: 14.75rem;
+				max-width: calc(14.75rem + 18px);
 				width: 100%;
 
 				--d2l-datetime-picker-label-width: 5rem;
@@ -67,6 +67,15 @@ Accessible, Localized Time Picker Input Element
 				--vaadin-date-picker-calendar: {
 					font-family: inherit;
 				};
+			}
+
+			.clear-button-container {
+				margin-right: 18px;
+			}
+
+			:host-context([dir="rtl"]) .clear-button-container {
+				margin-right: 0;
+				margin-left: 18px;
 			}
 
 			.clear-button {
