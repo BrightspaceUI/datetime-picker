@@ -263,7 +263,10 @@ Accessible, Localized Time Picker Input Element
 					value: moment.tz.guess(),
 					notify: true
 				},
-				timezoneName: String,
+				timezoneName: {
+					type: String,
+					value: ''
+				},
 				hasDate: {
 					type: Boolean,
 					reflectToAttribute: true,
