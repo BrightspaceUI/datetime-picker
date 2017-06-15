@@ -214,7 +214,7 @@ Accessible, Localized Time Picker Input Element
 						label="[[_timeLabel]]"
 						locale="[[locale]]"
 						overrides="[[overrides]]"
-						timezone="[[timezone]]"
+						timezone="[[_getTimezone(timezone, timezoneName)]]"
 						hours="{{hours}}"
 						minutes="{{minutes}}"
 						boundary="[[boundary]]"
@@ -262,6 +262,10 @@ Accessible, Localized Time Picker Input Element
 					type: String,
 					value: moment.tz.guess(),
 					notify: true
+				},
+				timezoneName: {
+					type: String,
+					value: ''
 				},
 				hasDate: {
 					type: Boolean,
@@ -359,6 +363,10 @@ Accessible, Localized Time Picker Input Element
 
 			_computeHasDate: function(datetime) {
 				return !!datetime;
+			},
+
+			_getTimezone: function(timezone, timezoneName) {
+				return timezoneName || timezone;
 			}
 		});
 	</script>
