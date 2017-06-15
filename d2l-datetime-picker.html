@@ -100,11 +100,20 @@ Accessible, Localized Time Picker Input Element
 
 			vaadin-date-picker-light {
 				display: inline-block;
-				padding-right: 1rem;
 				padding-bottom: 20px;
 			}
 
-			:host-context([dir="rtl"]) vaadin-date-picker-light {
+			:host([has-date]) vaadin-date-picker-light {
+				padding-right: 1rem;
+			}
+
+			:host-context([dir="rtl"]):host([has-date]) vaadin-date-picker-light {
+				padding-right: 0;
+				padding-left: 1rem;
+			}
+
+			/* shadyDOM workaround */
+			:host-context([dir="rtl"])[has-date] vaadin-date-picker-light {
 				padding-right: 0;
 				padding-left: 1rem;
 			}
@@ -238,6 +247,11 @@ Accessible, Localized Time Picker Input Element
 					value: moment.tz.guess(),
 					notify: true
 				},
+				hasDate: {
+					type: Boolean,
+					reflectToAttribute: true,
+					computed: '_computeHasDate(datetime)'
+				},
 				date: {
 					type: String,
 					notify: true,
@@ -325,6 +339,10 @@ Accessible, Localized Time Picker Input Element
 
 			_computeTimeLabel: function(timeLabel, localize) {
 				return timeLabel ? timeLabel : localize('timepicker');
+			},
+
+			_computeHasDate: function(datetime) {
+				return !!datetime;
 			}
 		});
 	</script>
