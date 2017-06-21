@@ -9,9 +9,18 @@
 	/** @polymerBehavior D2L.PolymerBehaviors.DateTimePicker.LocalizeBehavior */
 	window.D2L.PolymerBehaviors.DateTimePicker.LocalizeBehaviorImpl = {
 		properties: {
+			locale: {
+				type: String,
+				value: function() {
+					var locale = document.documentElement.lang
+						|| document.documentElement.getAttribute('data-lang-default')
+						|| 'en-us';
+					return locale.toLowerCase();
+				}
+			},
 			language: {
 				type: String,
-				computed: '_computeLanguage(resources)'
+				computed: '_computeLanguage(locale, resources)'
 			},
 			resources: {
 				value: function() {
@@ -25,11 +34,7 @@
 				}
 			}
 		},
-		_computeLanguage: function(resources) {
-			var locale = document.documentElement.lang
-				|| document.documentElement.getAttribute('data-lang-default')
-				|| 'en-us';
-			locale = locale.toLowerCase();
+		_computeLanguage: function(locale, resources) {
 			if (resources[locale]) {
 				return locale;
 			}
