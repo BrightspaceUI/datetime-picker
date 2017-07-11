@@ -1,12 +1,12 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../vaadin-date-picker/vaadin-date-picker-light.html">
+<link rel="import" href="../d2l-date-picker/d2l-date-picker.html">
 <link rel="import" href="../iron-input/iron-input.html">
 <link rel="import" href="../d2l-time-picker/d2l-time-picker.html">
 <link rel="import" href="../d2l-offscreen/d2l-offscreen.html">
 <link rel="import" href="../d2l-icons/d2l-icon-button.html">
 <link rel="import" href="../d2l-icons/tier1-icons.html">
+<link rel="import" href="../d2l-intl/d2l-intl.html">
 <link rel="import" href="localize-behavior.html">
-<script type="text/javascript" src="https://s.brightspace.com/lib/d2l-intl/0.2.1/Intl.js"></script>
 <script type="text/javascript" src="https://s.brightspace.com/lib/moment.js/2.15.2/moment.min.js"></script>
 <script type="text/javascript" src="https://s.brightspace.com/lib/moment-timezone/0.5.10/moment-timezone-with-data.min.js"></script>
 
@@ -37,37 +37,8 @@ Accessible, Localized Time Picker Input Element
 				--d2l-datetime-picker-label-padding: 20px;
 			}
 
-			vaadin-date-picker-light {
+			d2l-date-picker {
 				width: 7rem;
-
-				--primary-color: var(--d2l-color-celestine);
-				--light-primary-color: var(--d2l-color-celestine-plus-1);
-				--dark-theme-background-color: var(--d2l-color-ferrite);
-				--dark-theme-secondary-color: var(--d2l-color-white);
-				--primary-text-color: var(--d2l-color-ferrite);
-				--secondary-text-color: var(--d2l-color-tungsten);
-				--vaadin-date-picker-overlay: {
-					font-family: inherit;
-					max-height: 300px;
-				};
-				--vaadin-date-picker-yearscroller: {
-					font-family: inherit;
-				};
-				--vaadin-date-picker-header: {
-					font-family: inherit;
-				};
-				--vaadin-date-picker-calendar-title: {
-					font-family: inherit;
-				};
-				--vaadin-date-picker-calendar-cell: {
-					font-family: inherit;
-				};
-				--vaadin-date-picker-footer: {
-					font-family: inherit;
-				};
-				--vaadin-date-picker-calendar: {
-					font-family: inherit;
-				};
 			}
 
 			.clear-button-container {
@@ -108,13 +79,13 @@ Accessible, Localized Time Picker Input Element
 				padding-bottom: 20px;
 			}
 
-			:host-context([dir="rtl"]):host([has-date]) vaadin-date-picker-light {
+			:host-context([dir="rtl"]):host([has-date]) d2l-date-picker {
 				padding-right: 0;
 				padding-left: 1rem;
 			}
 
 			/* shadyDOM workaround */
-			:host-context([dir="rtl"])[has-date] vaadin-date-picker-light {
+			:host-context([dir="rtl"])[has-date] d2l-date-picker {
 				padding-right: 0;
 				padding-left: 1rem;
 			}
@@ -199,11 +170,7 @@ Accessible, Localized Time Picker Input Element
 		</style>
 		<div class="d2l-date-picker-container">
 			<label aria-hidden="true" role="presentation">{{_dateLabel}}</label>
-			<vaadin-date-picker-light value="{{date}}">
-				<iron-input>
-					<input aria-label$="{{_dateLabel}}" placeholder="{{placeholder}}" class="d2l-input" is="iron-input" type="text"/>
-				</iron-input>
-			</vaadin-date-picker-light>
+			<d2l-date-picker value="{{date}}"></d2l-date-picker>
 		</div>
 
 		<template is="dom-if" if="{{date}}">
