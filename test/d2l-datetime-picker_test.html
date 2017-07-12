@@ -37,6 +37,13 @@
 					expect(this.element.$$('d2l-time-picker')).to.be.ok;
 				});
 
+				test('should have d2l-time-picker when alwaysShowTime is set', function() {
+					expect(this.element.$$('d2l-time-picker')).to.not.be.ok;
+					this.element.alwaysShowTime = true;
+					Polymer.dom.flush();
+					expect(this.element.$$('d2l-time-picker')).to.be.ok;
+				});
+
 				test('should have d2l-date-picker', function() {
 					expect(this.element.$$('d2l-date-picker')).to.be.ok;
 				});
