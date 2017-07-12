@@ -5,7 +5,7 @@
   "dependencies": {
     "polymer": "Polymer/polymer#1.9 - 2",
     "d2l-time-picker": "BrightspaceUI/time-picker#^0.3.0",
-    "d2l-date-picker": "BrightspaceUI/date-picker#^0.0.9",
+    "d2l-date-picker": "BrightspaceUI/date-picker#^0.0.10",
     "d2l-offscreen": "^2.2.5",
     "app-localize-behavior": "0.10 - 2",
     "iron-input": "^1.0.0",
