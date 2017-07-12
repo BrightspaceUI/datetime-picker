@@ -33,7 +33,8 @@
         "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
       },
       "resolutions": {
-        "webcomponentsjs": "^0.7"
+        "webcomponentsjs": "^0.7",
+        "app-localize-behavior": "^0.10.1"
       }
     }
   },
