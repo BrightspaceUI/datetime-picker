@@ -43,6 +43,8 @@ Accessible, Localized Time Picker Input Element
 
 			.clear-button-container {
 				margin-right: 18px;
+
+				@apply --d2l-datetime-picker-clear-button-container;
 			}
 
 			:host-context([dir="rtl"]) .clear-button-container {
@@ -64,6 +66,8 @@ Accessible, Localized Time Picker Input Element
 				--d2l-icon-button-icon: {
 					color: var(--d2l-color-tungsten);
 				};
+
+				@apply --d2l-datetime-picker-clear-button;
 			}
 
 			.clear-button button {
@@ -169,7 +173,7 @@ Accessible, Localized Time Picker Input Element
 			<d2l-date-picker value="{{date}}"></d2l-date-picker>
 		</div>
 
-		<template is="dom-if" if="{{date}}">
+		<template is="dom-if" if="{{_showTime(date, alwaysShowTime)}}">
 			<div class="time-clear-container">
 				<div class="d2l-time-picker-container">
 					<label aria-hidden="true" role="presentation">{{_timeLabel}}</label>
@@ -265,6 +269,10 @@ Accessible, Localized Time Picker Input Element
 				hideLabel: {
 					type: Boolean,
 					reflectToAttribute: true
+				},
+				alwaysShowTime: {
+					type: Boolean,
+					value: false
 				}
 			},
 
@@ -329,6 +337,10 @@ Accessible, Localized Time Picker Input Element
 
 			_getTimezone: function(timezone, timezoneName) {
 				return timezoneName || timezone;
+			},
+
+			_showTime: function(date, alwaysShowTime) {
+				return alwaysShowTime || date;
 			}
 		});
 	</script>
