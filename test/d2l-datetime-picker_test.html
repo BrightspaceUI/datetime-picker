@@ -49,6 +49,8 @@
 				});
 
 				test('should pass locale to d2l-time-picker and d2l-date-picker', function() {
+					this.element.alwaysShowTime = true;
+					Polymer.dom.flush();
 					this.element.locale = 'fr-CA';
 					expect(this.element.$$('d2l-time-picker').locale).to.equal('fr-CA');
 					expect(this.element.$$('d2l-date-picker').locale).to.equal('fr-CA');
