@@ -48,6 +48,15 @@
 					expect(this.element.$$('d2l-date-picker')).to.be.ok;
 				});
 
+				test('should pass locale to d2l-time-picker and d2l-date-picker', function() {
+					this.element.locale = 'fr-CA';
+					expect(this.element.$$('d2l-time-picker').locale).to.equal('fr-CA');
+					expect(this.element.$$('d2l-date-picker').locale).to.equal('fr-CA');
+					this.element.locale = 'en-US';
+					expect(this.element.$$('d2l-time-picker').locale).to.equal('en-US');
+					expect(this.element.$$('d2l-date-picker').locale).to.equal('en-US');
+				});
+
 				suite('hours/minutes', function() {
 					test('should update time-picker hours/minutes', function() {
 						this.element.date = '1990-01-30';
