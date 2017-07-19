@@ -35,6 +35,7 @@ Accessible, Localized Time Picker Input Element
 				--d2l-datetime-picker-label-width: 5rem;
 				--d2l-datetime-picker-label-min-width: 2rem;
 				--d2l-datetime-picker-label-padding: 20px;
+				--d2l-datetime-picker-label-display: block;
 
 				--d2l-date-picker-label: {
 					@apply --d2l-offscreen;
@@ -134,7 +135,7 @@ Accessible, Localized Time Picker Input Element
 			label {
 				color: var(--d2l-color-ferrite);
 				cursor: default;
-				display: block;
+				display: var(--d2l-datetime-picker-label-display);
 				font-family: inherit;
 				font-size: 0.7rem;
 				font-weight: normal;
@@ -156,11 +157,13 @@ Accessible, Localized Time Picker Input Element
 					font-size: 0.6rem;
 					padding-right: var(--d2l-datetime-picker-label-padding);
 					text-align: right;
+					@apply --d2l-datetime-picker-label-mobile;
 				}
 
 				:host-context([dir="rtl"]) label {
 					padding-right: 0;
 					padding-left: var(--d2l-datetime-picker-label-padding);
+					@apply --d2l-datetime-picker-label-mobile-rtl;
 				}
 
 				:host(:not([hide-label])) .d2l-date-picker-container,
