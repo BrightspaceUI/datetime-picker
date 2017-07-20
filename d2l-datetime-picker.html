@@ -145,6 +145,7 @@ Accessible, Localized Time Picker Input Element
 				min-width: var(--d2l-datetime-picker-label-min-width);
 				box-sizing: border-box;
 				max-height: 0.7rem;
+				@apply --d2l-datetime-picker-label;
 			}
 
 			:host([hide-label]) label {
@@ -156,11 +157,13 @@ Accessible, Localized Time Picker Input Element
 					font-size: 0.6rem;
 					padding-right: var(--d2l-datetime-picker-label-padding);
 					text-align: right;
+					@apply --d2l-datetime-picker-label-mobile;
 				}
 
 				:host-context([dir="rtl"]) label {
 					padding-right: 0;
 					padding-left: var(--d2l-datetime-picker-label-padding);
+					@apply --d2l-datetime-picker-label-mobile-rtl;
 				}
 
 				:host(:not([hide-label])) .d2l-date-picker-container,
