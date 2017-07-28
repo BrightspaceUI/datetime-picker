@@ -231,6 +231,22 @@
 						expect(this.element.datetime.utc().date()).to.equal(30);
 					});
 				});
+
+				suite('min/max', function() {
+					test('should pass min to d2l-date-picker', function() {
+						this.element.min = '2000-10-11';
+						expect(this.element.$$('d2l-date-picker').min).to.equal('2000-10-11');
+						this.element.min = '2020-02-20';
+						expect(this.element.$$('d2l-date-picker').min).to.equal('2020-02-20');
+					});
+
+					test('should pass max to d2l-date-picker', function() {
+						this.element.max = '2000-10-11';
+						expect(this.element.$$('d2l-date-picker').max).to.equal('2000-10-11');
+						this.element.max = '2020-02-20';
+						expect(this.element.$$('d2l-date-picker').max).to.equal('2020-02-20');
+					});
+				});
 			});
 		</script>
 	</body>
