@@ -184,7 +184,14 @@ Accessible, Localized Time Picker Input Element
 		</style>
 		<div class="d2l-date-picker-container">
 			<label aria-hidden="true" role="presentation">[[_dateLabel]]</label>
-			<d2l-date-picker value="{{date}}" placeholder=[[placeholder]] label=[[_dateLabel]] locale=[[locale]]></d2l-date-picker>
+			<d2l-date-picker 
+				value="{{date}}" 
+				placeholder=[[placeholder]] 
+				label=[[_dateLabel]] 
+				locale=[[locale]] 
+				min=[[min]]
+				max=[[max]]
+			></d2l-date-picker>
 		</div>
 
 		<template is="dom-if" if="{{_showTime(date, alwaysShowTime)}}">
@@ -287,6 +294,12 @@ Accessible, Localized Time Picker Input Element
 				alwaysShowTime: {
 					type: Boolean,
 					value: false
+				},
+				min: {
+					type: String
+				},
+				max: {
+					type: String
 				}
 			},
 
