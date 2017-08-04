@@ -39,6 +39,8 @@
     }
   },
   "resolutions": {
-    "webcomponentsjs": "0.7 - 1"
+    "webcomponentsjs": "0.7 - 1",
+    "d2l-offscreen": "^3.0.1",
+    "d2l-polymer-behaviors": "^1.0.0"
   }
 }
