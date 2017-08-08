@@ -191,6 +191,8 @@ Accessible, Localized Time Picker Input Element
 				locale=[[locale]] 
 				min=[[min]]
 				max=[[max]]
+				date-format=[[dateFormat]]
+				first-day-of-week=[[firstDayOfWeek]]
 			></d2l-date-picker>
 		</div>
 
@@ -300,7 +302,9 @@ Accessible, Localized Time Picker Input Element
 				},
 				max: {
 					type: String
-				}
+				},
+				dateFormat: String,
+				firstDayOfWeek: Number
 			},
 
 			observers: [

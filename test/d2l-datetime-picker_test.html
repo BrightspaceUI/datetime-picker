@@ -59,6 +59,20 @@
 					expect(this.element.$$('d2l-date-picker').locale).to.equal('en-US');
 				});
 
+				test('should pass dateFormat to d2l-date-picker', function() {
+					this.element.dateFormat = 'dd.MM.yyyy';
+					expect(this.element.$$('d2l-date-picker').dateFormat).to.equal('dd.MM.yyyy');
+					this.element.dateFormat = 'd/M/yyyy';
+					expect(this.element.$$('d2l-date-picker').dateFormat).to.equal('d/M/yyyy');
+				});
+
+				test('should pass firstDayOfWeek to d2l-date-picker', function() {
+					this.element.firstDayOfWeek = 2;
+					expect(this.element.$$('d2l-date-picker').firstDayOfWeek).to.equal(2);
+					this.element.firstDayOfWeek = 5;
+					expect(this.element.$$('d2l-date-picker').firstDayOfWeek).to.equal(5);
+				});
+
 				suite('hours/minutes', function() {
 					test('should update time-picker hours/minutes', function() {
 						this.element.date = '1990-01-30';
