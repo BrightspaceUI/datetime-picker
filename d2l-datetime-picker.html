@@ -376,17 +376,14 @@ Accessible, Localized Time Picker Input Element
 			},
 
 			_processOverrides: function(overrides) {
-				var date = overrides.date;
-				if (date) {
-					var formats = date.formats;
-					if (formats && formats.dateFormats && formats.dateFormats.short) {
-						this.dateFormat = formats.dateFormats.short;
-					}
+				var dateFormatOverride = this.get('date.formats.dateFormats.short', overrides);
+				if (dateFormatOverride) {
+					this.dateFormat = dateFormatOverride;
+				}
 
-					var calendar = date.calendar;
-					if (calendar && calendar.firstDayOfWeek) {
-						this.firstDayOfWeek = calendar.firstDayOfWeek;
-					}
+				var firstDayOfWeekOverride = this.get('date.calendar.firstDayOfWeek', overrides);
+				if (firstDayOfWeekOverride) {
+					this.firstDayOfWeek = firstDayOfWeekOverride;
 				}
 			}
 		});
