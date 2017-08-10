@@ -191,6 +191,8 @@ Accessible, Localized Time Picker Input Element
 				locale=[[locale]] 
 				min=[[min]]
 				max=[[max]]
+				date-format=[[dateFormat]]
+				first-day-of-week=[[firstDayOfWeek]]
 			></d2l-date-picker>
 		</div>
 
@@ -300,11 +302,14 @@ Accessible, Localized Time Picker Input Element
 				},
 				max: {
 					type: String
-				}
+				},
+				dateFormat: String,
+				firstDayOfWeek: Number
 			},
 
 			observers: [
-				'_dateAndTimeChanged(date, timezone, hours, minutes)'
+				'_dateAndTimeChanged(date, timezone, hours, minutes)',
+				'_processOverrides(overrides)'
 			],
 
 			clear: function() {
@@ -368,6 +373,18 @@ Accessible, Localized Time Picker Input Element
 
 			_showTime: function(date, alwaysShowTime) {
 				return alwaysShowTime || date;
+			},
+
+			_processOverrides: function(overrides) {
+				var dateFormatOverride = this.get('date.formats.dateFormats.short', overrides);
+				if (dateFormatOverride) {
+					this.dateFormat = dateFormatOverride;
+				}
+
+				var firstDayOfWeekOverride = this.get('date.calendar.firstDayOfWeek', overrides);
+				if (firstDayOfWeekOverride) {
+					this.firstDayOfWeek = firstDayOfWeekOverride;
+				}
 			}
 		});
 	</script>
