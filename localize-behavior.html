@@ -1,13 +1,13 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../app-localize-behavior/app-localize-behavior.html">
+<link rel="import" href="../d2l-localize-behavior/d2l-localize-behavior.html">
 <script>
 (function() {
 	'use strict';
 	window.D2L = window.D2L || {};
 	window.D2L.PolymerBehaviors = window.D2L.PolymerBehaviors || {};
 	window.D2L.PolymerBehaviors.DateTimePicker = window.D2L.PolymerBehaviors.DateTimePicker || {};
-	/** @polymerBehavior window.D2L.PolymerBehaviors.DateTimePicker.LocalizeBehavior */
-	window.D2L.PolymerBehaviors.DateTimePicker.LocalizeBehaviorImpl = {
+	/** @polymerBehavior D2L.PolymerBehaviors.DateTimePicker.LocalizeBehaviorImpl */
+	D2L.PolymerBehaviors.DateTimePicker.LocalizeBehaviorImpl = {
 		properties: {
 			locale: {
 				type: String,
@@ -17,10 +17,6 @@
 						|| 'en-us';
 					return locale.toLowerCase();
 				}
-			},
-			language: {
-				type: String,
-				computed: '_computeLanguage(locale, resources)'
 			},
 			resources: {
 				value: function() {
@@ -40,57 +36,52 @@
 							timepicker: '时间选取器',
 							clear: '清除日期/时间'
 						},
-						'tr-TR': {
+						'tr': {
 							datepicker: 'Tarih Seçici',
 							timepicker: 'Saat Seçici',
 							clear: 'Tarihi/Saati Temizle'
 						},
-						'sv-SE': {
+						'sv': {
 							datepicker: 'Datumväljare',
 							timepicker: 'Timväljare',
 							clear: 'Ta bort datum/tid'
 						},
-						'pt-BR': {
+						'pt': {
 							datepicker: 'Seletor de Data',
 							timepicker: 'Seletor de Hora',
 							clear: 'Limpar Data/Hora'
 						},
-						'nl-NL': {
+						'nl': {
 							datepicker: 'Datumkiezer',
 							timepicker: 'Tijdkiezer',
 							clear: 'Datum/tijd wissen'
 						},
-						'nb-NO': {
-							datepicker: 'Velg en dato',
-							timepicker: 'Velg tid',
-							clear: 'Slett dato og klokkeslett'
-						},
-						'ko-KR': {
+						'ko': {
 							datepicker: '날짜 선택기',
 							timepicker: '시간 선택기',
 							clear: '날짜/시간 지우기'
 						},
-						'ja-JP': {
+						'ja': {
 							datepicker: '日付ピッカー',
 							timepicker: '時刻ピッカー',
 							clear: '日付と時刻のクリア'
 						},
-						'fr-CA': {
+						'fr': {
 							datepicker: 'Sélecteur de date',
 							timepicker: 'Sélecteur d’heure',
 							clear: 'Effacer la date/l\'heure :'
 						},
-						'es-MX': {
+						'es': {
 							datepicker: 'Selector de fecha',
 							timepicker: 'Selector de hora',
 							clear: 'Borrar fecha/hora'
 						},
-						'de-DE': {
+						'de': {
 							datepicker: 'Datumsauswahl',
 							timepicker: 'Zeitauswahl',
 							clear: 'Datum/Uhrzeit löschen'
 						},
-						'ar-SA': {
+						'ar': {
 							datepicker: 'منتقي التاريخ',
 							timepicker: 'منتقي الوقت',
 							clear: 'مسح التاريخ/الوقت'
@@ -98,22 +89,12 @@
 					};
 				}
 			}
-		},
-		_computeLanguage: function(locale, resources) {
-			if (resources[locale]) {
-				return locale;
-			}
-			var langAndRegion = locale.split('-');
-			if (resources[langAndRegion[0]]) {
-				return langAndRegion[0];
-			}
-			return 'en';
 		}
 	};
 	/** @polymerBehavior */
 	window.D2L.PolymerBehaviors.DateTimePicker.LocalizeBehavior = [
-		Polymer.AppLocalizeBehavior,
-		window.D2L.PolymerBehaviors.DateTimePicker.LocalizeBehaviorImpl
+		D2L.PolymerBehaviors.LocalizeBehavior,
+		D2L.PolymerBehaviors.DateTimePicker.LocalizeBehaviorImpl
 	];
 })();
 </script>
