@@ -2,6 +2,18 @@
   "name": "d2l-datetime-picker",
   "description": "Accessible, Localized Date-Time Picker Element",
   "main": "d2l-datetime-picker.html",
+  "license": "Apache-2.0",
+  "ignore": [
+    "demo",
+    "test",
+    ".editorconfig",
+    ".eslintrc.json",
+    ".gitignore",
+    ".travis.yml",
+    "package.json",
+    "polymer.json",
+    "wct.conf.json"
+  ],
   "dependencies": {
     "polymer": "Polymer/polymer#1.9 - 2",
     "d2l-time-picker": "BrightspaceUI/time-picker#^0.3.0",
