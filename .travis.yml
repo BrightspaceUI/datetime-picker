@@ -1,18 +1,18 @@
 language: node_js
-node_js: stable
+node_js: node
 before_install:
 - export JAVA_HOME=/usr/lib/jvm/java-8-oracle
 - export PATH=$JAVA_HOME/bin:$PATH
 script:
 - npm run test:lint
-- polymer test --skip-plugin local
-- npm run test:galen:sauce
+- 'if [ "$TRAVIS_SECURE_ENV_VARS" = "true" ]; then polymer test --skip-plugin local; fi'
+- 'if [ "$TRAVIS_SECURE_ENV_VARS" = "false" ]; then polymer test --skip-plugin sauce; fi'
+- 'if [ "$TRAVIS_SECURE_ENV_VARS" = "true" ]; then npm run test:galen:sauce; fi'
 addons:
   apt:
     packages:
-      - oracle-java8-installer
-  jwt:
-    secure: DlYsyXdKZ54zdTTMrXOTqLNGoxIQfJPdIEJ11ExKyVkUYZ/dmcxiJmbbpZ240V/gSPio8MajEmmMAVrkNIbdSMBkOBjqxKwXJdQaXdDG4/H6baGV7RJ7qASkDCJPfXJLbUg56XA71nTYarpkkSIml7hMLX17LHwgRVo/LrG791SFJ9fe4ADfmNJ4d8aDkuu/OkOSbbTSLNVQL2t+TNMdc/lvw8RvP5jCPrigYUVpT96OU0HDnYm6KIFGFAXr64g6MKy7n1kT2scgYdDHITVhibMRny53XgvNNYuG41kewmFEUZojsvi6yv/pybXMqqIDyHktgzbsNkaU/RAQGxENt8T45xyrw4zhcjCEuemPOhvD5YnSOWS54Om1g7f14scdi3gbCIqw1SeoIqC/rd0mKfC+IvOzIhYWURTIPFurcn08UADn+XOW1IACpOawpcbO20VqV4Gu67qu5HTtGmkz7H8Zpev2mtwXQHVxwnYu8E1oIRUg6TeAMqMYORx+lT+SQzP6mqeeXDbLAQrrhFU9qsrGlyflciEzzf9h9+ceM41+2Rk4UU3my6AvzEP6+neCnK34NQIx0PZayC05BzWt77Fh10SIzyNUOuRTDAtAS7v3A4rmY9Rr7cjN9S0b2EtnCm3T0jtdMeKBPB8/J21teap8MCTQkNFnsQt+65XT7Aw=
+    - oracle-java8-installer
 env:
   global:
-    SAUCE_USERNAME: Desire2Learn
+  - SAUCE_USERNAME: Desire2Learn
+  - secure: e2JomX27Ro3hoO3OYYJdGszdUxZhpwdAo0K3yJpGQkPeaxYhsYmCan9WOGGmcQ5oS79UFIpMl+x0n8fooo2pueCmxpuu61as7nKQ/cbbnwiuFHxx8uu2ETdECqqyY92hcOTw3yxS1jIqJ3rCMWBWBJBLCA7rnWnU0LMt1gYqcEqU1mTgMu6bqEN8SHzjkz2ALmbwKegOr8BNsFtTg563axzAhKn1kA87Bk2BlaKLEHJ1fGSDvgwV7u+THBOX1WlDQCIIKeCDTON+t9+GtjSRN+gT6wVuztyDyLo6x8bth8mMOvUzWvpWdnadXb8U0mmLEB/F8O1DPiGP0Y4NvLctTPFM6zY2le9/XAIWyqXgIaN3WZ8J7pOnn5KHsVxTQFaFPn8M0ddLs6rlMGBQjaF6akCvkVoR90ZMzpylflmTIeopwPYkP+36u5NC6VxS64tn5jCBqOPVgkXkvesyhFPuPwjCTNRQMY632jJQ7rzNfHz3tLlBvNbXO40pFYVexPeTKI3R81w7DtQ9nn0P7/7qSnAwZGh1IUW7dxny+R+tkluH7iEw9+U4awVP/PPGUvAqVYPM8uAWpTrq3Gu+ov3HpCpndvknVj5h3jmVDKA07nWRjeaiOMC9jcqeJA/tkUDzEB1qtEBY6X8b30L4MbryTy7zadvLDv1ItXQlX7t2MLM=
