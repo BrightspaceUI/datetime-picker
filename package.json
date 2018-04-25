@@ -23,7 +23,7 @@
   "author": "D2L Corporation",
   "license": "Apache-2.0",
   "devDependencies": {
-    "chromedriver": "^2.29.0",
+    "chromedriver": "^2.36.0",
     "concurrently": "^3.5.1",
     "d2l-galen-utils": "git+https://github.com/Brightspace/d2l-galen-utils.git#v0.2.4",
     "eslint": "^4.18.1",

@@ -31,11 +31,6 @@ var browsers = {
 		browser: 'Chrome',
 		platform: 'SIERRA',
 		size: '1400x900',
-		/* crashes during screenshot command on > 2.24
-		 *			https://bugs.chromium.org/p/chromedriver/issues/detail?id=1770# */
-		desiredCapabilities: {
-			chromedriverVersion: '2.24'
-		}
 	}),
 	safariMac: new SauceBrowserFactory({
 		browser: 'Safari',
