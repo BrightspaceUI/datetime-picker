@@ -85,6 +85,12 @@ Accessible, Localized Time Picker Input Element
 				height: 2.4rem;
 			}
 
+			.clear-button {
+				--d2l-icon-button-icon: {
+					height: 2.4rem;
+				};
+			}
+
 			:host([has-date]) d2l-date-picker {
 				padding-right: 1rem;
 				padding-bottom: 20px;
@@ -184,11 +190,11 @@ Accessible, Localized Time Picker Input Element
 		</style>
 		<div class="d2l-date-picker-container">
 			<label aria-hidden="true" role="presentation">[[_dateLabel]]</label>
-			<d2l-date-picker 
-				value="{{date}}" 
-				placeholder=[[placeholder]] 
-				label=[[_dateLabel]] 
-				locale=[[locale]] 
+			<d2l-date-picker
+				value="{{date}}"
+				placeholder=[[placeholder]]
+				label=[[_dateLabel]]
+				locale=[[locale]]
 				min=[[min]]
 				max=[[max]]
 				date-format=[[dateFormat]]
@@ -211,7 +217,12 @@ Accessible, Localized Time Picker Input Element
 					></d2l-time-picker>
 				</div>
 				<div class="clear-button-container">
-					<d2l-icon-button class="clear-button" icon="d2l-tier1:close-small">
+					<d2l-icon-button
+						class="clear-button"
+						icon="d2l-tier1:close-small"
+						on-click="clear"
+						title="[[localize('clear')]]"
+					>
 						<button is="d2l-icon-button"
 							icon="d2l-tier1:close-small"
 							on-click="clear"

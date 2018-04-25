@@ -21,7 +21,8 @@
     "d2l-localize-behavior": "^1.0.1",
     "d2l-offscreen": "^3.0.1",
     "iron-input": "^1.0.0",
-    "d2l-intl": "^0.4.1"
+    "d2l-intl": "^0.4.1",
+    "d2l-icons": "^4.12.1"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#1 - 2",
@@ -51,6 +52,9 @@
   "resolutions": {
     "webcomponentsjs": "0.7 - 1",
     "d2l-offscreen": "^3.0.1",
-    "d2l-polymer-behaviors": "^1.0.0"
+    "d2l-polymer-behaviors": "^1.0.0",
+    "d2l-colors": "^3.1.2",
+    "d2l-icons": "^4.12.1",
+    "iron-iconset-svg": "^2.1.0"
   }
 }
