@@ -8,32 +8,40 @@
 
 		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 
-		<link rel="import" href="../../d2l-demo-template/d2l-demo-template.html">
+		<link rel="import" href="../../d2l-typography/d2l-typography.html">
 		<link rel="import" href="../d2l-datetime-picker.html">
+		<custom-style include="d2l-typography">
+			<style is="custom-style" include="d2l-typography"></style>
+		</custom-style>
+		<style>
+			html {
+				font-size: 20px;
+			}
+		</style>
 	</head>
 	<body unresolved>
-		<d2l-demo-template title="d2l-datetime-picker">
-			<div class="d2l-demo-fixture">
-				<dom-bind>
-					<template is="dom-bind">
-						<d2l-datetime-picker
-							datetime="{{datetime}}"
-						></d2l-datetime-picker>
-						<br/>
-						<d2l-datetime-picker
-							datetime="{{datetime}}"
-							hide-label
-						></d2l-datetime-picker>
-					</template>
-				</dom-bind>
-			</div>
-		</d2l-demo-template>
+		<dom-bind>
+			<template is="dom-bind">
+				<d2l-datetime-picker
+					datetime="{{datetime}}"
+				></d2l-datetime-picker>
+				<br/>
+				<d2l-datetime-picker
+					datetime="{{datetime}}"
+					hide-label
+				></d2l-datetime-picker>
+			</template>
+		</dom-bind>
 		<script>
 			(function() {
 				var match = window.location.search.match(/width=([^&]*)/);
 				if (match) {
-					document.querySelector('.d2l-demo-fixture').style.width = match[1];
+					document.body.style.width = match[1];
 				}
+				if (window.location.href.indexOf('dir=rtl') > -1) {
+					document.body.setAttribute('dir', 'rtl');
+				}
+				document.body.className = 'd2l-typography';
 			})();
 		</script>
 	</body>

@@ -5,7 +5,6 @@
 <link rel="import" href="../d2l-offscreen/d2l-offscreen.html">
 <link rel="import" href="../d2l-icons/d2l-icon-button.html">
 <link rel="import" href="../d2l-icons/tier1-icons.html">
-<link rel="import" href="../d2l-intl/d2l-intl.html">
 <link rel="import" href="localize-behavior.html">
 <script type="text/javascript" src="https://s.brightspace.com/lib/moment.js/2.15.2/moment.min.js"></script>
 <script type="text/javascript" src="https://s.brightspace.com/lib/moment-timezone/0.5.10/moment-timezone-with-data.min.js"></script>
@@ -38,13 +37,6 @@ Accessible, Localized Time Picker Input Element
 
 				--d2l-date-picker-label: {
 					@apply --d2l-offscreen;
-				};
-			}
-
-			:host-context([dir="rtl"]) {
-				--d2l-date-picker-label: {
-					@apply --d2l-offscreen;
-					@apply --d2l-offscreen-rtl;
 				};
 			}
 
@@ -197,7 +189,6 @@ Accessible, Localized Time Picker Input Element
 				locale=[[locale]]
 				min=[[min]]
 				max=[[max]]
-				date-format=[[dateFormat]]
 				first-day-of-week=[[firstDayOfWeek]]
 			></d2l-date-picker>
 		</div>
@@ -314,7 +305,6 @@ Accessible, Localized Time Picker Input Element
 				max: {
 					type: String
 				},
-				dateFormat: String,
 				firstDayOfWeek: Number
 			},
 
@@ -387,11 +377,6 @@ Accessible, Localized Time Picker Input Element
 			},
 
 			_processOverrides: function(overrides) {
-				var dateFormatOverride = this.get('date.formats.dateFormats.short', overrides);
-				if (dateFormatOverride) {
-					this.dateFormat = dateFormatOverride;
-				}
-
 				var firstDayOfWeekOverride = this.get('date.calendar.firstDayOfWeek', overrides);
 				if (firstDayOfWeekOverride) {
 					this.firstDayOfWeek = firstDayOfWeekOverride;
