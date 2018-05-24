@@ -32,7 +32,8 @@
   "variants": {
     "1.x": {
       "dependencies": {
-        "polymer": "Polymer/polymer#^1.9.1"
+        "polymer": "Polymer/polymer#^1.9.1",
+        "vaadin-date-picker": "Brightspace/vaadin-date-picker#^1.2.6"
       },
       "devDependencies": {
         "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
@@ -40,6 +41,12 @@
       "resolutions": {
         "webcomponentsjs": "^0.7",
         "polymer": "^1.9.1",
+        "iron-selector": "^2.0.0",
+        "iron-dropdown": "^2.0.0",
+        "iron-overlay-behavior": "^2.0.0",
+        "iron-iconset-svg": "^2.0.0",
+        "iron-resizable-behavior": "^2.0.0",
+        "iron-a11y-keys-behavior": "^2.0.0",
         "vaadin-date-picker": "Brightspace/vaadin-date-picker#^1.2.6"
       }
     }
