@@ -11,42 +11,37 @@ var browsers = {
 		platform: 'WIN10',
 		size: '1400x900'
 	}),
-	firefoxWindows: new SauceBrowserFactory({
+	/*firefoxWindows: new SauceBrowserFactory({
 		browser: 'Firefox',
 		platform: 'WIN10',
-		size: '1400x900',
-		tags: ['no-d2l-shadow']
+		size: '1400x900'
 	}),
 	ie11Windows: new SauceBrowserFactory({
 		browser: 'internet explorer',
 		version: '11',
 		platform: 'WIN10',
-		size: '1400x900',
-		tags: ['no-d2l-shadow']
+		size: '1400x900'
 	}),
 	edgeWindows: new SauceBrowserFactory({
 		browser: 'microsoftedge',
 		platform: 'WIN10',
-		size: '1400x900',
-		tags: ['no-d2l-shadow']
+		size: '1400x900'
 	}),
 	chromeMac: new SauceBrowserFactory({
 		browser: 'Chrome',
 		platform: 'SIERRA',
-		size: '1400x900'
+		size: '1400x900',
 	}),
 	safariMac: new SauceBrowserFactory({
 		browser: 'Safari',
 		platform: 'EL_CAPITAN',
-		size: '1400x900',
-		tags: ['no-d2l-shadow']
+		size: '1400x900'
 	}),
 	firefoxMac: new SauceBrowserFactory({
 		browser: 'Firefox',
 		platform: 'EL_CAPITAN',
-		size: '1400x900',
-		tags: ['no-d2l-shadow']
-	})
+		size: '1400x900'
+	})*/
 };
 
 var mainlineEndpoint = 'http://localhost:8081/components/d2l-datetime-picker/demo/galen.html';
@@ -109,18 +104,18 @@ polymerTests(browsers, function(test) {
 
 	function runTests(mainline) {
 		testHelper(false, false, false, false, mainline);
-		// testHelper(false, false, true, false, mainline);
-		// testHelper(true, false, false, false, mainline);
-		// testHelper(true, false, true, false, mainline);
-		// testHelper(false, true, false, false, mainline);
-		// testHelper(false, true, true, false, mainline);
-		// testHelper(true, true, false, false, mainline);
-		// testHelper(true, true, true, false, mainline);
-		// testHelper(false, false, false, true, mainline);
-		// testHelper(false, false, true, true, mainline);
-		// testHelper(true, false, false, true, mainline);
-		// testHelper(true, false, true, true, mainline);
+		testHelper(false, false, true, false, mainline);
+		testHelper(true, false, false, false, mainline);
+		testHelper(true, false, true, false, mainline);
+		testHelper(false, true, false, false, mainline);
+		testHelper(false, true, true, false, mainline);
+		testHelper(true, true, false, false, mainline);
+		testHelper(true, true, true, false, mainline);
+		testHelper(false, false, false, true, mainline);
+		testHelper(false, false, true, true, mainline);
+		testHelper(true, false, false, true, mainline);
+		testHelper(true, false, true, true, mainline);
 	}
 
-	[/*false, */true].forEach(runTests);
+	[false, true].forEach(runTests);
 });
