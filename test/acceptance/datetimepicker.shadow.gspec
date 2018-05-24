@@ -1,17 +1,23 @@
 @objects
 
 	datetimepicker           d2l-datetime-picker
-		date-picker-label    d2l-datetime-picker /deep/ .d2l-date-picker-container label
-		date-picker          d2l-datetime-picker /deep/ vaadin-date-picker-light .d2l-input
-		time-picker-label    d2l-datetime-picker /deep/ .d2l-time-picker-container label
-		time-picker          d2l-datetime-picker /deep/ d2l-time-picker
-		clear                d2l-datetime-picker /deep/ .clear-button /deep/ svg g
+		date-picker-label    ::d2l-shadow .d2l-date-picker-container label
+		d2l-date-picker      ::d2l-shadow d2l-date-picker
+			date-picker          ::d2l-shadow .d2l-input
+		time-picker-label    ::d2l-shadow .d2l-time-picker-container label
+		time-picker          ::d2l-shadow d2l-time-picker
+		icon-button          ::d2l-shadow .clear-button
+			clear                ::d2l-shadow d2l-icon
+				svg                ::d2l-shadow svg g
 
 	datetimepicker-labelless d2l-datetime-picker[hide-label]
-		date-picker-label    d2l-datetime-picker /deep/ .d2l-date-picker-container label
-		date-picker          d2l-datetime-picker /deep/ vaadin-date-picker-light .d2l-input
-		time-picker-label    d2l-datetime-picker /deep/ .d2l-time-picker-container label
-		time-picker          d2l-datetime-picker /deep/ d2l-time-picker
-		clear                d2l-datetime-picker /deep/ .clear-button /deep/ svg g
+		date-picker-label    ::d2l-shadow .d2l-date-picker-container label
+		d2l-date-picker      ::d2l-shadow d2l-date-picker
+			date-picker          ::d2l-shadow .d2l-input
+		time-picker-label    ::d2l-shadow .d2l-time-picker-container label
+		time-picker          ::d2l-shadow d2l-time-picker
+		icon-button          ::d2l-shadow .clear-button
+			clear                ::d2l-shadow d2l-icon
+				svg                ::d2l-shadow svg g
 
 @import datetimepicker.common.gspec

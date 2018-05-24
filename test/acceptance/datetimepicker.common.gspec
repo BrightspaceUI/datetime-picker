@@ -5,15 +5,15 @@
 
 	@on closed
 		@forEach [&datetime] as item
-			${item}.time-picker, ${item}.clear:
+			${item}.time-picker, ${item}.icon-button.clear.svg:
 				absent
 
 	@on open
 		@forEach [&datetime] as item
-			${item}.time-picker, ${item}.clear:
+			${item}.time-picker, ${item}.icon-button.clear.svg:
 				visible
 
-			${item}.clear:
+			${item}.icon-button.clear.svg:
 				inside ${item}
 
 		datetimepicker.time-picker-label:
@@ -28,11 +28,11 @@
 	@on mobile
 		@on ltr
 			datetimepicker.date-picker-label:
-				left-of datetimepicker.date-picker
+				left-of datetimepicker.d2l-date-picker.date-picker
 
 		@on rtl
 			datetimepicker.date-picker-label:
-				right-of datetimepicker.date-picker
+				right-of datetimepicker.d2l-date-picker.date-picker
 
 		@on open
 			@on ltr
@@ -45,30 +45,30 @@
 
 			@forEach [&datetime] as item
 				${item}.time-picker:
-					below ${item}.date-picker 20px
+					below ${item}.d2l-date-picker.date-picker 20px
 
 				@on ltr
 					${item}.time-picker:
-						aligned vertically left ${item}.date-picker
+						aligned vertically left ${item}.d2l-date-picker.date-picker
 
-					${item}.clear:
-						right-of ${item}.date-picker ~18px
+					${item}.icon-button.clear.svg:
+						right-of ${item}.d2l-date-picker.date-picker ~18px
 
 				@on rtl
 					${item}.time-picker:
-						aligned vertically right ${item}.date-picker
+						aligned vertically right ${item}.d2l-date-picker.date-picker
 
-					${item}.clear:
-						left-of ${item}.date-picker ~18px
+					${item}.icon-button.clear.svg:
+						left-of ${item}.d2l-date-picker.date-picker ~18px
 
 	@on desktop
 		@on ltr
 			datetimepicker.date-picker-label:
-				aligned vertically left datetimepicker.date-picker
+				aligned vertically left datetimepicker.d2l-date-picker.date-picker
 
 		@on rtl
 			datetimepicker.date-picker-label:
-				aligned vertically right datetimepicker.date-picker
+				aligned vertically right datetimepicker.d2l-date-picker.date-picker
 
 		@on open
 			@on ltr
@@ -81,18 +81,18 @@
 
 			@forEach [&datetime] as item
 				${item}.time-picker:
-					aligned horizontally top ${item}.date-picker
+					aligned horizontally top ${item}.d2l-date-picker.date-picker
 
 				@on ltr
 					${item}.time-picker:
-						right-of ${item}.date-picker 20px
+						right-of ${item}.d2l-date-picker.date-picker 20px
 
-					${item}.clear:
+					${item}.icon-button.clear.svg:
 						right-of ${item}.time-picker ~18px
 
 				@on rtl
 					${item}.time-picker:
-						left-of ${item}.date-picker 20px
+						left-of ${item}.d2l-date-picker.date-picker 20px
 
-					${item}.clear:
+					${item}.icon-button.clear.svg:
 						left-of ${item}.time-picker ~18px

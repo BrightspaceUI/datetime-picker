@@ -1,4 +1,4 @@
-/* global polymerTests, LocalBrowserFactory, SauceBrowserFactory, importClass, org, Keys */
+/* global polymerTests, LocalBrowserFactory, SauceBrowserFactory, importClass, org, Thread */
 /* eslint no-invalid-this: 0 */
 'use strict';
 
@@ -15,7 +15,7 @@ var browsers = {
 		browser: 'Firefox',
 		platform: 'WIN10',
 		size: '1400x900'
-	}),*/
+	}),
 	ie11Windows: new SauceBrowserFactory({
 		browser: 'internet explorer',
 		version: '11',
@@ -36,7 +36,7 @@ var browsers = {
 		browser: 'Safari',
 		platform: 'EL_CAPITAN',
 		size: '1400x900'
-	})/*,
+	}),
 	firefoxMac: new SauceBrowserFactory({
 		browser: 'Firefox',
 		platform: 'EL_CAPITAN',
@@ -44,18 +44,17 @@ var browsers = {
 	})*/
 };
 
-var endpoint = 'http://localhost:8080/components/d2l-datetime-picker/demo/galen.html';
+var mainlineEndpoint = 'http://localhost:8081/components/d2l-datetime-picker/demo/galen.html';
+var oneDotXEndpoint = 'http://localhost:8000/components/d2l-datetime-picker/demo/galen.html';
 
-var DateTimePickerDemoPage = $page('Date Time Picker Demo Page', {
-	input: 'd2l-datetime-picker .d2l-input'
-});
-
-var DateTimePickerDemoShadowPage = $page('Date Time Picker Demo Page', {
-	input: 'd2l-datetime-picker /deep/ .d2l-input'
-});
+var rtlScript = 'document.body.setAttribute("dir", "rtl");';
+var getInput = 'document.querySelector("d2l-datetime-picker").$$("d2l-date-picker").$$(".d2l-input")';
+var inputClickScript = getInput + '.dispatchEvent(new MouseEvent("click"))';
+var typeDateScript = getInput + '.value= "01/30/1990"';
+var hitEnterScript = getInput + '.dispatchEvent(new KeyboardEvent("keydown", {bubbles: true, cancelable: true, key:"Enter", char:"Enter", keyCode: 13}))';
 
 polymerTests(browsers, function(test) {
-	function testHelper(rtl, shadow, open, mobile) {
+	function testHelper(rtl, shadow, open, mobile, mainline) {
 		var name = 'd2l-datetime-picker';
 		var queryParams = [];
 		name = rtl ? name + '-rtl' : name;
@@ -67,7 +66,7 @@ polymerTests(browsers, function(test) {
 		shadow && queryParams.push('dom=shadow');
 		mobile && queryParams.push('width=280px');
 
-		var testEndpoint = endpoint;
+		var testEndpoint = mainline ? mainlineEndpoint : oneDotXEndpoint;
 		if (queryParams.length) {
 			testEndpoint += '?' + queryParams.join('&');
 		}
@@ -79,10 +78,16 @@ polymerTests(browsers, function(test) {
 		var cb;
 		if (open) {
 			cb = function(opts, cb) {
-				var timepickerdemopage = shadow ? new DateTimePickerDemoShadowPage(opts.driver) : new DateTimePickerDemoPage(opts.driver);
-				timepickerdemopage.input.click();
-				timepickerdemopage.input.typeText('01/30/1990');
-				timepickerdemopage.input.typeText(Keys.ENTER);
+				if (rtl) {
+					opts.driver.executeScript(rtlScript);
+				}
+				Thread.sleep(50);
+				opts.driver.executeScript(inputClickScript);
+				Thread.sleep(50);
+				opts.driver.executeScript(typeDateScript);
+				Thread.sleep(50);
+				opts.driver.executeScript(hitEnterScript);
+				Thread.sleep(50);
 				cb();
 			};
 		}
@@ -97,16 +102,20 @@ polymerTests(browsers, function(test) {
 		}, cb);
 	}
 
-	testHelper(false, false, false, false);
-	testHelper(false, false, true, false);
-	testHelper(true, false, false, false);
-	testHelper(true, false, true, false);
-	testHelper(false, true, false, false);
-	testHelper(false, true, true, false);
-	testHelper(true, true, false, false);
-	testHelper(true, true, true, false);
-	testHelper(false, false, false, true);
-	testHelper(false, false, true, true);
-	testHelper(true, false, false, true);
-	testHelper(true, false, true, true);
+	function runTests(mainline) {
+		testHelper(false, false, false, false, mainline);
+		testHelper(false, false, true, false, mainline);
+		testHelper(true, false, false, false, mainline);
+		testHelper(true, false, true, false, mainline);
+		testHelper(false, true, false, false, mainline);
+		testHelper(false, true, true, false, mainline);
+		testHelper(true, true, false, false, mainline);
+		testHelper(true, true, true, false, mainline);
+		testHelper(false, false, false, true, mainline);
+		testHelper(false, false, true, true, mainline);
+		testHelper(true, false, false, true, mainline);
+		testHelper(true, false, true, true, mainline);
+	}
+
+	[false, true].forEach(runTests);
 });
