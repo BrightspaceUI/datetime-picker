@@ -33,8 +33,7 @@ var browsers = {
 	chromeMac: new SauceBrowserFactory({
 		browser: 'Chrome',
 		platform: 'SIERRA',
-		size: '1400x900',
-		tags: ['no-d2l-shadow']
+		size: '1400x900'
 	}),
 	safariMac: new SauceBrowserFactory({
 		browser: 'Safari',
@@ -80,7 +79,6 @@ polymerTests(browsers, function(test) {
 		rtl && tags.push('rtl') || tags.push('ltr');
 		open && tags.push('open') || tags.push('closed');
 		mobile && tags.push('mobile') || tags.push('desktop');
-		tags.push('no-d2l-shadow');
 
 		var cb;
 		if (open) {
