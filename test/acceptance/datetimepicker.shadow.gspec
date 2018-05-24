@@ -40,6 +40,6 @@
 			time-picker          d2l-time-picker
 			icon-button          .clear-button
 				clear                d2l-icon
-					svg                svg
+					svg                svg g
 
 @import datetimepicker.common.gspec
