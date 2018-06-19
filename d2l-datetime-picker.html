@@ -31,7 +31,7 @@ Accessible, Localized Time Picker Input Element
 				max-width: calc(14.75rem + 34px);
 				width: 100%;
 
-				--d2l-datetime-picker-label-width: 5rem;
+				--d2l-datetime-picker-label-width: 3rem;
 				--d2l-datetime-picker-label-min-width: 2rem;
 				--d2l-datetime-picker-label-padding: 20px;
 
@@ -61,26 +61,16 @@ Accessible, Localized Time Picker Input Element
 			}
 
 			:host([hide-label]) .clear-button {
-				top: 0;
+				top: 0.2rem;
 			}
 
 			.clear-button,
 			.clear-button button {
-				--d2l-icon-button-icon: {
-					color: var(--d2l-color-tungsten);
-				};
-
 				@apply --d2l-datetime-picker-clear-button;
 			}
 
 			.clear-button button {
 				height: 2.4rem;
-			}
-
-			.clear-button {
-				--d2l-icon-button-icon: {
-					height: 2.4rem;
-				};
 			}
 
 			:host([has-date]) d2l-date-picker {
@@ -175,7 +165,7 @@ Accessible, Localized Time Picker Input Element
 				}
 
 				:host(:not([hide-label])) .clear-button {
-					top: 0;
+					top: 0.2rem;
 				}
 			}
 
