@@ -15,13 +15,14 @@
     "wct.conf.json"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#1 - 2",
-    "d2l-time-picker": "BrightspaceUI/time-picker#^1.0.0",
+    "d2l-button": "^4.4.0",
     "d2l-date-picker": "BrightspaceUI/date-picker#^1.0.0",
+    "d2l-icons": "^4.12.1",
     "d2l-localize-behavior": "^1.0.1",
     "d2l-offscreen": "^3.0.1",
+    "d2l-time-picker": "BrightspaceUI/time-picker#^1.0.0",
     "iron-input": "^2.0.0",
-    "d2l-icons": "^4.12.1"
+    "polymer": "Polymer/polymer#1 - 2"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#1 - 2",
