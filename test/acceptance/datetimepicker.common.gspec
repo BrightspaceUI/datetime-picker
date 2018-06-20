@@ -52,14 +52,14 @@
 						aligned vertically left ${item}.d2l-date-picker.date-picker
 
 					${item}.icon-button.clear.svg:
-						right-of ${item}.d2l-date-picker.date-picker ~34px
+						right-of ${item}.d2l-date-picker.date-picker ~30px
 
 				@on rtl
 					${item}.time-picker:
 						aligned vertically right ${item}.d2l-date-picker.date-picker
 
 					${item}.icon-button.clear.svg:
-						left-of ${item}.d2l-date-picker.date-picker ~34px
+						left-of ${item}.d2l-date-picker.date-picker ~30px
 
 	@on desktop
 		@on ltr
@@ -88,11 +88,11 @@
 						right-of ${item}.d2l-date-picker.date-picker 20px
 
 					${item}.icon-button.clear.svg:
-						right-of ${item}.time-picker ~34px
+						right-of ${item}.time-picker ~30px
 
 				@on rtl
 					${item}.time-picker:
 						left-of ${item}.d2l-date-picker.date-picker 20px
 
 					${item}.icon-button.clear.svg:
-						left-of ${item}.time-picker ~34px
+						left-of ${item}.time-picker ~30px
