@@ -4,17 +4,19 @@
   "description": "Accessible, Localized Date-Time Picker Element",
   "scripts": {
     "postinstall": "polymer install --variants",
-    "test": "npm run test:lint && polymer test --skip-plugin sauce",
-    "test:lint": "npm run test:lint:wc && npm run test:lint:html",
-    "test:lint:html": "eslint *.html test/*.html demo/*.html",
-    "test:lint:wc": "polymer lint",
+    "lint": "npm run lint:wc && npm run lint:html",
+    "lint:html": "eslint *.html demo/*.html test/*.html",
+    "lint:wc": "polymer lint -i *.html",
+    "test": "npm run lint && npm run test:polymer:local",
     "galen": "d2l-galen -s -c \"java -Xmx2g -cp node_modules/galenframework/lib/galen/galen.jar com.galenframework.GalenMain\"",
     "dump:galen:local:run": "npm run galen -- dump test/acceptance/galen.test.js -g factory:local -d test/acceptance/dumps",
     "galen:local:run": "npm run galen -- test test/acceptance/galen.test.js -g factory:local -- -p4",
     "galen:sauce:run": "sc-run -- npm run galen -- test test/acceptance/galen.test.js -g factory:sauce -i SAUCE_USERNAME SAUCE_ACCESS_KEY TRAVIS_REPO_SLUG TRAVIS_BUILD_NUMBER -- -p4",
     "dump:galen:local": "concurrently -p name -n serve,galen -s first -k \"polymer serve\" \"npm run dump:galen:local:run\"",
     "test:galen:local": "concurrently -p name -n serve,galen -s first -k \"polymer serve\" \"npm run galen:local:run\"",
-    "test:galen:sauce": "concurrently -p name -n serve,galen -s first -k \"polymer serve\" \"npm run galen:sauce:run\""
+    "test:galen:sauce": "concurrently -p name -n serve,galen -s first -k \"polymer serve\" \"npm run galen:sauce:run\"",
+    "test:polymer:local": "polymer test --skip-plugin sauce",
+    "test:polymer:sauce": "polymer test --skip-plugin local"
   },
   "repository": {
     "type": "git",
