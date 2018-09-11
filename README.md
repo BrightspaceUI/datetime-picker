@@ -1,3 +1,5 @@
+> Deprecated: use [BrightspaceUI/inputs](https://github.com/BrightspaceUI/inputs) `d2l-input-datetime` web component instead.
+
 # \<d2l-datetime-picker\>
 
 [![Build Status](https://travis-ci.org/BrightspaceUI/datetime-picker.svg?branch=master)](https://travis-ci.org/BrightspaceUI/datetime-picker)
