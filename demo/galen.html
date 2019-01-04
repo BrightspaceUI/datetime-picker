@@ -10,60 +10,55 @@
 
 		<script type="module" src="../../d2l-typography/d2l-typography.js"></script>
 		<script type="module" src="../d2l-datetime-picker.js"></script>
-		<!-- FIXME(polymer-modulizer):
-		These imperative modules that innerHTML your HTML are
-		a hacky way to be sure that any mixins in included style
-		modules are ready before any elements that reference them are
-		instantiated, otherwise the CSS @apply mixin polyfill won't be
-		able to expand the underlying CSS custom properties.
-		See: https://github.com/Polymer/polymer-modulizer/issues/154
-		-->
-	<script type="module">
-const $_documentContainer = document.createElement('template');
 
-$_documentContainer.innerHTML = `<custom-style include="d2l-typography">
-			<style is="custom-style" include="d2l-typography"></style>
-		</custom-style>`;
-
-document.body.appendChild($_documentContainer.content);
-</script>
 		<script type="module">
-const $_documentContainer = document.createElement('template');
+			const $_documentContainer = document.createElement('template');
 
-$_documentContainer.innerHTML = `<style>
-			html {
-				font-size: 20px;
-			}
-		</style>`;
+			$_documentContainer.innerHTML = `<custom-style include="d2l-typography">
+						<style is="custom-style" include="d2l-typography"></style>
+					</custom-style>`;
 
-document.body.appendChild($_documentContainer.content);
-</script>
+			document.body.appendChild($_documentContainer.content);
+		</script>
+
+		<script type="module">
+			const $_documentContainer = document.createElement('template');
+
+			$_documentContainer.innerHTML = `<style>
+						html {
+							font-size: 20px;
+						}
+					</style>`;
+
+			document.body.appendChild($_documentContainer.content);
+		</script>
 	</head>
 	<body unresolved>
 		<script type="module">
-const $_documentContainer = document.createElement('template');
+			const $_documentContainer = document.createElement('template');
 
-$_documentContainer.innerHTML = `<dom-bind>
-			<template is="dom-bind">
-				<d2l-datetime-picker datetime="{{datetime}}"></d2l-datetime-picker>
-				<br>
-				<d2l-datetime-picker datetime="{{datetime}}" hide-label=""></d2l-datetime-picker>
-			</template>
-		</dom-bind>`;
+			$_documentContainer.innerHTML = `<dom-bind>
+						<template is="dom-bind">
+							<d2l-datetime-picker datetime="{{datetime}}"></d2l-datetime-picker>
+							<br>
+							<d2l-datetime-picker datetime="{{datetime}}" hide-label=""></d2l-datetime-picker>
+						</template>
+					</dom-bind>`;
 
-document.body.appendChild($_documentContainer.content);
-</script>
+			document.body.appendChild($_documentContainer.content);
+		</script>
+
 		<script type="module">
-import 'd2l-typography/d2l-typography.js';
-import '../d2l-datetime-picker.js';
-var match = window.location.search.match(/width=([^&]*)/);
-if (match) {
-	document.body.style.width = match[1];
-}
-if (window.location.href.indexOf('dir=rtl') > -1) {
-	document.body.setAttribute('dir', 'rtl');
-}
-document.body.className = 'd2l-typography';
-</script>
+			import 'd2l-typography/d2l-typography.js';
+			import '../d2l-datetime-picker.js';
+			var match = window.location.search.match(/width=([^&]*)/);
+			if (match) {
+				document.body.style.width = match[1];
+			}
+			if (window.location.href.indexOf('dir=rtl') > -1) {
+				document.body.setAttribute('dir', 'rtl');
+			}
+			document.body.className = 'd2l-typography';
+		</script>
 	</body>
 </html>

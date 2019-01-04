@@ -1,14 +1,10 @@
 /**
-`d2l-time-picker`
-Accessible, Localized Time Picker Input Element
+`d2l-datetime-picker`
+Accessible, Localized Date and Time Picker Input Element
 
 @demo demo/index.html
 */
-/*
-  FIXME(polymer-modulizer): the above comments were extracted
-  from HTML and may be out of place here. Review them and
-  then delete this comment!
-*/
+
 import '@polymer/polymer/polymer-legacy.js';
 
 import 'd2l-button/d2l-button-icon.js';
@@ -18,7 +14,9 @@ import 'd2l-offscreen/d2l-offscreen.js';
 import 'd2l-time-picker/d2l-time-picker.js';
 import '@polymer/iron-input/iron-input.js';
 import './localize-behavior.js';
+import d2lIntl from 'd2l-intl';
 import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
+
 const $_documentContainer = document.createElement('template');
 
 $_documentContainer.innerHTML = `<dom-module id="d2l-datetime-picker">
@@ -184,7 +182,7 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-datetime-picker">
 			<div class="time-clear-container">
 				<div class="d2l-time-picker-container">
 					<label aria-hidden="true" role="presentation">{{_timeLabel}}</label>
-					<d2l-time-picker label="[[_timeLabel]]" locale="[[locale]]" overrides="[[overrides]]" timezone="[[_getTimezone(timezone, timezoneName)]]" hours="{{hours}}" minutes="{{minutes}}" boundary="[[boundary]]"></d2l-time-picker>
+					<d2l-time-picker label="[[_timeLabel]]" locale="[[locale]]" overrides="[[overrides]]" timezone="[[_getTimezone(__timezone, timezoneName)]]" hours="{{hours}}" minutes="{{minutes}}" boundary="[[boundary]]"></d2l-time-picker>
 				</div>
 				<div class="clear-button-container">
 					<d2l-button-icon class="clear-button" icon="d2l-tier1:close-small" on-click="clear" text="[[localize('clear')]]"></d2l-button-icon>
@@ -192,8 +190,6 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-datetime-picker">
 			</div>
 		</template>
 	</template>
-
-	
 </dom-module>`;
 
 document.head.appendChild($_documentContainer.content);
@@ -212,18 +208,16 @@ Polymer({
 		},
 		hours: {
 			type: Number,
-			notify: true
+			notify: true,
+			value: 23
 		},
 		minutes: {
 			type: Number,
-			notify: true
+			notify: true,
+			value: 59
 		},
 		overrides: Object,
-		timezone: {
-			type: String,
-			value: moment.tz.guess(),
-			notify: true
-		},
+		locale: Object,
 		timezoneName: {
 			type: String,
 			value: ''
@@ -279,12 +273,12 @@ Polymer({
 	},
 
 	observers: [
-		'_dateAndTimeChanged(date, timezone, hours, minutes)',
+		'_dateAndTimeChanged(date, hours, minutes, __timezone)',
 		'_processOverrides(overrides)'
 	],
 
 	clear: function() {
-		this.datetime = '';
+		this.datetime = null;
 	},
 
 	_dateTimeChanged: function(datetime) {
@@ -292,7 +286,7 @@ Polymer({
 			this.date = '';
 			return;
 		}
-		datetime = moment.tz(datetime, this.timezone);
+		datetime = moment.tz(datetime, this.__timezone);
 		if (!datetime.isValid()) {
 			return;
 		}
@@ -309,12 +303,12 @@ Polymer({
 			return;
 		}
 		if (!this.date) {
-			this.datetime = '';
+			this.datetime = null;
 			return;
 		}
 		var datetime;
 		try {
-			datetime = moment.tz(this.date, this.timezone);
+			datetime = moment.tz(this.date, this.__timezone);
 			if (!datetime.isValid()) {
 				return;
 			}
