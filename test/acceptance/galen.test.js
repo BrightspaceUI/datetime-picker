@@ -46,8 +46,8 @@ var browsers = {
 
 var testEndpoint = 'http://localhost:8081/components/d2l-datetime-picker/demo/galen.html';
 
-var rtlScript = 'document.body.setAttribute("dir", "rtl");';
-var getInput = 'document.querySelector("d2l-datetime-picker").querySelector("d2l-date-picker").querySelector(".d2l-input")';
+var rtlScript = 'document.documentElement.setAttribute("dir", "rtl");';
+var getInput = 'document.querySelector("d2l-datetime-picker d2l-date-picker .d2l-input")';
 var inputClickScript = getInput + '.dispatchEvent(new MouseEvent("click"))';
 var typeDateScript = getInput + '.value= "01/30/1990"';
 var hitEnterScript = getInput + '.dispatchEvent(new KeyboardEvent("keydown", {bubbles: true, cancelable: true, key:"Enter", char:"Enter", keyCode: 13}))';
