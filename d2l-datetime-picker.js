@@ -53,7 +53,7 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-datetime-picker">
 				@apply --d2l-datetime-picker-clear-button-container;
 			}
 
-			:host-context([dir="rtl"]) .clear-button-container {
+			:host(:dir(rtl)) .clear-button-container {
 				margin-right: 0;
 				margin-left: 34px;
 			}
@@ -81,13 +81,13 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-datetime-picker">
 				padding-bottom: 20px;
 			}
 
-			:host-context([dir="rtl"]):host([has-date]) d2l-date-picker {
+			:host(:dir(rtl)):host([has-date]) d2l-date-picker {
 				padding-right: 0;
 				padding-left: 1rem;
 			}
 
 			/* shadyDOM workaround */
-			:host-context([dir="rtl"])[has-date] d2l-date-picker {
+			:host(:dir(rtl))[has-date] d2l-date-picker {
 				padding-right: 0;
 				padding-left: 1rem;
 			}
@@ -111,7 +111,7 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-datetime-picker">
 				flex: 1 1 auto;
 			}
 
-			:host-context([dir="rtl"]) .d2l-time-picker-container {
+			:host(:dir(rtl)) .d2l-time-picker-container {
 				padding-left: 0.75rem;
 				padding-right: 0;
 			}
@@ -151,7 +151,7 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-datetime-picker">
 					@apply --d2l-datetime-picker-label-mobile;
 				}
 
-				:host-context([dir="rtl"]) label {
+				:host(:dir(rtl)) label {
 					padding-right: 0;
 					padding-left: var(--d2l-datetime-picker-label-padding);
 					@apply --d2l-datetime-picker-label-mobile-rtl;
