@@ -44,8 +44,7 @@ var browsers = {
 	})*/
 };
 
-var mainlineEndpoint = 'http://localhost:8081/components/d2l-datetime-picker/demo/galen.html';
-var oneDotXEndpoint = 'http://localhost:8000/components/d2l-datetime-picker/demo/galen.html';
+var testEndpoint = 'http://localhost:8081/components/d2l-datetime-picker/demo/galen.html';
 
 var rtlScript = 'document.body.setAttribute("dir", "rtl");';
 var getInput = 'document.querySelector("d2l-datetime-picker").$$("d2l-date-picker").$$(".d2l-input")';
@@ -54,7 +53,7 @@ var typeDateScript = getInput + '.value= "01/30/1990"';
 var hitEnterScript = getInput + '.dispatchEvent(new KeyboardEvent("keydown", {bubbles: true, cancelable: true, key:"Enter", char:"Enter", keyCode: 13}))';
 
 polymerTests(browsers, function(test) {
-	function testHelper(rtl, shadow, open, mobile, mainline) {
+	function testHelper(rtl, shadow, open, mobile) {
 		var name = 'd2l-datetime-picker';
 		var queryParams = [];
 		name = rtl ? name + '-rtl' : name;
@@ -66,7 +65,6 @@ polymerTests(browsers, function(test) {
 		shadow && queryParams.push('dom=shadow');
 		mobile && queryParams.push('width=280px');
 
-		var testEndpoint = mainline ? mainlineEndpoint : oneDotXEndpoint;
 		if (queryParams.length) {
 			testEndpoint += '?' + queryParams.join('&');
 		}
@@ -102,20 +100,20 @@ polymerTests(browsers, function(test) {
 		}, cb);
 	}
 
-	function runTests(mainline) {
-		testHelper(false, false, false, false, mainline);
-		testHelper(false, false, true, false, mainline);
-		testHelper(true, false, false, false, mainline);
-		testHelper(true, false, true, false, mainline);
-		testHelper(false, true, false, false, mainline);
-		testHelper(false, true, true, false, mainline);
-		testHelper(true, true, false, false, mainline);
-		testHelper(true, true, true, false, mainline);
-		testHelper(false, false, false, true, mainline);
-		testHelper(false, false, true, true, mainline);
-		testHelper(true, false, false, true, mainline);
-		testHelper(true, false, true, true, mainline);
+	function runTests() {
+		testHelper(false, false, false, false);
+		testHelper(false, false, true, false);
+		testHelper(true, false, false, false);
+		testHelper(true, false, true, false);
+		testHelper(false, true, false, false);
+		testHelper(false, true, true, false);
+		testHelper(true, true, false, false);
+		testHelper(true, true, true, false);
+		testHelper(false, false, false, true);
+		testHelper(false, false, true, true);
+		testHelper(true, false, false, true);
+		testHelper(true, false, true, true);
 	}
 
-	[false, true].forEach(runTests);
+	runTests();
 });
