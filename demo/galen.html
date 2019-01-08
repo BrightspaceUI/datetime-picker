@@ -49,10 +49,7 @@
 					</dom-bind>`;
 
 			document.body.appendChild($_documentContainer.content);
-		</script>
-		<script type="module">
-			import 'd2l-typography/d2l-typography.js';
-			import '../d2l-datetime-picker.js';
+
 			var match = window.location.search.match(/width=([^&]*)/);
 			if (match) {
 				document.body.style.width = match[1];
@@ -60,7 +57,6 @@
 			if (window.location.href.indexOf('dir=rtl') > -1) {
 				document.documentElement.setAttribute('dir', 'rtl');
 			}
-			document.body.className = 'd2l-typography';
 		</script>
 	</body>
 </html>
