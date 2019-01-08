@@ -32,7 +32,7 @@
 				document.body.style.width = match[1];
 			}
 			if (window.location.href.indexOf('dir=rtl') > -1) {
-				document.body.setAttribute('dir', 'rtl');
+				document.documentElement.setAttribute('dir', 'rtl');
 			}
 			document.body.className = 'd2l-typography';
 		</script>
