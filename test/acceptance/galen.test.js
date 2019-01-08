@@ -44,7 +44,7 @@ var browsers = {
 	})*/
 };
 
-var testEndpoint = 'http://localhost:8081/components/d2l-datetime-picker/demo/galen.html';
+var testEndpointOriginal = 'http://localhost:8081/components/d2l-datetime-picker/demo/galen.html';
 
 var rtlScript = 'document.documentElement.setAttribute("dir", "rtl");';
 var getInput = 'document.querySelector("d2l-datetime-picker").shadowRoot.querySelector("d2l-date-picker").shadowRoot.querySelector(".d2l-input")';
@@ -64,6 +64,8 @@ polymerTests(browsers, function(test) {
 		rtl && queryParams.push('dir=rtl');
 		shadow && queryParams.push('dom=shadow');
 		mobile && queryParams.push('width=280px');
+
+		var testEndpoint = testEndpointOriginal;
 
 		if (queryParams.length) {
 			testEndpoint += '?' + queryParams.join('&');
