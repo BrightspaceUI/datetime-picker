@@ -29,7 +29,7 @@
 			<template is="dom-bind">
 				<label>Locale: <input value="{{locale::input}}"/></label>
 				<br/>
-				<label>Timezone: <input value="{{timezone::input}}"/></label>
+				<label>Timezone: <input value="{{timezoneName::input}}"/></label>
 				<br/>
 				<label>Placeholder: <input value="{{placeholder::input}}" type="text"/></label>
 				<br/>
@@ -47,7 +47,7 @@
 				<br/>
 				<d2l-datetime-picker
 					locale="{{locale}}"
-					timezone="{{timezone}}"
+					timezone-name="{{timezoneName}}"
 					placeholder="{{placeholder}}"
 					datetime="{{datetime}}"
 					date="{{date}}"
