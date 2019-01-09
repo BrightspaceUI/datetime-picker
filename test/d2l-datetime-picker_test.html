@@ -6,12 +6,15 @@
 
 		<title>d2l-datetime-picker test</title>
 
-		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-		<script src="../../web-component-tester/browser.js"></script>
+		<script src="../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+		<script src="../../wct-browser-legacy/browser.js"></script>
 		<script type="text/javascript" src="https://s.brightspace.com/lib/d2l-intl/0.2.1/Intl.js"></script>
 
-		<link rel="import" href="../../iron-test-helpers/mock-interactions.html">
-		<link rel="import" href="../d2l-datetime-picker.html">
+		<script type="module" src="../../@polymer/iron-test-helpers/mock-interactions.js"></script>
+		<script type="module" src="../d2l-datetime-picker.js"></script>
+
+		<script type="text/javascript" src="https://s.brightspace.com/lib/moment.js/2.15.2/moment.min.js"></script>
+		<script type="text/javascript" src="https://s.brightspace.com/lib/moment-timezone/0.5.10/moment-timezone-with-data.min.js"></script>
 	</head>
 	<body>
 		<test-fixture id="basic">
@@ -20,241 +23,245 @@
 			</template>
 		</test-fixture>
 
-		<script>
-		suite('d2l-datetime-picker', function() {
-			setup(function() {
-				this.element = fixture('basic');
-			});
+		<script type="module">
+			import '@polymer/iron-test-helpers/mock-interactions.js';
+			import '../d2l-datetime-picker.js';
+			import { flush } from '@polymer/polymer/lib/legacy/polymer.dom.js';
+			suite('d2l-datetime-picker', function() {
+				var element;
+				setup(function() {
+					element = fixture('basic');
+				});
 
-			test('instantiating the element works', function() {
-				expect(this.element.is).to.equal('d2l-datetime-picker');
-			});
+				test('instantiating the element works', function() {
+					expect(element.is).to.equal('d2l-datetime-picker');
+				});
 
-			test('should have d2l-time-picker when date is set', function() {
-				expect(this.element.$$('d2l-time-picker')).to.not.be.ok;
-				this.element.date = '1990-01-30';
-				Polymer.dom.flush();
-				expect(this.element.$$('d2l-time-picker')).to.be.ok;
-			});
+				test('should have d2l-time-picker when date is set', function() {
+					expect(element.$$('d2l-time-picker')).to.not.be.ok;
+					element.date = '1990-01-30';
+					flush();
+					expect(element.$$('d2l-time-picker')).to.be.ok;
+				});
 
-			test('should have d2l-time-picker when alwaysShowTime is set', function() {
-				expect(this.element.$$('d2l-time-picker')).to.not.be.ok;
-				this.element.alwaysShowTime = true;
-				Polymer.dom.flush();
-				expect(this.element.$$('d2l-time-picker')).to.be.ok;
-			});
+				test('should have d2l-time-picker when alwaysShowTime is set', function() {
+					expect(element.$$('d2l-time-picker')).to.not.be.ok;
+					element.alwaysShowTime = true;
+					flush();
+					expect(element.$$('d2l-time-picker')).to.be.ok;
+				});
 
-			test('should have d2l-date-picker', function() {
-				expect(this.element.$$('d2l-date-picker')).to.be.ok;
-			});
+				test('should have d2l-date-picker', function() {
+					expect(element.$$('d2l-date-picker')).to.be.ok;
+				});
 
-			test('should pass locale to d2l-time-picker and d2l-date-picker', function() {
-				this.element.alwaysShowTime = true;
-				Polymer.dom.flush();
-				this.element.locale = 'fr-CA';
-				expect(this.element.$$('d2l-time-picker').locale).to.equal('fr-CA');
-				expect(this.element.$$('d2l-date-picker').locale).to.equal('fr-CA');
-				this.element.locale = 'en-US';
-				expect(this.element.$$('d2l-time-picker').locale).to.equal('en-US');
-				expect(this.element.$$('d2l-date-picker').locale).to.equal('en-US');
-			});
+				test('should pass locale to d2l-time-picker and d2l-date-picker', function() {
+					element.alwaysShowTime = true;
+					flush();
+					element.locale = 'fr-CA';
+					expect(element.$$('d2l-time-picker').locale).to.equal('fr-CA');
+					expect(element.$$('d2l-date-picker').locale).to.equal('fr-CA');
+					element.locale = 'en-US';
+					expect(element.$$('d2l-time-picker').locale).to.equal('en-US');
+					expect(element.$$('d2l-date-picker').locale).to.equal('en-US');
+				});
 
-			test('should pass firstDayOfWeek to d2l-date-picker', function() {
-				this.element.firstDayOfWeek = 2;
-				expect(this.element.$$('d2l-date-picker').firstDayOfWeek).to.equal(2);
-				this.element.firstDayOfWeek = 5;
-				expect(this.element.$$('d2l-date-picker').firstDayOfWeek).to.equal(5);
-			});
+				test('should pass firstDayOfWeek to d2l-date-picker', function() {
+					element.firstDayOfWeek = 2;
+					expect(element.$$('d2l-date-picker').firstDayOfWeek).to.equal(2);
+					element.firstDayOfWeek = 5;
+					expect(element.$$('d2l-date-picker').firstDayOfWeek).to.equal(5);
+				});
 
-			suite('hours/minutes', function() {
-				test('should update time-picker hours/minutes', function() {
-					this.element.date = '1990-01-30';
-					Polymer.dom.flush();
-					this.element.hours = 1;
-					this.element.minutes = 30;
+				suite('hours/minutes', function() {
+					test('should update time-picker hours/minutes', function() {
+						element.date = '1990-01-30';
+						flush();
+						element.hours = 1;
+						element.minutes = 30;
 
-					expect(this.element.$$('d2l-time-picker').hours).to.equal(1);
-					expect(this.element.$$('d2l-time-picker').minutes).to.equal(30);
+						expect(element.$$('d2l-time-picker').hours).to.equal(1);
+						expect(element.$$('d2l-time-picker').minutes).to.equal(30);
+					});
+				});
+
+				suite('datetime', function() {
+					test('should not be updated when date is undefined', function() {
+						element.date = undefined;
+						element.hours = 1;
+						element.minutes = 30;
+						expect(element.datetime).to.not.be.ok;
+					});
+
+					test('empty when date is empty', function() {
+						element.date = moment();
+						element.date = '';
+						expect(element.datetime).to.not.be.ok;
+					});
+
+					test('should be updated when date is defined', function() {
+						element.date = '1990-01-30';
+						flush();
+						expect(element.datetime).to.be.ok;
+						expect(element.datetime.year()).to.equal(1990);
+						expect(element.datetime.month()).to.equal(0);
+						expect(element.datetime.date()).to.equal(30);
+					});
+
+					test('should have correct time', function() {
+						element.date = '1990-01-30';
+						flush();
+						element.hours = 1;
+						element.minutes = 30;
+						expect(element.datetime).to.be.ok;
+						expect(element.datetime.year()).to.equal(1990);
+						expect(element.datetime.month()).to.equal(0);
+						expect(element.datetime.date()).to.equal(30);
+						expect(element.datetime.hours()).to.equal(1);
+						expect(element.datetime.minutes()).to.equal(30);
+					});
+
+					test('date,hours,minutes should be updated when set', function() {
+						element.datetime = moment.tz('1899-12-31T00:00:00', element.__timezone);
+						expect(element.date).to.equal('1899-12-31');
+						expect(element.hours).to.equal(0);
+						expect(element.minutes).to.equal(0);
+					});
+
+					test('clears date,hours,minutes when set to empty', function() {
+						element.datetime = '';
+						expect(element.date).to.be.empty;
+					});
+
+					test('noop when date is invalid', function() {
+						element.datetime = moment();
+						var date = element.date;
+						var hours = element.hours;
+						var minutes = element.minutes;
+						element.datetime = 'foozleberries';
+						expect(element.date).to.equal(date);
+						expect(element.hours).to.equal(hours);
+						expect(element.minutes).to.equal(minutes);
+					});
+				});
+
+				suite('date-label', function() {
+					test('defaults to "Date Picker" under the "en" locale', function() {
+						element.locale = 'en';
+						expect(element._dateLabel).to.equal('Date Picker');
+					});
+				});
+
+				suite('time-label', function() {
+					test('defaults to "Time Picker" under the "en" locale', function() {
+						element.locale = 'en';
+						expect(element._timeLabel).to.equal('Time Picker');
+					});
+				});
+
+				suite('d2l-button-icon', function() {
+					test('clears datetime', function() {
+						element.datetime = moment();
+						flush();
+						element.$$('d2l-button-icon').click();
+						expect(element.datetime).to.be.null;
+					});
+				});
+
+				suite('timezone', function() {
+					test('utcdatetime is converted to UTC from the given timezone (UTC)', function() {
+						element.__timezone = 'UTC';
+						element.date = '1990-01-30';
+						element.hours = 1;
+						element.minutes = 30;
+
+						expect(element.datetime.utc().hours()).to.equal(1);
+						expect(element.datetime.utc().minutes()).to.equal(30);
+						expect(element.datetime.utc().date()).to.equal(30);
+					});
+
+					test('utcdatetime is converted to UTC from the given timezone (America/Toronto)', function() {
+						element.__timezone = 'America/Toronto';
+						element.date = '1990-01-30';
+						element.hours = 1;
+						element.minutes = 30;
+
+						expect(element.datetime.utc().hours()).to.equal(6);
+						expect(element.datetime.utc().minutes()).to.equal(30);
+						expect(element.datetime.utc().date()).to.equal(30);
+					});
+
+					test('utcdatetime is converted to UTC from the given timezone (America/Los_Angeles)', function() {
+						element.__timezone = 'America/Los_Angeles';
+						element.date = '1990-01-30';
+						element.hours = 1;
+						element.minutes = 30;
+
+						expect(element.datetime.utc().hours()).to.equal(9);
+						expect(element.datetime.utc().minutes()).to.equal(30);
+						expect(element.datetime.utc().date()).to.equal(30);
+					});
+
+					test('changing timezone will not update date/hours/minutes', function() {
+						element.__timezone = 'America/Toronto';
+						element.date = '1990-01-30';
+						element.hours = 1;
+						element.minutes = 30;
+
+						element.__timezone = 'UTC';
+
+						expect(element.date).to.equal('1990-01-30');
+						expect(element.hours).to.equal(1);
+						expect(element.minutes).to.equal(30);
+					});
+
+					test('changing timezone will not update date/hours/minutes', function() {
+						element.__timezone = 'UTC';
+						element.date = '1990-01-30';
+						element.hours = 23;
+						element.minutes = 30;
+
+						element.__timezone = 'America/Toronto';
+
+						expect(element.date).to.equal('1990-01-30');
+						expect(element.hours).to.equal(23);
+						expect(element.minutes).to.equal(30);
+					});
+
+					test('changing timezone will update datetime', function() {
+						element.__timezone = 'America/Toronto';
+						element.date = '1990-01-30';
+						element.hours = 1;
+						element.minutes = 30;
+
+						expect(element.datetime.utc().hours()).to.equal(6);
+						expect(element.datetime.utc().minutes()).to.equal(30);
+						expect(element.datetime.utc().date()).to.equal(30);
+
+						element.__timezone = 'UTC';
+
+						expect(element.datetime.utc().hours()).to.equal(1);
+						expect(element.datetime.utc().minutes()).to.equal(30);
+						expect(element.datetime.utc().date()).to.equal(30);
+					});
+				});
+
+				suite('min/max', function() {
+					test('should pass min to d2l-date-picker', function() {
+						element.min = '2000-10-11';
+						expect(element.$$('d2l-date-picker').min).to.equal('2000-10-11');
+						element.min = '2020-02-20';
+						expect(element.$$('d2l-date-picker').min).to.equal('2020-02-20');
+					});
+
+					test('should pass max to d2l-date-picker', function() {
+						element.max = '2000-10-11';
+						expect(element.$$('d2l-date-picker').max).to.equal('2000-10-11');
+						element.max = '2020-02-20';
+						expect(element.$$('d2l-date-picker').max).to.equal('2020-02-20');
+					});
 				});
 			});
-
-			suite('datetime', function() {
-				test('should not be updated when date is undefined', function() {
-					this.element.date = undefined;
-					this.element.hours = 1;
-					this.element.minutes = 30;
-					expect(this.element.datetime).to.not.be.ok;
-				});
-
-				test('empty when date is empty', function() {
-					this.element.date = moment();
-					this.element.date = '';
-					expect(this.element.datetime).to.not.be.ok;
-				});
-
-				test('should be updated when date is defined', function() {
-					this.element.date = '1990-01-30';
-					Polymer.dom.flush();
-					expect(this.element.datetime).to.be.ok;
-					expect(this.element.datetime.year()).to.equal(1990);
-					expect(this.element.datetime.month()).to.equal(0);
-					expect(this.element.datetime.date()).to.equal(30);
-				});
-
-				test('should have correct time', function() {
-					this.element.date = '1990-01-30';
-					Polymer.dom.flush();
-					this.element.hours = 1;
-					this.element.minutes = 30;
-					expect(this.element.datetime).to.be.ok;
-					expect(this.element.datetime.year()).to.equal(1990);
-					expect(this.element.datetime.month()).to.equal(0);
-					expect(this.element.datetime.date()).to.equal(30);
-					expect(this.element.datetime.hours()).to.equal(1);
-					expect(this.element.datetime.minutes()).to.equal(30);
-				});
-
-				test('date,hours,minutes should be updated when set', function() {
-					this.element.datetime = moment.tz('1899-12-31T00:00:00', this.element.timezone);
-					expect(this.element.date).to.equal('1899-12-31');
-					expect(this.element.hours).to.equal(0);
-					expect(this.element.minutes).to.equal(0);
-				});
-
-				test('clears date,hours,minutes when set to empty', function() {
-					this.element.datetime = '';
-					expect(this.element.date).to.be.empty;
-				});
-
-				test('noop when date is invalid', function() {
-					this.element.datetime = moment();
-					var date = this.element.date;
-					var hours = this.element.hours;
-					var minutes = this.element.minutes;
-					this.element.datetime = 'foozleberries';
-					expect(this.element.date).to.equal(date);
-					expect(this.element.hours).to.equal(hours);
-					expect(this.element.minutes).to.equal(minutes);
-				});
-			});
-
-			suite('date-label', function() {
-				test('defaults to "Date Picker" under the "en" locale', function() {
-					this.element.locale = 'en';
-					expect(this.element._dateLabel).to.equal('Date Picker');
-				});
-			});
-
-			suite('time-label', function() {
-				test('defaults to "Time Picker" under the "en" locale', function() {
-					this.element.locale = 'en';
-					expect(this.element._timeLabel).to.equal('Time Picker');
-				});
-			});
-
-			suite('d2l-button-icon', function() {
-				test('clears datetime', function() {
-					this.element.datetime = moment();
-					Polymer.dom.flush();
-					this.element.$$('d2l-button-icon').click();
-					expect(this.element.datetime).to.be.empty;
-				});
-			});
-
-			suite('timezone', function() {
-				test('utcdatetime is converted to UTC from the given timezone (UTC)', function() {
-					this.element.timezone = 'UTC';
-					this.element.date = '1990-01-30';
-					this.element.hours = 1;
-					this.element.minutes = 30;
-
-					expect(this.element.datetime.utc().hours()).to.equal(1);
-					expect(this.element.datetime.utc().minutes()).to.equal(30);
-					expect(this.element.datetime.utc().date()).to.equal(30);
-				});
-
-				test('utcdatetime is converted to UTC from the given timezone (America/Toronto)', function() {
-					this.element.timezone = 'America/Toronto';
-					this.element.date = '1990-01-30';
-					this.element.hours = 1;
-					this.element.minutes = 30;
-
-					expect(this.element.datetime.utc().hours()).to.equal(6);
-					expect(this.element.datetime.utc().minutes()).to.equal(30);
-					expect(this.element.datetime.utc().date()).to.equal(30);
-				});
-
-				test('utcdatetime is converted to UTC from the given timezone (America/Los_Angeles)', function() {
-					this.element.timezone = 'America/Los_Angeles';
-					this.element.date = '1990-01-30';
-					this.element.hours = 1;
-					this.element.minutes = 30;
-
-					expect(this.element.datetime.utc().hours()).to.equal(9);
-					expect(this.element.datetime.utc().minutes()).to.equal(30);
-					expect(this.element.datetime.utc().date()).to.equal(30);
-				});
-
-				test('changing timezone will not update date/hours/minutes', function() {
-					this.element.timezone = 'America/Toronto';
-					this.element.date = '1990-01-30';
-					this.element.hours = 1;
-					this.element.minutes = 30;
-
-					this.element.timezone = 'UTC';
-
-					expect(this.element.date).to.equal('1990-01-30');
-					expect(this.element.hours).to.equal(1);
-					expect(this.element.minutes).to.equal(30);
-				});
-
-				test('changing timezone will not update date/hours/minutes', function() {
-					this.element.timezone = 'UTC';
-					this.element.date = '1990-01-30';
-					this.element.hours = 23;
-					this.element.minutes = 30;
-
-					this.element.timezone = 'America/Toronto';
-
-					expect(this.element.date).to.equal('1990-01-30');
-					expect(this.element.hours).to.equal(23);
-					expect(this.element.minutes).to.equal(30);
-				});
-
-				test('changing timezone will update datetime', function() {
-					this.element.timezone = 'America/Toronto';
-					this.element.date = '1990-01-30';
-					this.element.hours = 1;
-					this.element.minutes = 30;
-
-					expect(this.element.datetime.utc().hours()).to.equal(6);
-					expect(this.element.datetime.utc().minutes()).to.equal(30);
-					expect(this.element.datetime.utc().date()).to.equal(30);
-
-					this.element.timezone = 'UTC';
-
-					expect(this.element.datetime.utc().hours()).to.equal(1);
-					expect(this.element.datetime.utc().minutes()).to.equal(30);
-					expect(this.element.datetime.utc().date()).to.equal(30);
-				});
-			});
-
-			suite('min/max', function() {
-				test('should pass min to d2l-date-picker', function() {
-					this.element.min = '2000-10-11';
-					expect(this.element.$$('d2l-date-picker').min).to.equal('2000-10-11');
-					this.element.min = '2020-02-20';
-					expect(this.element.$$('d2l-date-picker').min).to.equal('2020-02-20');
-				});
-
-				test('should pass max to d2l-date-picker', function() {
-					this.element.max = '2000-10-11';
-					expect(this.element.$$('d2l-date-picker').max).to.equal('2000-10-11');
-					this.element.max = '2020-02-20';
-					expect(this.element.$$('d2l-date-picker').max).to.equal('2020-02-20');
-				});
-			});
-		});
 		</script>
 	</body>
 </html>

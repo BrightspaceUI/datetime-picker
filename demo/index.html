@@ -6,59 +6,80 @@
 
 		<title>d2l-datetime-picker demo</title>
 
-		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-		<link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-		<link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+		<script src="../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+		<script type="module" src="../../@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
+		<script type="module" src="../../@polymer/iron-demo-helpers/demo-snippet.js"></script>
 
-		<link rel="import" href="../../d2l-typography/d2l-typography.html">
-		<link rel="import" href="../d2l-datetime-picker.html">
-		<custom-style include="d2l-typography">
-			<style is="custom-style" include="d2l-typography"></style>
-		</custom-style>
-		<script>
+		<script type="module" src="../../d2l-typography/d2l-typography.js"></script>
+		<script type="module" src="../d2l-datetime-picker.js"></script>
+
+		<script type="text/javascript" src="https://s.brightspace.com/lib/moment.js/2.15.2/moment.min.js"></script>
+		<script type="text/javascript" src="https://s.brightspace.com/lib/moment-timezone/0.5.10/moment-timezone-with-data.min.js"></script>
+
+		<script type="module">
+			const $_documentContainer = document.createElement('template');
+
+			$_documentContainer.innerHTML = `<custom-style include="d2l-typography">
+						<style is="custom-style" include="d2l-typography"></style>
+					</custom-style>`;
+
+			document.body.appendChild($_documentContainer.content);
+		</script>
+
+		<script type="module">
+			import '@polymer/iron-demo-helpers/demo-pages-shared-styles.js';
+			import '@polymer/iron-demo-helpers/demo-snippet.js';
+			import 'd2l-typography/d2l-typography.js';
+			import '../d2l-datetime-picker.js';
 			document.body.className = 'd2l-typography';
 		</script>
-		<style>
-			body {
-				font-size: 20px;
-			}
-		</style>
+
+		<script type="module">
+			const $_documentContainer = document.createElement('template');
+
+			$_documentContainer.innerHTML = `<style>
+						body {
+							font-size: 20px;
+						}
+					</style>`;
+
+			document.body.appendChild($_documentContainer.content);
+		</script>
 	</head>
 	<body class="d2l-typography">
-		<dom-bind>
-			<template is="dom-bind">
-				<label>Locale: <input value="{{locale::input}}"/></label>
-				<br/>
-				<label>Timezone: <input value="{{timezone::input}}"/></label>
-				<br/>
-				<label>Placeholder: <input value="{{placeholder::input}}" type="text"/></label>
-				<br/>
-				<label>Date Label: <input value="{{dateLabel::input}}" type="text"/></label>
-				<br/>
-				<label>Time Label: <input value="{{timeLabel::input}}" type="text"/></label>
-				<br/>
-				<label>Date-Time: <input value="{{datetime::input}}" type="text"/></label>
-				<br/>
-				<label>Date: <input value="{{date::input}}" type="text"/></label>
-				<br/>
-				<label>Hours: <input value="{{hours::input}}" type="text"/></label>
-				<br/>
-				<label>Minutes: <input value="{{minutes::input}}" type="text"/></label>
-				<br/>
-				<d2l-datetime-picker
-					locale="{{locale}}"
-					timezone="{{timezone}}"
-					placeholder="{{placeholder}}"
-					datetime="{{datetime}}"
-					date="{{date}}"
-					hours="{{hours}}"
-					minutes="{{minutes}}"
-					boundary='{"below":240}'
-					date-label="{{dateLabel}}"
-					time-label="{{timeLabel}}"
-				></d2l-datetime-picker>
-				<br/>
-			</template>
-		</dom-bind>
+		<script type="module">
+			const $_documentContainer = document.createElement('template');
+
+			$_documentContainer.innerHTML = `<dom-bind>
+						<template is="dom-bind">
+							<label>Locale: <input value="{{locale::input}}"></label>
+							<span> To test a different locale, please set it <em>before</em> opening the date picker</span>
+							<br>
+							<label>Timezone: <input value="{{__timezone::input}}"></label>
+							<br>
+							<label>Timezone Name: <input value="{{timezoneName::input}}"></label>
+							<br>
+							<label>Placeholder: <input value="{{placeholder::input}}" type="text"></label>
+							<br>
+							<label>Date Label: <input value="{{dateLabel::input}}" type="text"></label>
+							<br>
+							<label>Time Label: <input value="{{timeLabel::input}}" type="text"></label>
+							<br>
+							<label>Date-Time: <input value="{{datetime::input}}" type="text"></label>
+							<br>
+							<label>Date: <input value="{{date::input}}" type="text"></label>
+							<br>
+							<label>Hours: <input value="{{hours::input}}" type="text"></label>
+							<br>
+							<label>Minutes: <input value="{{minutes::input}}" type="text"></label>
+							<br>
+							<d2l-datetime-picker locale="{{locale}}" __timezone="{{__timezone}}" timezone-name="{{timezoneName}}" placeholder="{{placeholder}}" datetime="{{datetime}}" date="{{date}}" hours="{{hours}}" minutes="{{minutes}}" boundary="{&quot;below&quot;:240}" date-label="{{dateLabel}}" time-label="{{timeLabel}}"></d2l-datetime-picker>
+							<br>
+						</template>
+					</dom-bind>`;
+
+			document.body.appendChild($_documentContainer.content);
+
+		</script>
 	</body>
 </html>

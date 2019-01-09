@@ -6,12 +6,14 @@
 
 		<title>d2l-datetime-picker test</title>
 
-		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-		<script src="../../web-component-tester/browser.js"></script>
-		<script src="../../web-component-tester/data/a11ySuite.js"></script>
+		<script src="../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+		<script src="../../wct-browser-legacy/browser.js"></script>
 
-		<link rel="import" href="../../iron-test-helpers/mock-interactions.html">
-		<link rel="import" href="../d2l-datetime-picker.html">
+		<script type="module" src="../../@polymer/iron-test-helpers/mock-interactions.js"></script>
+		<script type="module" src="../d2l-datetime-picker.js"></script>
+
+		<script type="text/javascript" src="https://s.brightspace.com/lib/moment.js/2.15.2/moment.min.js"></script>
+		<script type="text/javascript" src="https://s.brightspace.com/lib/moment-timezone/0.5.10/moment-timezone-with-data.min.js"></script>
 	</head>
 	<body>
 		<test-fixture id="a11y">
@@ -22,37 +24,41 @@
 			</template>
 		</test-fixture>
 
-		<script>
+		<script type="module">
+			import '@polymer/iron-test-helpers/mock-interactions.js';
+			import '../d2l-datetime-picker.js';
+			import { flush } from '@polymer/polymer/lib/legacy/polymer.dom.js';
+			import { a11ySuite } from 'wct-browser-legacy/a11ySuite.js';
 			/* global MockInteractions */
 			suite('a11y', function() {
 				a11ySuite('a11y', ['duplicateId']);
 				a11ySuite('a11y', ['duplicateId'], function() {
 					var a11y = fixture('a11y');
-					a11y.querySelector('d2l-datetime-picker').datetime = moment();
-					Polymer.dom.flush();
+					a11y.querySelector('d2l-datetime-picker').datetime = new Date();
+					flush();
 					var picker = a11y.querySelector('d2l-datetime-picker').$$('d2l-time-picker');
 					picker.focus();
 				});
 				a11ySuite('a11y', ['duplicateId'], function() {
 					var a11y = fixture('a11y');
-					a11y.querySelector('d2l-datetime-picker').datetime = moment();
-					Polymer.dom.flush();
+					a11y.querySelector('d2l-datetime-picker').datetime = new Date();
+					flush();
 					var picker = a11y.querySelector('d2l-datetime-picker').$$('d2l-time-picker');
 					picker.focus();
-					Polymer.dom.flush();
+					flush();
 					MockInteractions.pressAndReleaseKeyOn(document.activeElement, 27);
 				});
 				a11ySuite('a11y', ['duplicateId'], function() {
 					var a11y = fixture('a11y');
 					var picker = a11y.querySelector('d2l-datetime-picker').$$('d2l-date-picker').$$('input');
 					MockInteractions.tap(picker);
-					Polymer.dom.flush();
+					flush();
 				});
 				a11ySuite('a11y', ['duplicateId'], function() {
 					var a11y = fixture('a11y');
 					var picker = a11y.querySelector('d2l-datetime-picker').$$('d2l-date-picker').$$('input');
 					MockInteractions.tap(picker);
-					Polymer.dom.flush();
+					flush();
 					MockInteractions.pressAndReleaseKeyOn(picker, 27);
 				});
 			});

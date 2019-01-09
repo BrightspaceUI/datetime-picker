@@ -6,43 +6,57 @@
 
 		<title>d2l-datetime-picker demo</title>
 
-		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+		<script src="../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
 
-		<link rel="import" href="../../d2l-typography/d2l-typography.html">
-		<link rel="import" href="../d2l-datetime-picker.html">
-		<custom-style include="d2l-typography">
-			<style is="custom-style" include="d2l-typography"></style>
-		</custom-style>
-		<style>
-			html {
-				font-size: 20px;
-			}
-		</style>
+		<script type="module" src="../../d2l-typography/d2l-typography.js"></script>
+		<script type="module" src="../d2l-datetime-picker.js"></script>
+
+		<script type="text/javascript" src="https://s.brightspace.com/lib/moment.js/2.15.2/moment.min.js"></script>
+		<script type="text/javascript" src="https://s.brightspace.com/lib/moment-timezone/0.5.10/moment-timezone-with-data.min.js"></script>
+
+		<script type="module">
+			const $_documentContainer = document.createElement('template');
+
+			$_documentContainer.innerHTML = `<custom-style include="d2l-typography">
+						<style is="custom-style" include="d2l-typography"></style>
+					</custom-style>`;
+
+			document.body.appendChild($_documentContainer.content);
+		</script>
+
+		<script type="module">
+			const $_documentContainer = document.createElement('template');
+
+			$_documentContainer.innerHTML = `<style>
+						html {
+							font-size: 20px;
+						}
+					</style>`;
+
+			document.body.appendChild($_documentContainer.content);
+		</script>
 	</head>
-	<body unresolved>
-		<dom-bind>
-			<template is="dom-bind">
-				<d2l-datetime-picker
-					datetime="{{datetime}}"
-				></d2l-datetime-picker>
-				<br/>
-				<d2l-datetime-picker
-					datetime="{{datetime}}"
-					hide-label
-				></d2l-datetime-picker>
-			</template>
-		</dom-bind>
-		<script>
-			(function() {
-				var match = window.location.search.match(/width=([^&]*)/);
-				if (match) {
-					document.body.style.width = match[1];
-				}
-				if (window.location.href.indexOf('dir=rtl') > -1) {
-					document.body.setAttribute('dir', 'rtl');
-				}
-				document.body.className = 'd2l-typography';
-			})();
+	<body class="d2l-typography">
+		<script type="module">
+			const $_documentContainer = document.createElement('template');
+
+			$_documentContainer.innerHTML = `<dom-bind>
+						<template is="dom-bind">
+							<d2l-datetime-picker datetime="{{datetime}}"></d2l-datetime-picker>
+							<br>
+							<d2l-datetime-picker datetime="{{datetime}}" hide-label=""></d2l-datetime-picker>
+						</template>
+					</dom-bind>`;
+
+			document.body.appendChild($_documentContainer.content);
+
+			var match = window.location.search.match(/width=([^&]*)/);
+			if (match) {
+				document.body.style.width = match[1];
+			}
+			if (window.location.href.indexOf('dir=rtl') > -1) {
+				document.documentElement.setAttribute('dir', 'rtl');
+			}
 		</script>
 	</body>
 </html>
