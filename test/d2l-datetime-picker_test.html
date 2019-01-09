@@ -163,7 +163,7 @@
 
 			suite('timezone', function() {
 				test('utcdatetime is converted to UTC from the given timezone (UTC)', function() {
-					this.element.timezone = 'UTC';
+					this.element.__timezoneObject = {name: '', identifier: 'UTC'};
 					this.element.date = '1990-01-30';
 					this.element.hours = 1;
 					this.element.minutes = 30;
@@ -174,7 +174,7 @@
 				});
 
 				test('utcdatetime is converted to UTC from the given timezone (America/Toronto)', function() {
-					this.element.timezone = 'America/Toronto';
+					this.element.__timezoneObject = {name: '', identifier: 'America/Toronto'};
 					this.element.date = '1990-01-30';
 					this.element.hours = 1;
 					this.element.minutes = 30;
@@ -185,7 +185,7 @@
 				});
 
 				test('utcdatetime is converted to UTC from the given timezone (America/Los_Angeles)', function() {
-					this.element.timezone = 'America/Los_Angeles';
+					this.element.__timezoneObject = {name: '', identifier: 'America/Los_Angeles'};
 					this.element.date = '1990-01-30';
 					this.element.hours = 1;
 					this.element.minutes = 30;
@@ -196,12 +196,12 @@
 				});
 
 				test('changing timezone will not update date/hours/minutes', function() {
-					this.element.timezone = 'America/Toronto';
+					this.element.__timezoneObject = {name: '', identifier: 'America/Toronto'};
 					this.element.date = '1990-01-30';
 					this.element.hours = 1;
 					this.element.minutes = 30;
 
-					this.element.timezone = 'UTC';
+					this.element.__timezoneObject = {name: '', identifier: 'UTC'};
 
 					expect(this.element.date).to.equal('1990-01-30');
 					expect(this.element.hours).to.equal(1);
@@ -209,12 +209,12 @@
 				});
 
 				test('changing timezone will not update date/hours/minutes', function() {
-					this.element.timezone = 'UTC';
+					this.element.__timezoneObject = {name: '', identifier: 'UTC'};
 					this.element.date = '1990-01-30';
 					this.element.hours = 23;
 					this.element.minutes = 30;
 
-					this.element.timezone = 'America/Toronto';
+					this.element.__timezoneObject = {name: '', identifier: 'America/Toronto'};
 
 					expect(this.element.date).to.equal('1990-01-30');
 					expect(this.element.hours).to.equal(23);
@@ -222,7 +222,7 @@
 				});
 
 				test('changing timezone will update datetime', function() {
-					this.element.timezone = 'America/Toronto';
+					this.element.__timezoneObject = {name: '', identifier: 'America/Toronto'};
 					this.element.date = '1990-01-30';
 					this.element.hours = 1;
 					this.element.minutes = 30;
@@ -231,7 +231,7 @@
 					expect(this.element.datetime.utc().minutes()).to.equal(30);
 					expect(this.element.datetime.utc().date()).to.equal(30);
 
-					this.element.timezone = 'UTC';
+					this.element.__timezoneObject = {name: '', identifier: 'UTC'};
 
 					expect(this.element.datetime.utc().hours()).to.equal(1);
 					expect(this.element.datetime.utc().minutes()).to.equal(30);

@@ -191,7 +191,7 @@ Accessible, Localized Time Picker Input Element
 						label="[[_timeLabel]]"
 						locale="[[locale]]"
 						overrides="[[overrides]]"
-						timezone="[[_getTimezone(__timezone, timezoneName)]]"
+						timezone="[[timezoneName]]"
 						hours="{{hours}}"
 						minutes="{{minutes}}"
 						boundary="[[boundary]]"
@@ -287,12 +287,21 @@ Accessible, Localized Time Picker Input Element
 			},
 
 			observers: [
-				'_dateAndTimeChanged(date, timezoneIdentifier, hours, minutes)',
+				'_dateAndTimeChanged(date, timezoneName, hours, minutes)',
 				'_processOverrides(overrides)'
 			],
 
+			listeners: {
+				'd2l-localize-behavior-timezone-changed': '_handleTimezoneChange',
+			},
+
 			clear: function() {
 				this.datetime = '';
+			},
+
+			_handleTimezoneChange: function() {
+				this.timezoneName = this.getTimezone() && this.getTimezone().name;
+				this._dateAndTimeChanged();
 			},
 
 			_dateTimeChanged: function(datetime) {
@@ -300,7 +309,8 @@ Accessible, Localized Time Picker Input Element
 					this.date = '';
 					return;
 				}
-				datetime = moment.tz(datetime, this.timezoneIdentifier);
+				datetime = moment.tz(datetime, this.getTimezone() && this.getTimezone().identifier);
+
 				if (!datetime.isValid()) {
 					return;
 				}
@@ -322,7 +332,7 @@ Accessible, Localized Time Picker Input Element
 				}
 				var datetime;
 				try {
-					datetime = moment.tz(this.date, this.timezoneIdentifier);
+					datetime = moment.tz(this.date, this.getTimezone() && this.getTimezone().identifier);
 					if (!datetime.isValid()) {
 						return;
 					}
@@ -344,10 +354,6 @@ Accessible, Localized Time Picker Input Element
 
 			_computeHasDate: function(datetime) {
 				return !!datetime;
-			},
-
-			_getTimezone: function(timezone, timezoneName) {
-				return timezoneName || timezone;
 			},
 
 			_showTime: function(date, alwaysShowTime) {
