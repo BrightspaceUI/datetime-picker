@@ -182,7 +182,7 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-datetime-picker">
 			<div class="time-clear-container">
 				<div class="d2l-time-picker-container">
 					<label aria-hidden="true" role="presentation">{{_timeLabel}}</label>
-					<d2l-time-picker label="[[_timeLabel]]" locale="[[locale]]" overrides="[[overrides]]" timezone="[[_getTimezone(__timezone, timezoneName)]]" hours="{{hours}}" minutes="{{minutes}}" boundary="[[boundary]]"></d2l-time-picker>
+					<d2l-time-picker label="[[_timeLabel]]" locale="[[locale]]" overrides="[[overrides]]" timezone="[[timezoneName]]" hours="{{hours}}" minutes="{{minutes}}" boundary="[[boundary]]"></d2l-time-picker>
 				</div>
 				<div class="clear-button-container">
 					<d2l-button-icon class="clear-button" icon="d2l-tier1:close-small" on-click="clear" text="[[localize('clear')]]"></d2l-button-icon>
@@ -273,12 +273,21 @@ Polymer({
 	},
 
 	observers: [
-		'_dateAndTimeChanged(date, hours, minutes, __timezone)',
+		'_dateAndTimeChanged(date, timezoneName, hours, minutes)',
 		'_processOverrides(overrides)'
 	],
 
+	listeners: {
+		'd2l-localize-behavior-timezone-changed': '_handleTimezoneChange',
+	},
+
 	clear: function() {
 		this.datetime = null;
+	},
+
+	_handleTimezoneChange: function() {
+		this.timezoneName = this.getTimezone() && this.getTimezone().name;
+		this._dateAndTimeChanged();
 	},
 
 	_dateTimeChanged: function(datetime) {
@@ -286,7 +295,7 @@ Polymer({
 			this.date = '';
 			return;
 		}
-		datetime = moment.tz(datetime, this.__timezone);
+		datetime = moment.tz(datetime, this.getTimezone() && this.getTimezone().identifier);
 		if (!datetime.isValid()) {
 			return;
 		}
@@ -308,7 +317,7 @@ Polymer({
 		}
 		var datetime;
 		try {
-			datetime = moment.tz(this.date, this.__timezone);
+			datetime = moment.tz(this.date, this.getTimezone() && this.getTimezone().identifier);
 			if (!datetime.isValid()) {
 				return;
 			}
@@ -330,10 +339,6 @@ Polymer({
 
 	_computeHasDate: function(datetime) {
 		return !!datetime;
-	},
-
-	_getTimezone: function(timezone, timezoneName) {
-		return timezoneName || timezone;
 	},
 
 	_showTime: function(date, alwaysShowTime) {
