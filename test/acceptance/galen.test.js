@@ -1,7 +1,7 @@
 /* global polymerTests, LocalBrowserFactory, SauceBrowserFactory, importClass, org, Thread */
 /* eslint no-invalid-this: 0 */
 'use strict';
-
+/* testing if galen tests run on current unchanged hybrid branch */
 importClass(org.openqa.selenium.Keys);
 
 var browsers = {
