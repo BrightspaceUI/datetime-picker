@@ -55,9 +55,7 @@
 							<label>Locale: <input value="{{locale::input}}"></label>
 							<span> To test a different locale, please set it <em>before</em> opening the date picker</span>
 							<br>
-							<label>Timezone: <input value="{{__timezone::input}}"></label>
-							<br>
-							<label>Timezone Name: <input value="{{timezoneName::input}}"></label>
+							<label>Timezone Name: <input value="{{__timezone::input}}"></label>
 							<br>
 							<label>Placeholder: <input value="{{placeholder::input}}" type="text"></label>
 							<br>
@@ -73,7 +71,7 @@
 							<br>
 							<label>Minutes: <input value="{{minutes::input}}" type="text"></label>
 							<br>
-							<d2l-datetime-picker locale="{{locale}}" __timezone="{{__timezone}}" timezone-name="{{timezoneName}}" placeholder="{{placeholder}}" datetime="{{datetime}}" date="{{date}}" hours="{{hours}}" minutes="{{minutes}}" boundary="{&quot;below&quot;:240}" date-label="{{dateLabel}}" time-label="{{timeLabel}}"></d2l-datetime-picker>
+							<d2l-datetime-picker locale="{{locale}}" timezone-name="{{__timezone}}" placeholder="{{placeholder}}" datetime="{{datetime}}" date="{{date}}" hours="{{hours}}" minutes="{{minutes}}" boundary="{&quot;below&quot;:240}" date-label="{{dateLabel}}" time-label="{{timeLabel}}"></d2l-datetime-picker>
 							<br>
 						</template>
 					</dom-bind>`;
