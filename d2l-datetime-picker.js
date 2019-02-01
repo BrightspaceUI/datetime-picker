@@ -19,11 +19,9 @@ import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
 
 const $_documentContainer = document.createElement('template');
 
-$_documentContainer.innerHTML = `<dom-module id="d2l-datetime-picker">
+$_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-datetime-picker">
 	<template strip-whitespace="">
-		<!-- HACK d2l-input-styles is imported from time-picker.
-		This is here until the input styles get split out into their own repo -->
-		<style include="d2l-offscreen-shared-styles d2l-input-styles">
+		<style include="d2l-offscreen-shared-styles">
 			:host {
 				display: inline-flex;
 				align-items: flex-start;
@@ -175,17 +173,38 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-datetime-picker">
 		</style>
 		<div class="d2l-date-picker-container">
 			<label aria-hidden="true" role="presentation">[[_dateLabel]]</label>
-			<d2l-date-picker value="{{date}}" placeholder="[[placeholder]]" label="[[_dateLabel]]" locale="[[locale]]" min="[[min]]" max="[[max]]" first-day-of-week="[[firstDayOfWeek]]"></d2l-date-picker>
+			<d2l-date-picker
+				value="{{date}}"
+				placeholder="[[placeholder]]"
+				label="[[_dateLabel]]"
+				locale="[[locale]]"
+				min="[[min]]"
+				max="[[max]]"
+				first-day-of-week="[[firstDayOfWeek]]">
+			</d2l-date-picker>
 		</div>
 
 		<template is="dom-if" if="{{_showTime(date, alwaysShowTime)}}">
 			<div class="time-clear-container">
 				<div class="d2l-time-picker-container">
 					<label aria-hidden="true" role="presentation">{{_timeLabel}}</label>
-					<d2l-time-picker label="[[_timeLabel]]" locale="[[locale]]" overrides="[[overrides]]" timezone="[[timezoneName]]" hours="{{hours}}" minutes="{{minutes}}" boundary="[[boundary]]"></d2l-time-picker>
+					<d2l-time-picker
+						label="[[_timeLabel]]"
+						locale="[[locale]]"
+						overrides="[[overrides]]"
+						timezone="[[timezoneName]]"
+						hours="{{hours}}"
+						minutes="{{minutes}}"
+						boundary="[[boundary]]">
+					</d2l-time-picker>
 				</div>
 				<div class="clear-button-container">
-					<d2l-button-icon class="clear-button" icon="d2l-tier1:close-small" on-click="clear" text="[[localize('clear')]]"></d2l-button-icon>
+					<d2l-button-icon
+						class="clear-button"
+						icon="d2l-tier1:close-small"
+						on-click="clear"
+						text="[[localize('clear')]]">
+					</d2l-button-icon>
 				</div>
 			</div>
 		</template>
