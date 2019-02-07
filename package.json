@@ -42,7 +42,7 @@
     "sauceconnect-runner": "git+https://github.com/Brightspace/sauceconnect-runner.git",
     "wct-browser-legacy": "^1.0.1"
   },
-  "version": "4.0.2",
+  "version": "4.0.3",
   "resolutions": {
     "inherits": "2.0.3",
     "samsam": "1.1.3",
