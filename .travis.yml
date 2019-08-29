@@ -1,13 +1,5 @@
 language: node_js
 node_js: node
-before_install:
-- export JAVA_HOME=/usr/lib/jvm/java-8-oracle
-- export PATH=$JAVA_HOME/bin:$PATH
-addons:
-  apt:
-    packages:
-    - oracle-java8-installer
-  chrome: stable
 script:
 - npm run lint
 - |
