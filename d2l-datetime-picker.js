@@ -239,7 +239,9 @@ Polymer({
 		locale: Object,
 		timezoneName: {
 			type: String,
-			value: ''
+			value: function() {
+				return this.getTimezone() && this.getTimezone().name;
+			}
 		},
 		hasDate: {
 			type: Boolean,
@@ -292,21 +294,12 @@ Polymer({
 	},
 
 	observers: [
-		'_dateAndTimeChanged(date, timezoneName, hours, minutes)',
+		'_dateAndTimeChanged(date, hours, minutes)',
 		'_processOverrides(overrides)'
 	],
 
-	listeners: {
-		'd2l-localize-behavior-timezone-changed': '_handleTimezoneChange',
-	},
-
 	clear: function() {
 		this.datetime = null;
-	},
-
-	_handleTimezoneChange: function() {
-		this.timezoneName = this.getTimezone() && this.getTimezone().name;
-		this._dateAndTimeChanged();
 	},
 
 	_dateTimeChanged: function(datetime) {

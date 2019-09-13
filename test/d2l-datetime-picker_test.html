@@ -28,16 +28,20 @@
 			import '../d2l-datetime-picker.js';
 			import { flush } from '@polymer/polymer/lib/legacy/polymer.dom.js';
 			suite('d2l-datetime-picker', function() {
-				var element;
+
+				let htmlElem;
 				setup(function() {
-					element = fixture('basic');
+					htmlElem = window.document.getElementsByTagName('html')[0];
+					htmlElem.removeAttribute('data-timezone');
 				});
 
 				test('instantiating the element works', function() {
+					const element = fixture('basic');
 					expect(element.is).to.equal('d2l-datetime-picker');
 				});
 
 				test('should have d2l-time-picker when date is set', function() {
+					const element = fixture('basic');
 					expect(element.$$('d2l-time-picker')).to.not.be.ok;
 					element.date = '1990-01-30';
 					flush();
@@ -45,6 +49,7 @@
 				});
 
 				test('should have d2l-time-picker when alwaysShowTime is set', function() {
+					const element = fixture('basic');
 					expect(element.$$('d2l-time-picker')).to.not.be.ok;
 					element.alwaysShowTime = true;
 					flush();
@@ -52,10 +57,12 @@
 				});
 
 				test('should have d2l-date-picker', function() {
+					const element = fixture('basic');
 					expect(element.$$('d2l-date-picker')).to.be.ok;
 				});
 
 				test('should pass locale to d2l-time-picker and d2l-date-picker', function() {
+					const element = fixture('basic');
 					element.alwaysShowTime = true;
 					flush();
 					element.locale = 'fr-CA';
@@ -67,6 +74,7 @@
 				});
 
 				test('should pass firstDayOfWeek to d2l-date-picker', function() {
+					const element = fixture('basic');
 					element.firstDayOfWeek = 2;
 					expect(element.$$('d2l-date-picker').firstDayOfWeek).to.equal(2);
 					element.firstDayOfWeek = 5;
@@ -75,6 +83,7 @@
 
 				suite('hours/minutes', function() {
 					test('should update time-picker hours/minutes', function() {
+						const element = fixture('basic');
 						element.date = '1990-01-30';
 						flush();
 						element.hours = 1;
@@ -87,6 +96,7 @@
 
 				suite('datetime', function() {
 					test('should not be updated when date is undefined', function() {
+						const element = fixture('basic');
 						element.date = undefined;
 						element.hours = 1;
 						element.minutes = 30;
@@ -94,12 +104,14 @@
 					});
 
 					test('empty when date is empty', function() {
+						const element = fixture('basic');
 						element.date = moment();
 						element.date = '';
 						expect(element.datetime).to.not.be.ok;
 					});
 
 					test('should be updated when date is defined', function() {
+						const element = fixture('basic');
 						element.date = '1990-01-30';
 						flush();
 						expect(element.datetime).to.be.ok;
@@ -109,6 +121,7 @@
 					});
 
 					test('should have correct time', function() {
+						const element = fixture('basic');
 						element.date = '1990-01-30';
 						flush();
 						element.hours = 1;
@@ -122,18 +135,21 @@
 					});
 
 					test('date,hours,minutes should be updated when set', function() {
-						element.datetime = moment.tz('1899-12-31T00:00:00', element.__timezone.identifier);
+						const element = fixture('basic');
+						element.datetime = moment.tz('1899-12-31T00:00:00', element.getTimezone().identifier);
 						expect(element.date).to.equal('1899-12-31');
 						expect(element.hours).to.equal(0);
 						expect(element.minutes).to.equal(0);
 					});
 
 					test('clears date,hours,minutes when set to empty', function() {
+						const element = fixture('basic');
 						element.datetime = '';
 						expect(element.date).to.be.empty;
 					});
 
 					test('noop when date is invalid', function() {
+						const element = fixture('basic');
 						element.datetime = moment();
 						var date = element.date;
 						var hours = element.hours;
@@ -147,6 +163,7 @@
 
 				suite('date-label', function() {
 					test('defaults to "Date Picker" under the "en" locale', function() {
+						const element = fixture('basic');
 						element.locale = 'en';
 						expect(element._dateLabel).to.equal('Date Picker');
 					});
@@ -154,6 +171,7 @@
 
 				suite('time-label', function() {
 					test('defaults to "Time Picker" under the "en" locale', function() {
+						const element = fixture('basic');
 						element.locale = 'en';
 						expect(element._timeLabel).to.equal('Time Picker');
 					});
@@ -161,6 +179,7 @@
 
 				suite('d2l-button-icon', function() {
 					test('clears datetime', function() {
+						const element = fixture('basic');
 						element.datetime = moment();
 						flush();
 						element.$$('d2l-button-icon').click();
@@ -170,7 +189,9 @@
 
 				suite('timezone', function() {
 					test('utcdatetime is converted to UTC from the given timezone (UTC)', function() {
-						element.__timezoneObject = { name: '', identifier: 'UTC' };
+
+						htmlElem.setAttribute('data-timezone', JSON.stringify({ name: '', identifier: 'UTC' }));
+						const element = fixture('basic');
 						element.date = '1990-01-30';
 						element.hours = 1;
 						element.minutes = 30;
@@ -181,7 +202,8 @@
 					});
 
 					test('utcdatetime is converted to UTC from the given timezone (America/Toronto)', function() {
-						element.__timezoneObject = { name: '', identifier: 'America/Toronto' };
+						htmlElem.setAttribute('data-timezone', JSON.stringify({ name: '', identifier: 'America/Toronto' }));
+						const element = fixture('basic');
 						element.date = '1990-01-30';
 						element.hours = 1;
 						element.minutes = 30;
@@ -192,7 +214,8 @@
 					});
 
 					test('utcdatetime is converted to UTC from the given timezone (America/Los_Angeles)', function() {
-						element.__timezoneObject = { name: '', identifier: 'America/Los_Angeles' };
+						htmlElem.setAttribute('data-timezone', JSON.stringify({ name: '', identifier: 'America/Los_Angeles' }));
+						const element = fixture('basic');
 						element.date = '1990-01-30';
 						element.hours = 1;
 						element.minutes = 30;
@@ -203,12 +226,13 @@
 					});
 
 					test('changing timezone will not update date/hours/minutes', function() {
-						element.__timezoneObject = { name: '', identifier: 'America/Toronto' };
+						htmlElem.setAttribute('data-timezone', JSON.stringify({ name: '', identifier: 'America/Toronto' }));
+						const element = fixture('basic');
 						element.date = '1990-01-30';
 						element.hours = 1;
 						element.minutes = 30;
 
-						element.__timezoneObject = { name: '', identifier: 'UTC' };
+						htmlElem.setAttribute('data-timezone', JSON.stringify({ name: '', identifier: 'UTC' }));
 
 						expect(element.date).to.equal('1990-01-30');
 						expect(element.hours).to.equal(1);
@@ -216,38 +240,24 @@
 					});
 
 					test('changing timezone will not update date/hours/minutes', function() {
-						element.__timezoneObject = { name: '', identifier: 'UTC' };
+						htmlElem.setAttribute('data-timezone', JSON.stringify({ name: '', identifier: 'UTC' }));
+						const element = fixture('basic');
 						element.date = '1990-01-30';
 						element.hours = 23;
 						element.minutes = 30;
 
-						element.__timezoneObject = { name: '', identifier: 'America/Toronto' };
+						htmlElem.setAttribute('data-timezone', JSON.stringify({ name: '', identifier: 'America/Toronto' }));
 
 						expect(element.date).to.equal('1990-01-30');
 						expect(element.hours).to.equal(23);
 						expect(element.minutes).to.equal(30);
 					});
 
-					test('changing timezone will update datetime', function() {
-						element.__timezoneObject = { name: '', identifier: 'America/Toronto' };
-						element.date = '1990-01-30';
-						element.hours = 1;
-						element.minutes = 30;
-
-						expect(element.datetime.utc().hours()).to.equal(6);
-						expect(element.datetime.utc().minutes()).to.equal(30);
-						expect(element.datetime.utc().date()).to.equal(30);
-
-						element.__timezoneObject = { name: '', identifier: 'UTC' };
-
-						expect(element.datetime.utc().hours()).to.equal(1);
-						expect(element.datetime.utc().minutes()).to.equal(30);
-						expect(element.datetime.utc().date()).to.equal(30);
-					});
 				});
 
 				suite('min/max', function() {
 					test('should pass min to d2l-date-picker', function() {
+						const element = fixture('basic');
 						element.min = '2000-10-11';
 						expect(element.$$('d2l-date-picker').min).to.equal('2000-10-11');
 						element.min = '2020-02-20';
@@ -255,6 +265,7 @@
 					});
 
 					test('should pass max to d2l-date-picker', function() {
+						const element = fixture('basic');
 						element.max = '2000-10-11';
 						expect(element.$$('d2l-date-picker').max).to.equal('2000-10-11');
 						element.max = '2020-02-20';
