@@ -300,6 +300,7 @@ Polymer({
 
 	clear: function() {
 		this.datetime = null;
+		this.fire('d2l-datetime-picker-datetime-cleared');
 	},
 
 	_dateTimeChanged: function(datetime) {
