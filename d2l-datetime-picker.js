@@ -14,7 +14,6 @@ import 'd2l-offscreen/d2l-offscreen.js';
 import 'd2l-time-picker/d2l-time-picker.js';
 import '@polymer/iron-input/iron-input.js';
 import './localize-behavior.js';
-import d2lIntl from 'd2l-intl';
 import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
 
 const $_documentContainer = document.createElement('template');
@@ -220,11 +219,6 @@ Polymer({
 	],
 
 	properties: {
-		_parser: {
-			type: Object,
-			readOnly: true,
-			value: new d2lIntl.DateTimeParse(null, {locale:{date:{formats:{dateFormats:{short:'yyyy-MM-dd'}}}}})
-		},
 		hours: {
 			type: Number,
 			notify: true,
@@ -321,7 +315,7 @@ Polymer({
 	},
 
 	_dateAndTimeChanged: function() {
-		if (!this._parser || this._dontUpdateDateTime) {
+		if (this._dontUpdateDateTime) {
 			return;
 		}
 		if (!this.date) {
