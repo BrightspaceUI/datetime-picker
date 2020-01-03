@@ -176,10 +176,8 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-datetime-picker">
 				value="{{date}}"
 				placeholder="[[placeholder]]"
 				label="[[_dateLabel]]"
-				locale="[[locale]]"
 				min="[[min]]"
-				max="[[max]]"
-				first-day-of-week="[[firstDayOfWeek]]">
+				max="[[max]]">
 			</d2l-date-picker>
 		</div>
 
@@ -189,8 +187,6 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-datetime-picker">
 					<label aria-hidden="true" role="presentation">{{_timeLabel}}</label>
 					<d2l-time-picker
 						label="[[_timeLabel]]"
-						locale="[[locale]]"
-						overrides="[[overrides]]"
 						timezone="[[timezoneName]]"
 						hours="{{hours}}"
 						minutes="{{minutes}}"
@@ -229,8 +225,6 @@ Polymer({
 			notify: true,
 			value: 59
 		},
-		overrides: Object,
-		locale: Object,
 		timezoneName: {
 			type: String,
 			value: function() {
@@ -283,13 +277,11 @@ Polymer({
 		},
 		max: {
 			type: String
-		},
-		firstDayOfWeek: Number
+		}
 	},
 
 	observers: [
-		'_dateAndTimeChanged(date, hours, minutes)',
-		'_processOverrides(overrides)'
+		'_dateAndTimeChanged(date, hours, minutes)'
 	],
 
 	clear: function() {
@@ -350,12 +342,5 @@ Polymer({
 
 	_showTime: function(date, alwaysShowTime) {
 		return alwaysShowTime || date;
-	},
-
-	_processOverrides: function(overrides) {
-		var firstDayOfWeekOverride = this.get('date.calendar.firstDayOfWeek', overrides);
-		if (firstDayOfWeekOverride) {
-			this.firstDayOfWeek = firstDayOfWeekOverride;
-		}
 	}
 });

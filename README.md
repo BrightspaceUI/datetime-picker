@@ -22,8 +22,6 @@ $ polymer serve
 <script type="text/javascript" src="https://s.brightspace.com/lib/moment.js/2.15.2/moment.min.js"></script>
 <script type="text/javascript" src="https://s.brightspace.com/lib/moment-timezone/0.5.10/moment-timezone-with-data.min.js"></script>
 <d2l-datetime-picker
-	locale="en"
-	overrides="[[overrides]]"
 	timezoneName="Canada-Toronto"
 	datetime="Wed Dec 31 1969 19:00:00 GMT-0500 (EST)",
 	boundary='{"below":240}'
