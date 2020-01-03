@@ -39,7 +39,7 @@
   },
   "main": "d2l-datetime-picker.js",
   "dependencies": {
-    "@brightspace-ui/intl": "Brightspace/intl#v3",
+    "@brightspace-ui/intl": "^3",
     "@polymer/iron-input": "^3.0.0",
     "@polymer/polymer": "^3.0.0",
     "d2l-button": "BrightspaceUI/button#semver:^5",
