@@ -1,4 +1,4 @@
-> Deprecated: A new datetime input (that does not rely on third-party components) should be created and added to [BrightspaceUI/inputs](https://github.com/BrightspaceUI/inputs) instead.
+> Deprecated: A new datetime input (that does not rely on third-party components) should be created and added to [BrightspaceUI/core](https://github.com/BrightspaceUI/core) instead.
 
 # \<d2l-datetime-picker\>
 
