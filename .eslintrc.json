@@ -1,7 +1,6 @@
 {
   "extends": "brightspace/polymer-3-config",
   "globals": {
-    "d2lIntl": false,
     "moment": false
   }
 }

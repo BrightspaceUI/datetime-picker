@@ -14,7 +14,6 @@ import 'd2l-offscreen/d2l-offscreen.js';
 import 'd2l-time-picker/d2l-time-picker.js';
 import '@polymer/iron-input/iron-input.js';
 import './localize-behavior.js';
-import d2lIntl from 'd2l-intl';
 import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
 
 const $_documentContainer = document.createElement('template');
@@ -177,10 +176,8 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-datetime-picker">
 				value="{{date}}"
 				placeholder="[[placeholder]]"
 				label="[[_dateLabel]]"
-				locale="[[locale]]"
 				min="[[min]]"
-				max="[[max]]"
-				first-day-of-week="[[firstDayOfWeek]]">
+				max="[[max]]">
 			</d2l-date-picker>
 		</div>
 
@@ -190,8 +187,6 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-datetime-picker">
 					<label aria-hidden="true" role="presentation">{{_timeLabel}}</label>
 					<d2l-time-picker
 						label="[[_timeLabel]]"
-						locale="[[locale]]"
-						overrides="[[overrides]]"
 						timezone="[[timezoneName]]"
 						hours="{{hours}}"
 						minutes="{{minutes}}"
@@ -220,11 +215,6 @@ Polymer({
 	],
 
 	properties: {
-		_parser: {
-			type: Object,
-			readOnly: true,
-			value: new d2lIntl.DateTimeParse(null, {locale:{date:{formats:{dateFormats:{short:'yyyy-MM-dd'}}}}})
-		},
 		hours: {
 			type: Number,
 			notify: true,
@@ -235,8 +225,6 @@ Polymer({
 			notify: true,
 			value: 59
 		},
-		overrides: Object,
-		locale: Object,
 		timezoneName: {
 			type: String,
 			value: function() {
@@ -289,13 +277,11 @@ Polymer({
 		},
 		max: {
 			type: String
-		},
-		firstDayOfWeek: Number
+		}
 	},
 
 	observers: [
-		'_dateAndTimeChanged(date, hours, minutes)',
-		'_processOverrides(overrides)'
+		'_dateAndTimeChanged(date, hours, minutes)'
 	],
 
 	clear: function() {
@@ -321,7 +307,7 @@ Polymer({
 	},
 
 	_dateAndTimeChanged: function() {
-		if (!this._parser || this._dontUpdateDateTime) {
+		if (this._dontUpdateDateTime) {
 			return;
 		}
 		if (!this.date) {
@@ -356,12 +342,5 @@ Polymer({
 
 	_showTime: function(date, alwaysShowTime) {
 		return alwaysShowTime || date;
-	},
-
-	_processOverrides: function(overrides) {
-		var firstDayOfWeekOverride = this.get('date.calendar.firstDayOfWeek', overrides);
-		if (firstDayOfWeekOverride) {
-			this.firstDayOfWeek = firstDayOfWeekOverride;
-		}
 	}
 });
