@@ -38,6 +38,10 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-datetime-picker">
 				--d2l-date-picker-label: {
 					@apply --d2l-offscreen;
 				};
+
+				--d2l-date-picker-label-rtl: {
+					@apply --d2l-offscreen-rtl;
+				}
 			}
 
 			d2l-date-picker {
