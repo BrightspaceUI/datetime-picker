@@ -12,7 +12,7 @@ import 'd2l-date-picker/d2l-date-picker.js';
 import 'd2l-icons/tier1-icons.js';
 import 'd2l-offscreen/d2l-offscreen.js';
 import 'd2l-time-picker/d2l-time-picker.js';
-import 'd2l-tooltip/d2l-tooltip';
+import 'd2l-tooltip/d2l-tooltip.js';
 import '@brightspace-ui/core/components/colors/colors.js';
 import '@polymer/iron-input/iron-input.js';
 import './localize-behavior.js';
@@ -154,7 +154,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-datetime-picker">
 				margin-top: -26px;
 			}
 
-			:host([timezone-name]:not([timezone-name=""])) d2l-tooltip {
+			:host([has-date][timezone-name]:not([timezone-name=""])) d2l-tooltip {
 				margin-top: calc(-1.2rem - 16px);
 			}
 
