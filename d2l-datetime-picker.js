@@ -154,6 +154,10 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-datetime-picker">
 				margin-top: -26px;
 			}
 
+			:host([timezone-name]:not([timezone-name=""])) d2l-tooltip {
+				margin-top: calc(-1.2rem - 16px);
+			}
+
 			:host([tooltip-red]) d2l-tooltip {
 				--d2l-tooltip-background-color: var(--d2l-color-cinnabar);
 				--d2l-tooltip-border-color: var(--d2l-color-cinnabar);
@@ -259,7 +263,8 @@ Polymer({
 			type: String,
 			value: function() {
 				return this.getTimezone() && this.getTimezone().name;
-			}
+			},
+			reflectToAttribute: true
 		},
 		hasDate: {
 			type: Boolean,
