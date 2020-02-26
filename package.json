@@ -39,6 +39,7 @@
   },
   "main": "d2l-datetime-picker.js",
   "dependencies": {
+    "@brightspace-ui/core": "^1.31.0",
     "@brightspace-ui/intl": "^3",
     "@polymer/iron-input": "^3.0.0",
     "@polymer/polymer": "^3.0.0",
@@ -48,6 +49,7 @@
     "d2l-localize-behavior": "BrightspaceUI/localize-behavior#semver:^2",
     "d2l-offscreen": "BrightspaceUI/offscreen#semver:^4",
     "d2l-time-picker": "BrightspaceUI/time-picker#semver:^2",
+    "d2l-tooltip": "github:BrightspaceUI/tooltip#semver:^3",
     "d2l-typography": "BrightspaceUI/typography#semver:^7"
   }
 }

@@ -71,7 +71,9 @@
 							<br>
 							<label>Minutes: <input value="{{minutes::input}}" type="text"></label>
 							<br>
-							<d2l-datetime-picker timezone-name="{{__timezone}}" placeholder="{{placeholder}}" datetime="{{datetime}}" date="{{date}}" hours="{{hours}}" minutes="{{minutes}}" boundary="{&quot;below&quot;:240}" date-label="{{dateLabel}}" time-label="{{timeLabel}}"></d2l-datetime-picker>
+							<label>Invalid: <input value="{{invalid::input}}" type="text"></label> (note: tooltip is set to be red)
+							<br>
+							<d2l-datetime-picker tooltip-red invalid="{{invalid}}" timezone-name="{{__timezone}}" placeholder="{{placeholder}}" datetime="{{datetime}}" date="{{date}}" hours="{{hours}}" minutes="{{minutes}}" boundary="{&quot;below&quot;:240}" date-label="{{dateLabel}}" time-label="{{timeLabel}}"></d2l-datetime-picker>
 							<br>
 						</template>
 					</dom-bind>`;

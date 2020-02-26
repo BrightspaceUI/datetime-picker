@@ -12,6 +12,8 @@ import 'd2l-date-picker/d2l-date-picker.js';
 import 'd2l-icons/tier1-icons.js';
 import 'd2l-offscreen/d2l-offscreen.js';
 import 'd2l-time-picker/d2l-time-picker.js';
+import 'd2l-tooltip/d2l-tooltip.js';
+import '@brightspace-ui/core/components/colors/colors.js';
 import '@polymer/iron-input/iron-input.js';
 import './localize-behavior.js';
 import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
@@ -144,6 +146,11 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-datetime-picker">
 				display: none;
 			}
 
+			:host([tooltip-red]) d2l-tooltip {
+				--d2l-tooltip-background-color: var(--d2l-color-cinnabar);
+				--d2l-tooltip-border-color: var(--d2l-color-cinnabar);
+			}
+
 			@media (max-width: 615px), (max-device-width: 960px) {
 				label {
 					font-size: 0.6rem;
@@ -177,11 +184,13 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-datetime-picker">
 		<div class="d2l-date-picker-container">
 			<label aria-hidden="true" role="presentation">[[_dateLabel]]</label>
 			<d2l-date-picker
+				id="date-picker"
 				value="{{date}}"
 				placeholder="[[placeholder]]"
 				label="[[_dateLabel]]"
 				min="[[min]]"
-				max="[[max]]">
+				max="[[max]]"
+				invalid="[[_computeIsInvalid(invalid)]]">
 			</d2l-date-picker>
 		</div>
 
@@ -194,7 +203,8 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-datetime-picker">
 						timezone="[[timezoneName]]"
 						hours="{{hours}}"
 						minutes="{{minutes}}"
-						boundary="[[boundary]]">
+						boundary="[[boundary]]"
+						invalid="[[_computeIsInvalid(invalid)]]">
 					</d2l-time-picker>
 				</div>
 				<div class="clear-button-container">
@@ -206,6 +216,15 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-datetime-picker">
 					</d2l-button-icon>
 				</div>
 			</div>
+		</template>
+		<template is="dom-if" if="[[_computeIsInvalid(invalid)]]">
+			<d2l-tooltip
+				position="[[position]]"
+				boundary="[[boundary]]"
+				offset="[[_getTooltipOffset(hasDate, timezoneName)]]"
+			>
+				[[invalid]]
+			</d2l-tooltip>
 		</template>
 	</template>
 </dom-module>`;
@@ -281,6 +300,14 @@ Polymer({
 		},
 		max: {
 			type: String
+		},
+		invalid: {
+			type: String,
+			value: null
+		},
+		position: {
+			type: String,
+			value: 'bottom'
 		}
 	},
 
@@ -346,5 +373,21 @@ Polymer({
 
 	_showTime: function(date, alwaysShowTime) {
 		return alwaysShowTime || date;
+	},
+
+	_computeIsInvalid: function(invalid) {
+		return !!invalid;
+	},
+
+	_getTooltipOffset: function(hasDate, timezoneName) {
+		if (hasDate && timezoneName && timezoneName.length > 0) {
+			return -27;
+		}
+
+		if (hasDate) {
+			return -18;
+		}
+
+		return 2;
 	}
 });

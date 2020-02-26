@@ -39,20 +39,26 @@
 					expect(element.is).to.equal('d2l-datetime-picker');
 				});
 
-				test('should have d2l-time-picker when date is set', function() {
+				test('should have d2l-time-picker when date is set', function(done) {
 					const element = fixture('basic');
 					expect(element.$$('d2l-time-picker')).to.not.be.ok;
 					element.date = '1990-01-30';
-					flush();
-					expect(element.$$('d2l-time-picker')).to.be.ok;
+					setTimeout(() => {
+						flush();
+						expect(element.$$('d2l-time-picker')).to.be.ok;
+						done();
+					}, 0);
 				});
 
-				test('should have d2l-time-picker when alwaysShowTime is set', function() {
+				test('should have d2l-time-picker when alwaysShowTime is set', function(done) {
 					const element = fixture('basic');
 					expect(element.$$('d2l-time-picker')).to.not.be.ok;
 					element.alwaysShowTime = true;
-					flush();
-					expect(element.$$('d2l-time-picker')).to.be.ok;
+					setTimeout(() => {
+						flush();
+						expect(element.$$('d2l-time-picker')).to.be.ok;
+						done();
+					}, 0);
 				});
 
 				test('should have d2l-date-picker', function() {
@@ -61,15 +67,18 @@
 				});
 
 				suite('hours/minutes', function() {
-					test('should update time-picker hours/minutes', function() {
+					test('should update time-picker hours/minutes', function(done) {
 						const element = fixture('basic');
 						element.date = '1990-01-30';
-						flush();
-						element.hours = 1;
-						element.minutes = 30;
+						setTimeout(() => {
+							flush();
+							element.hours = 1;
+							element.minutes = 30;
 
-						expect(element.$$('d2l-time-picker').hours).to.equal(1);
-						expect(element.$$('d2l-time-picker').minutes).to.equal(30);
+							expect(element.$$('d2l-time-picker').hours).to.equal(1);
+							expect(element.$$('d2l-time-picker').minutes).to.equal(30);
+							done();
+						}, 0);
 					});
 				});
 
@@ -89,28 +98,34 @@
 						expect(element.datetime).to.not.be.ok;
 					});
 
-					test('should be updated when date is defined', function() {
+					test('should be updated when date is defined', function(done) {
 						const element = fixture('basic');
 						element.date = '1990-01-30';
-						flush();
-						expect(element.datetime).to.be.ok;
-						expect(element.datetime.year()).to.equal(1990);
-						expect(element.datetime.month()).to.equal(0);
-						expect(element.datetime.date()).to.equal(30);
+						setTimeout(() => {
+							flush();
+							expect(element.datetime).to.be.ok;
+							expect(element.datetime.year()).to.equal(1990);
+							expect(element.datetime.month()).to.equal(0);
+							expect(element.datetime.date()).to.equal(30);
+							done();
+						}, 0);
 					});
 
-					test('should have correct time', function() {
+					test('should have correct time', function(done) {
 						const element = fixture('basic');
 						element.date = '1990-01-30';
-						flush();
-						element.hours = 1;
-						element.minutes = 30;
-						expect(element.datetime).to.be.ok;
-						expect(element.datetime.year()).to.equal(1990);
-						expect(element.datetime.month()).to.equal(0);
-						expect(element.datetime.date()).to.equal(30);
-						expect(element.datetime.hours()).to.equal(1);
-						expect(element.datetime.minutes()).to.equal(30);
+						setTimeout(() => {
+							flush();
+							element.hours = 1;
+							element.minutes = 30;
+							expect(element.datetime).to.be.ok;
+							expect(element.datetime.year()).to.equal(1990);
+							expect(element.datetime.month()).to.equal(0);
+							expect(element.datetime.date()).to.equal(30);
+							expect(element.datetime.hours()).to.equal(1);
+							expect(element.datetime.minutes()).to.equal(30);
+							done();
+						}, 0);
 					});
 
 					test('date,hours,minutes should be updated when set', function() {
@@ -155,17 +170,20 @@
 				});
 
 				suite('d2l-button-icon', function() {
-					test('clears datetime', function() {
+					test('clears datetime', function(done) {
 						const element = fixture('basic');
 						element.datetime = moment();
-						flush();
-						element.$$('d2l-button-icon').click();
-						expect(element.datetime).to.be.null;
+						setTimeout(() => {
+							flush();
+							element.$$('d2l-button-icon').click();
+							expect(element.datetime).to.be.null;
+							done();
+						}, 0);
 					});
 				});
 
 				suite('timezone', function() {
-					test('utcdatetime is converted to UTC from the given timezone (UTC)', function() {
+					test('utcdatetime is converted to UTC from the given timezone (UTC)', function(done) {
 
 						htmlElem.setAttribute('data-timezone', JSON.stringify({ name: '', identifier: 'UTC' }));
 						const element = fixture('basic');
@@ -176,30 +194,37 @@
 						expect(element.datetime.utc().hours()).to.equal(1);
 						expect(element.datetime.utc().minutes()).to.equal(30);
 						expect(element.datetime.utc().date()).to.equal(30);
+						done();
 					});
 
-					test('utcdatetime is converted to UTC from the given timezone (America/Toronto)', function() {
+					test('utcdatetime is converted to UTC from the given timezone (America/Toronto)', function(done) {
 						htmlElem.setAttribute('data-timezone', JSON.stringify({ name: '', identifier: 'America/Toronto' }));
-						const element = fixture('basic');
-						element.date = '1990-01-30';
-						element.hours = 1;
-						element.minutes = 30;
+						setTimeout(() => {
+							const element = fixture('basic');
+							element.date = '1990-01-30';
+							element.hours = 1;
+							element.minutes = 30;
 
-						expect(element.datetime.utc().hours()).to.equal(6);
-						expect(element.datetime.utc().minutes()).to.equal(30);
-						expect(element.datetime.utc().date()).to.equal(30);
+							expect(element.datetime.utc().hours()).to.equal(6);
+							expect(element.datetime.utc().minutes()).to.equal(30);
+							expect(element.datetime.utc().date()).to.equal(30);
+							done();
+						}, 0);
 					});
 
-					test('utcdatetime is converted to UTC from the given timezone (America/Los_Angeles)', function() {
+					test('utcdatetime is converted to UTC from the given timezone (America/Los_Angeles)', function(done) {
 						htmlElem.setAttribute('data-timezone', JSON.stringify({ name: '', identifier: 'America/Los_Angeles' }));
-						const element = fixture('basic');
-						element.date = '1990-01-30';
-						element.hours = 1;
-						element.minutes = 30;
+						setTimeout(() => {
+							const element = fixture('basic');
+							element.date = '1990-01-30';
+							element.hours = 1;
+							element.minutes = 30;
 
-						expect(element.datetime.utc().hours()).to.equal(9);
-						expect(element.datetime.utc().minutes()).to.equal(30);
-						expect(element.datetime.utc().date()).to.equal(30);
+							expect(element.datetime.utc().hours()).to.equal(9);
+							expect(element.datetime.utc().minutes()).to.equal(30);
+							expect(element.datetime.utc().date()).to.equal(30);
+							done();
+						}, 0);
 					});
 
 					test('changing timezone will not update date/hours/minutes', function() {
