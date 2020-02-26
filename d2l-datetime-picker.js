@@ -146,18 +146,6 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-datetime-picker">
 				display: none;
 			}
 
-			d2l-tooltip {
-				margin-top: -6px;
-			}
-
-			:host([has-date]) d2l-tooltip {
-				margin-top: -26px;
-			}
-
-			:host([has-date][timezone-name]:not([timezone-name=""])) d2l-tooltip {
-				margin-top: calc(-1.2rem - 16px);
-			}
-
 			:host([tooltip-red]) d2l-tooltip {
 				--d2l-tooltip-background-color: var(--d2l-color-cinnabar);
 				--d2l-tooltip-border-color: var(--d2l-color-cinnabar);
@@ -233,6 +221,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-datetime-picker">
 			<d2l-tooltip
 				position="[[position]]"
 				boundary="[[boundary]]"
+				offset="[[_getTooltipOffset(hasDate, timezoneName)]]"
 			>
 				[[invalid]]
 			</d2l-tooltip>
@@ -263,8 +252,7 @@ Polymer({
 			type: String,
 			value: function() {
 				return this.getTimezone() && this.getTimezone().name;
-			},
-			reflectToAttribute: true
+			}
 		},
 		hasDate: {
 			type: Boolean,
@@ -389,5 +377,17 @@ Polymer({
 
 	_computeIsInvalid: function(invalid) {
 		return !!invalid;
+	},
+
+	_getTooltipOffset: function(hasDate, timezoneName) {
+		if (hasDate && timezoneName && timezoneName.length > 0) {
+			return -27;
+		}
+
+		if (hasDate) {
+			return -18;
+		}
+
+		return 2;
 	}
 });
