@@ -220,7 +220,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-datetime-picker">
 		<template is="dom-if" if="[[_computeIsInvalid(invalid)]]">
 			<d2l-tooltip
 				position="[[position]]"
-				boundary="[[boundary]]"
+				align="start"
 				offset="[[_getTooltipOffset(hasDate, timezoneName)]]"
 			>
 				[[invalid]]
